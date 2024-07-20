@@ -11,20 +11,23 @@ interface FilterToggleProps {
 
 const ProductCard = ({ isNew, isPreOrder, name, type, price }: FilterToggleProps) => {
     return (
-        <div className="relative text-white flex flex-col w-full h-[400px]">
+        <div className="relative text-white flex flex-col w-full aspect-[3.5/4]">
             
             <div className="z-10 flex flex-col justify-between p-5 h-full">
               
               <div className="flex justify-between items-start">
                 <div className="flex flex-col gap-3">
+
                     <div className="flex flex-row gap-2">
-                    {isPreOrder? <p>Pre-Order</p> : null}
-                    <p>{type}</p>
+                        {isPreOrder? <p>Pre-Order</p> : null}
+                        <p>{type}</p>
                     </div>
+
                     <div className="flex flex-col gap-2">
-                    <p>{name.toUpperCase()}</p>
-                    <p>Rp{price}</p>
+                        <p>{name.toUpperCase()}</p>
+                        <p>Rp{price}</p>
                     </div>
+                    
                 </div>
                 {isNew ? 
                 <Image
@@ -38,7 +41,7 @@ const ProductCard = ({ isNew, isPreOrder, name, type, price }: FilterToggleProps
               </div>
 
               <div className="flex w-full justify-end">
-                <AddToCartButton/>
+                <AddToCartButton />
               </div>
 
             </div>

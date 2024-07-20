@@ -10,24 +10,20 @@ const FilterToggle = ({ onChange, type, children }: FilterToggleProps) => {
     const defaultInputClass = `hidden peer`;
     const defaultLabelClass = `
         bg-light px-4 py-2 text-nowrap rounded-full cursor-pointer 
-        transition ease-in-out duration-300 
+        transition ease-in-out duration-150 
         peer-checked:bg-dark peer-checked:text-white
         hover:bg-[#C3EAFF] 
     `;
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        onChange(event);
-    };
-
     return (
-        <div className="transition ease-in-out duration-300 transform active:scale-95">
+        <div className="text-dark transition ease-in-out duration-150 transform active:scale-95">
             <input
                 type="radio"
                 name="product-filter"
                 value={type}
                 id={type}
                 className={defaultInputClass}
-                onChange={handleChange}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => onChange(event)}
             />
             <label
                 htmlFor={type}

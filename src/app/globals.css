@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes fadeIn {
+    from {
+        margin-top: 1000px;
+    }
+    to {
+        margin-top: 0px;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        margin-top: 0px;
+    }
+    to {
+        margin-top: 1000px;
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.5s forwards;
+}
+
+.animate-fadeOut {
+    animation: fadeOut 0.5s forwards;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
