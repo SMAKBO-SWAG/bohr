@@ -10,7 +10,7 @@ const AddToCartButton = () => {
         <button 
             onClick={() => dispatch(show())}
             className="
-                flex py-2 px-4 gap-2 items-center bg-dark rounded-full
+                flex py-2 px-4 gap-2 text-white items-center justify-center bg-dark rounded-full
                 transition ease-in-out duration-150 transform 
                 active:scale-95
                 hover:bg-darker active: 
