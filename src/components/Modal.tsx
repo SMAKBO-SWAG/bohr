@@ -6,6 +6,7 @@ import { RootState } from "@/redux/store";
 import Image from "next/image";
 import { AddToCartButton } from "./AddToCartButton";
 import { BraceletFilterButton } from "./BraceletSizeButton";
+import { AmountButton } from "./AmountButton";
 
 function Modal() {
     const show = useSelector((state: RootState) => state.modal.show);
@@ -23,7 +24,7 @@ function Modal() {
         } else {
             setSlideClass("animate-slideOut");
             setFadeClass("animate-fadeOut");
-            setTimeout(() => setVisible(false), 300);
+            setTimeout(() => setVisible(false), 280);
         }
     }, [show]);
 
@@ -68,15 +69,15 @@ function Modal() {
                         <hr className="border-t border-[#E4F6FF] border-1"/>
                         <div className="flex flex-row justify-between">
                             <p>Amount</p>
-                            <div className="flex">
-                                <button>+</button>
+                            <div className="flex items-center gap-2">
+                                <AmountButton>-</AmountButton>
                                 <p>0</p>
-                                <button>-</button>
+                                <AmountButton>+</AmountButton>
                             </div>
                         </div>
                     </div>
 
-                    <AddToCartButton></AddToCartButton>
+                    <AddToCartButton/>
                 </div>
             </div>
         </>

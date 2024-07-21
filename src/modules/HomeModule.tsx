@@ -4,8 +4,6 @@ import { FilterToggle } from "@/components/FilterToggle";
 import { ProductCard } from "@/components/ProductCard";
 import { useEffect, useState } from "react";
 
-import Link from "next/link";
-
 export default function HomeModule() {
   const [filter, setFilter] = useState<string>("");
 
@@ -37,11 +35,11 @@ export default function HomeModule() {
             </div>
 
             <div className="flex flex-col items-center gap-5">
-            <ProductCard isNew={true} isPreOrder={true} name="fluore" type="Bracelet" price="25.000"></ProductCard>
-            <ProductCard isNew={false} isPreOrder={true} name="classic" type="Bracelet" price="25.000"></ProductCard>
+            <ProductCard isNew={true} isPreOrder={true} name="fluore" type="Bracelet" price="25.000"/>
+            <ProductCard isNew={false} isPreOrder={true} name="classic" type="Bracelet" price="25.000"/>
             </div>
         </div>
-      
+
     </div>
   );
 }

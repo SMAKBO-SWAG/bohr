@@ -16,17 +16,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <Providers>
         <html lang="en">
             <body className={inter.className}>
-                <Providers>
+                
                     <div className="bg-base w-screen h-screen flex justify-center">
                         <div className="bg-white w-[480px] overflow-y-auto p-5">
                             {children}
                         </div>
                         <Modal/> 
                     </div>
-                </Providers>
+                
             </body>
         </html>
+    </Providers>
   );
 }
