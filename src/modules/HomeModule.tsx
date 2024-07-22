@@ -2,10 +2,13 @@
 import Image from "next/image";
 import { FilterToggle } from "@/components/FilterToggle";
 import { ProductCard } from "@/components/ProductCard";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import lottie from 'lottie-web';
 
 export default function HomeModule() {
   const [filter, setFilter] = useState<string>("");
+  const animationContainer = useRef<HTMLDivElement>(null);
+  const animationInstance = useRef<any>(null);
 
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(event.target.value);
@@ -14,6 +17,29 @@ export default function HomeModule() {
   useEffect(() => {
     console.log(filter);
   }, [filter]);
+
+
+  useEffect(() => {
+
+    if (animationInstance.current === null){
+        animationInstance.current = lottie.loadAnimation({
+            container: animationContainer.current!,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '/lottie/cash-on-delivery.json'
+        });
+
+        animationInstance.current.addEventListener('DOMLoaded', () => {
+            const svgElement = animationContainer.current!.querySelector('svg');
+            const watermark = svgElement!.querySelector('path[d^=" M351.34320068359375"]');
+            if (watermark) {
+            watermark.remove();
+            }
+        });
+    }
+
+  }, []);
 
   return (
     <div className="relative gap-5 flex flex-col text-black">          
@@ -39,6 +65,7 @@ export default function HomeModule() {
             <ProductCard isNew={false} isPreOrder={true} name="classic" type="Bracelet" price="25.000"/>
             </div>
         </div>
+        <div ref={animationContainer} ></div>
 
     </div>
   );
