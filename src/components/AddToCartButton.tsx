@@ -2,18 +2,17 @@ import Image from "next/image";
 import { useDispatch } from 'react-redux'
 import { show } from "@/redux/slices/modalSlice";
 
-
 const AddToCartButton = () => {
     const dispatch = useDispatch()
 
     return (
         <button 
-            onClick={() => dispatch(show())}
+            onClick={(e) => { e.stopPropagation() ; dispatch(show())}}
             className="
                 flex py-2 px-4 gap-2 text-white items-center justify-center bg-dark rounded-full
                 transition ease-in-out duration-150 transform 
                 active:scale-95
-                hover:bg-darker active: 
+                hover:bg-darker
                 shadow-[
                     0px_43px_12px_0px_rgba(0,0,0,0.00),
                     0px_27px_11px_0px_rgba(0,0,0,0.01),

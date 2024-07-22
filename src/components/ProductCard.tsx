@@ -1,5 +1,7 @@
+'use client'
 import Image from "next/image";
 import { AddToCartButton } from "./AddToCartButton";
+import { useRouter } from "next/navigation";
 
 interface FilterToggleProps {
    isNew: boolean,
@@ -10,8 +12,9 @@ interface FilterToggleProps {
 }
 
 const ProductCard = ({ isNew, isPreOrder, name, type, price }: FilterToggleProps) => {
+    const router = useRouter()
     return (
-        <div className="relative text-white flex flex-col w-full aspect-[3.5/4]">
+        <div className="relative text-white flex flex-col w-full aspect-[3.5/4] cursor-pointer" onClick={() => router.push(`/product/${name}`)}>
             
             <div className="z-10 flex flex-col justify-between p-5 h-full">
               
