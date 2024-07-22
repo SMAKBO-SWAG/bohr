@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FilterToggle } from "@/components/FilterToggle";
 import { ProductCard } from "@/components/ProductCard";
 import { useEffect, useState } from "react";
+import { CartButton } from "@/components/CartButton";
 
 export default function HomeModule() {
   const [filter, setFilter] = useState<string>("");

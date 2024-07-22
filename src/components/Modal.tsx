@@ -4,27 +4,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { close } from "@/redux/slices/modalSlice";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
-import { AddToCartButton } from "./AddToCartButton";
-import { BraceletFilterButton } from "./BraceletSizeButton";
-import { AmountButton } from "./AmountButton";
+import { PrimaryButton } from "./PrimaryButton";
+import { SecondaryButton } from "./SecondaryButton";
 
-function Modal() {
+
+export default function Drawer() {
     const show = useSelector((state: RootState) => state.modal.show);
     const dispatch = useDispatch();
 
     const [visible, setVisible] = useState(show);
-    const [slideClass, setSlideClass] = useState("");
-    const [fadeClass, setFadeClass] = useState("");
 
     useEffect(() => {
         if (show) {
             setVisible(true);
-            setSlideClass("animate-slideIn");
-            setFadeClass("animate-fadeIn");
+           
         } else {
-            setSlideClass("animate-slideOut");
-            setFadeClass("animate-fadeOut");
-            setTimeout(() => setVisible(false), 280);
+            setVisible(false)
         }
     }, [show]);
 
@@ -32,56 +27,34 @@ function Modal() {
 
     return (
         <>
-            <div className={`text-black fixed w-screen sm:w-[480px] h-full z-50 overflow-auto flex justify-center items-end`}>
-                <div className={`w-full h-full backdrop-blur-sm absolute ${fadeClass}`} onClick={() => dispatch(close())}>
+            <div className={`text-black fixed w-screen sm:w-[480px] h-full z-50 overflow-auto flex justify-center items-center`}>
+                <div className={`w-full h-full bg-black bg-opacity-30 backdrop-blur-sm absolute`} onClick={() => dispatch(close())}>
                 </div>
-                <div className={`z-10 p-5 h-fit flex flex-col gap-5 w-full bg-white rounded-[20px_20px_0px_0px] ${slideClass}`}>
 
-                    <div className="flex flex-row items-center gap-4">
-                        <Image
-                            src={`/png/fluore-thumbnail-s.png`}
-                            alt={`fluore-thumbnail-s`}
-                            width={82}
-                            height={82}
-                            unoptimized
-                        />
-                        <div className="flex flex-col gap-2 ">
-                            <p>Bracelet</p>
-                            <p>FLUORE</p>
-                            <p>Rp25.000</p>
+                <div className="z-10 w-screen sm:w-[480px] mx-5 bg-white gap-4 p-10 flex flex-col items-center justify-center rounded-3xl">
+                    <Image
+                        src={`/png/fluore-thumbnail-s.png`}
+                        alt={`fluore-thumbnail-s`}
+                        width={200}
+                        height={200}
+                        unoptimized
+                    />
+                    <div className="flex flex-col gap-6 items-center">
+                        <div className="flex flex-col text-center gap-2">
+                            <p>Confirm Deletion</p>
+                            <p>Are you sure you want to remove this item from your cart?</p>
                         </div>
-                    </div>
 
-                    <div className="flex flex-col gap-4">
-                        <hr className="border-t border-[#E4F6FF] border-1"/>
-                        <p>Sizes(Keliling)</p>
-                        <div className="flex w-full flex-row items-center justify-between gap-8">
-
-                            <BraceletFilterButton type='s' onChange={() => null}></BraceletFilterButton>
-                            <BraceletFilterButton type='m' onChange={() => null}></BraceletFilterButton>
-                            <BraceletFilterButton type='l' onChange={() => null}></BraceletFilterButton>
-
+                        <div className="flex w-full justify-between">
+                            <PrimaryButton>Cancel</PrimaryButton>
+                            <SecondaryButton>remove</SecondaryButton>
                         </div>
 
                     </div>
 
-                    <div className="flex flex-col gap-4">
-                        <hr className="border-t border-[#E4F6FF] border-1"/>
-                        <div className="flex flex-row justify-between">
-                            <p>Amount</p>
-                            <div className="flex items-center gap-2">
-                                <AmountButton>-</AmountButton>
-                                <p>0</p>
-                                <AmountButton>+</AmountButton>
-                            </div>
-                        </div>
-                    </div>
 
-                    <AddToCartButton/>
                 </div>
             </div>
         </>
     );
 }
-
-export default Modal;

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import CheckoutFloatingButton from "@/components/CheckoutFloatingButton";
+import Drawer from "@/components/Drawer";
 import Modal from "@/components/Modal";
 import { Providers } from '@/redux/provider'
 
@@ -24,6 +26,8 @@ export default function RootLayout({
                         <div className="bg-white w-[480px] overflow-y-auto p-5">
                             {children}
                         </div>
+                        <CheckoutFloatingButton/> 
+                        <Drawer/> 
                         <Modal/> 
                     </div>
                 

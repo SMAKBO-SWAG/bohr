@@ -1,13 +1,15 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const CartButton = () => {
-
+    const router = useRouter()
     return (
         <button 
             className="rounded-full bg-dark min-w-[54px] h-[54px] flex items-center justify-center
                 transition ease-in-out duration-150 transform 
                 active:scale-95
-                hover:bg-darker">
+                hover:bg-darker"
+                onClick={() => router.push('/cart')}>
             <Image
                 src={`/svg/cart-icon.svg`}
                 alt={`cart-icon`}
