@@ -1,8 +1,12 @@
 'use client'
 import { BackButton } from "@/components/BackButton";
+import { show } from "@/redux/slices/modalSlice";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+
 
 export default function CheckoutModule() {
+    const dispatch = useDispatch()
 
   return (
     <div className="relative flex flex-col items-center gap-6 text-black">          
@@ -98,6 +102,7 @@ export default function CheckoutModule() {
             </div>
             
         </div>
+        <button onClick={() => dispatch(show())} >Modal</button>
 
     </div>
   );

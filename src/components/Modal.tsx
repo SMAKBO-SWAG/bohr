@@ -27,25 +27,25 @@ export default function Drawer() {
 
     return (
         <>
-            <div className={`fixed w-screen sm:w-[480px] h-full z-50 overflow-auto flex justify-center items-center`}>
+            <div className={`fixed w-screen sm:w-[480px] h-full z-50 overflow-auto flex justify-center items-center text-black`}>
                 <div className={`w-full h-full bg-black bg-opacity-30 backdrop-blur-sm absolute`} onClick={() => dispatch(close())}>
                 </div>
 
                 <div className="z-10 w-screen sm:w-[480px] mx-5 bg-white gap-4 p-10 flex flex-col items-center justify-center rounded-3xl">
                     <Image
-                        src={`/png/fluore-thumbnail-s.png`}
-                        alt={`fluore-thumbnail-s`}
-                        width={200}
-                        height={200}
+                        src={`/svg/deletion-confirm-illustration.svg`}
+                        alt={`deletion-confirm-illustration`}
+                        width={250}
+                        height={0}
                         unoptimized
                     />
                     <div className="flex flex-col gap-6 items-center">
                         <div className="flex flex-col text-center gap-2">
-                            <p>Confirm Deletion</p>
-                            <p>Are you sure you want to remove this item from your cart?</p>
+                            <p className="text-2xl font-bold">Confirm Deletion</p>
+                            <p className="text-s font-medium">Are you sure you want to remove this item from your cart?</p>
                         </div>
 
-                        <div className="flex w-full justify-between">
+                        <div className="flex w-full justify-center gap-4">
                             <PrimaryButton>Cancel</PrimaryButton>
                             <SecondaryButton>remove</SecondaryButton>
                         </div>

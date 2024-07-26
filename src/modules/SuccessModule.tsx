@@ -5,20 +5,20 @@ import Image from "next/image";
 export default function HomeModule() {
 
   return (
-    <div className="relative gap-5 flex items-center justify-center h-full"> 
+    <div className="relative gap-5 flex items-center justify-center h-full text-black"> 
 
         <div className="z-10 gap-4 p-10 flex flex-col items-center justify-center rounded-3xl">
             <Image
-                src={`/png/fluore-thumbnail-s.png`}
-                alt={`fluore-thumbnail-s`}
-                width={200}
-                height={200}
+                src={`/svg/success-illustration.svg`}
+                alt={`success-illustration`}
+                width={250}
+                height={0}
                 unoptimized
             />
             <div className="flex flex-col gap-6 items-center">
                 <div className="flex flex-col text-center gap-2">
-                    <p>Confirm Deletion</p>
-                    <p>Are you sure you want to remove this item from your cart?</p>
+                    <p className="text-2xl font-bold">Order Successful!</p>
+                    <p className="text-s font-medium">You will receive a confirmation message through Whatsapp shortly. </p>
                 </div>
                     <PrimaryButton>Back to Home</PrimaryButton>
             </div>
