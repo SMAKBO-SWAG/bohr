@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function HomeModule() {
 
   return (
-    <div className="relative gap-5 flex text-black items-center justify-center h-full"> 
+    <div className="relative gap-5 flex items-center justify-center h-full"> 
 
         <div className="z-10 gap-4 p-10 flex flex-col items-center justify-center rounded-3xl">
             <Image

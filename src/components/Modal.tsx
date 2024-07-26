@@ -27,7 +27,7 @@ export default function Drawer() {
 
     return (
         <>
-            <div className={`text-black fixed w-screen sm:w-[480px] h-full z-50 overflow-auto flex justify-center items-center`}>
+            <div className={`fixed w-screen sm:w-[480px] h-full z-50 overflow-auto flex justify-center items-center`}>
                 <div className={`w-full h-full bg-black bg-opacity-30 backdrop-blur-sm absolute`} onClick={() => dispatch(close())}>
                 </div>
 

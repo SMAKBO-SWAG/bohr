@@ -9,6 +9,7 @@ interface FilterToggleProps {
 const FilterToggle = ({ onChange, type, children }: FilterToggleProps) => {
     const defaultInputClass = `hidden peer`;
     const defaultLabelClass = `
+        font-medium
         bg-light px-4 py-2 text-nowrap rounded-full cursor-pointer 
         transition ease-in-out duration-150 
         peer-checked:bg-dark peer-checked:text-white

@@ -32,8 +32,8 @@ export default function Drawer() {
 
     return (
         <>
-            <div className={`text-black fixed w-screen sm:w-[480px] h-full z-50 overflow-auto flex justify-center items-end`}>
-                <div className={`w-full h-full backdrop-blur-sm absolute ${fadeClass}`} onClick={() => dispatch(close())}>
+            <div className={`fixed w-screen sm:w-[480px] h-full z-50 overflow-auto flex justify-center items-end text-black`}>
+                <div className={`w-full h-full bg-black bg-opacity-30 backdrop-blur-sm absolute ${fadeClass}`} onClick={() => dispatch(close())}>
                 </div>
                 <div className={`z-10 p-5 h-fit flex flex-col gap-5 w-full bg-white rounded-[20px_20px_0px_0px] ${slideClass}`}>
 
@@ -41,13 +41,13 @@ export default function Drawer() {
                         <Image
                             src={`/png/fluore-thumbnail-s.png`}
                             alt={`fluore-thumbnail-s`}
-                            width={82}
-                            height={82}
+                            width={84}
+                            height={84}
                             unoptimized
                         />
                         <div className="flex flex-col gap-2 ">
                             <p>Bracelet</p>
-                            <p>FLUORE</p>
+                            <p className="text-xl font-bold leading-5">FLUORE</p>
                             <p>Rp25.000</p>
                         </div>
                     </div>

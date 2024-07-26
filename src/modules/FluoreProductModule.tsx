@@ -9,10 +9,10 @@ export default function FluoreProductModule() {
     <div className="relative flex flex-col items-center gap-6 text-black">          
         <div className="w-full flex justify-between items-center">
             <BackButton/>
-            <p>Fluore</p>
+            <p className="text-2xl font-bold tracking-wide">Fluore</p>
             <div className="w-[54px]"></div>
         </div>
-        <ProductCard isNew={true} isPreOrder={true} name="fluore" type="Bracelet" price="25.000"/>
+        <ProductCard isNew={true} isPreOrder={true} accent="#ffffff" accentComplement="#132042" name="fluore" type="Bracelet" price="25.000"/>
         <p>Kenalin Fluore, gelang dengan desain minimalis tulisan SMAKBO. Terinspirasi dari karakteristik fluorescent, gelang ini bisa 
         glow in the dark dan menambah keunikan serta kesan futuristik. </p>
         <Image

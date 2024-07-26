@@ -9,10 +9,10 @@ export default function CartModule() {
     <div className="relative flex flex-col items-center gap-6 text-black">          
         <div className="w-full flex justify-between items-center">
             <BackButton/>
-            <p>Classic</p>
+            <p className="text-2xl font-bold tracking-wide">Classic</p>
             <div className="w-[54px]"></div>
         </div>
-        <ProductCard isNew={false} isPreOrder={true} name="classic" type="Bracelet" price="25.000"/>
+        <ProductCard isNew={false} isPreOrder={true} accent="#132042" accentComplement="#ffffff" name="classic" type="Bracelet" price="25.000"/>
         <p>#BanggaBersama dengan Classic Bracelet! Didesain dengan siluet elegan logo SMAKBO, gelang ini memadukan gaya modern yang cocok banget buat semua kalangan. </p>
         <Image
             src="/png/classic-thumbnail-m.png"

@@ -4,6 +4,7 @@ import { FilterToggle } from "@/components/FilterToggle";
 import { ProductCard } from "@/components/ProductCard";
 import { useEffect, useState } from "react";
 import { CartButton } from "@/components/CartButton";
+import { CheckoutButton } from "@/components/CheckoutButton";
 
 export default function HomeModule() {
   const [filter, setFilter] = useState<string>("");
@@ -17,7 +18,7 @@ export default function HomeModule() {
   }, [filter]);
 
   return (
-    <div className="relative gap-5 flex flex-col text-black">          
+    <div className="relative gap-5 flex flex-col">          
         <Image
             src="/svg/logo.svg"
             width={225}
@@ -36,10 +37,13 @@ export default function HomeModule() {
             </div>
 
             <div className="flex flex-col items-center gap-5">
-                <ProductCard isNew={true} isPreOrder={true} name="fluore" type="Bracelet" price="25.000"/>
-                <ProductCard isNew={false} isPreOrder={true} name="classic" type="Bracelet" price="25.000"/>
+                <ProductCard isNew={true} isPreOrder={true} accent="#ffffff" accentComplement="#132042" name="fluore" type="Bracelet" price="25.000"/>
+                <ProductCard isNew={false} isPreOrder={true} accent="#132042" accentComplement="#ffffff" name="classic" type="Bracelet" price="25.000"/>
             </div>
         </div>
+
+        <CartButton></CartButton>
+        <CheckoutButton></CheckoutButton>
 
     </div>
   );

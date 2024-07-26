@@ -1,5 +1,4 @@
 'use client'
-import { AmountButton } from "@/components/AmountButton";
 import { BackButton } from "@/components/BackButton";
 import Image from "next/image";
 
@@ -9,7 +8,7 @@ export default function CheckoutModule() {
     <div className="relative flex flex-col items-center gap-6 text-black">          
         <div className="w-full flex justify-between items-center">
             <BackButton/>
-            <p>Checkout</p>
+            <p className="text-2xl font-bold tracking-wide">Checkout</p>
             <div className="w-[54px]"></div>
         </div>
         <div className="flex w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl">
@@ -21,9 +20,11 @@ export default function CheckoutModule() {
                 alt="SMAKBO SWAG Logo"
             />
 
-            <div className="flex flex-col gap-2">
-                <p>Pre-order berlangsung dari tanggal ... dan dilanjut produksi. (estimasi 1 minggu) </p>
-                <p>Pengambilan barang dilakukan di SMK-SMAK Bogor. </p>
+            <div className="flex flex-col gap-2 font-medium text-sm">
+                <ul className="list-disc pl-2">
+                    <li>Pre-order berlangsung dari tanggal ... dan dilanjut produksi. (estimasi 1 minggu) </li>
+                    <li>Pengambilan barang dilakukan di SMK-SMAK Bogor. </li>
+                </ul>
             </div>
             
         </div>
@@ -41,11 +42,11 @@ export default function CheckoutModule() {
         <div className="flex flex-col gap-2 w-full">
             <p>Payment Method</p>
             <div className="flex gap-2">
-                <input type="radio" id="cod"></input>
+                <input type="radio" id="cod" name="paymentMethod"></input>
                 <label htmlFor="cod"> Cash on Delivery (SMAKBO)</label>
             </div>
             <div className="flex gap-2">
-                <input type="radio" id="qris"></input>
+                <input type="radio" id="qris" name="paymentMethod"></input>
                 <label htmlFor="qris"> QRIS Payment</label>
             </div>
         </div>
@@ -57,14 +58,14 @@ export default function CheckoutModule() {
                     <Image
                         src={`/png/fluore-thumbnail-s.png`}
                         alt={`fluore-thumbnail-s`}
-                        width={82}
-                        height={82}
+                        width={84}
+                        height={84}
                         unoptimized
                     />
                     <div className="flex w-full h-full justify-between">
                         <div className="flex flex-col gap-2 ">
                             <p>Bracelet</p>
-                            <p>FLUORE</p>
+                            <p className="text-xl font-bold leading-5">FLUORE</p>
                             <p>Rp25.000</p>
                         </div>
                         <div className="flex flex-col items-end justify-center">
@@ -73,18 +74,19 @@ export default function CheckoutModule() {
                     </div>
                 </div>
 
+
                 <div className="flex flex-row items-center gap-4">
                     <Image
                         src={`/png/fluore-thumbnail-s.png`}
                         alt={`fluore-thumbnail-s`}
-                        width={82}
-                        height={82}
+                        width={84}
+                        height={84}
                         unoptimized
                     />
                     <div className="flex w-full h-full justify-between">
                         <div className="flex flex-col gap-2 ">
                             <p>Bracelet</p>
-                            <p>FLUORE</p>
+                            <p className="text-xl font-bold leading-5">FLUORE</p>
                             <p>Rp25.000</p>
                         </div>
                         <div className="flex flex-col items-end justify-center">
@@ -92,6 +94,7 @@ export default function CheckoutModule() {
                         </div>
                     </div>
                 </div>
+                
             </div>
             
         </div>
