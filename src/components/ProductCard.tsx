@@ -1,63 +1,69 @@
 'use client'
 import Image from "next/image";
-import { AddToCartButton } from "./AddToCartButton";
-import { useRouter } from "next/navigation";
+import { AmountButton } from "./AmountButton";
+import { allProducts } from "@/data/products";
+import { setCart } from "@/redux/slices/cartSlice";
+import { useSelector, useDispatch} from "react-redux";
+import { RootState } from "@/redux/store";
 
-interface FilterToggleProps {
-    isNew: boolean,
-    isPreOrder: boolean,
-    accent: string,
-    accentComplement: string,
+
+interface ProductCardProps {
     name: string,
-    type: string,
-    price: string
+    index: number,
+    editable: boolean,
 }
 
-const ProductCard = ({ isNew, isPreOrder, accent, accentComplement, name, type, price }: FilterToggleProps) => {
-    const router = useRouter();
+const ProductCard = ({ name, index , editable}: ProductCardProps) => {
+
+    const dispatch = useDispatch()
+
+    const product = allProducts.find((item) => item.name === name)
+
+    const cart = useSelector((state: RootState) => state.cart.cart);
+
+    const size = cart[index].size
+    const amount = cart[index].amount
+    
+    const localCart = localStorage.getItem('cart')
+    const cartJSON = JSON.parse(localCart!)
+
+    const handleIncrement = () => {
+        cartJSON[index].amount += 1
+        localStorage.setItem('cart', JSON.stringify(cartJSON));
+        dispatch(setCart(cartJSON))
+    }
+
+    const handleDecrement = () => {
+        cartJSON[index].amount -= 1
+        localStorage.setItem('cart', JSON.stringify(cartJSON));
+        dispatch(setCart(cartJSON))
+    }
 
     return (
-        <div className="relative flex flex-col w-full aspect-[3.5/4] cursor-pointer" onClick={() => router.push(`/product/${name}`)}>
-            <div className="z-10 flex flex-col justify-between p-5 h-full">
-                <div className="flex justify-between items-start">
-                    <div className="flex flex-col gap-3" style={{ color: accent }}>
-                        <div className="flex flex-row gap-2 items-center">
-                            {isPreOrder ?
-                                <div className="py-0.5 px-3 rounded-full font-medium" style={{ backgroundColor: accent, color: accentComplement }}>
-                                    <p>Pre-Order</p>
-                                </div> : null}
-                                <div className="py-0.5 px-3 rounded-full font-medium" style={{ backgroundColor: accent, color: accentComplement }}>
-                                    <p>{type}</p>
-                                </div>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <p className="text-3xl font-bold tracking-wider">{name.toUpperCase()}</p>
-                            <p className="text-lg">Rp{price}</p>
-                        </div>
-                    </div>
-                    {isNew ?
-                        <Image
-                            src={`/svg/${name}-new-tag.svg`}
-                            style={{ objectFit: "cover" }}
-                            alt={`/${name}-new-tag`}
-                            width={105}
-                            height={85}
-                            unoptimized
-                        /> : null}
-                </div>
-                <div className="flex w-full justify-end">
-                    <AddToCartButton />
-                </div>
-            </div>
+        <div className="flex flex-row items-center gap-4">
             <Image
-                src={`/png/${name}-thumbnail.png`}
-                className="w-full h-full rounded-3xl absolute"
-                style={{ objectFit: "cover" }}
-                alt={`${name}-thumbnail`}
-                width={0}
-                height={0}
+                src={`/images/${name}-thumbnail-s.png`}
+                alt={`${name}-thumbnail-s`}
+                width={84}
+                height={84}
                 unoptimized
             />
+            <div className="flex w-full h-full justify-between">
+                <div className="flex flex-col gap-2 ">
+                    <p>{product?.type} ({size.toUpperCase()})</p>
+                    <p className="text-xl font-bold leading-5">{product?.name.toUpperCase()}</p>
+                    <p>Rp{product?.price}</p>
+                </div>
+                <div className={`flex flex-col items-end ${editable? 'justify-end': 'justify-center' }`}>
+                    <p>{amount}</p>
+                    {editable ?
+                        <div className="flex gap-2">
+                            <AmountButton onClick={() => handleDecrement()}>-</AmountButton>
+                            <AmountButton onClick={() => handleIncrement()}>+</AmountButton>
+                        </div> : null
+                    }
+                </div>
+            </div>
         </div>
     );
 };

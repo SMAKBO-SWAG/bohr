@@ -1,20 +1,25 @@
 'use client'
 
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface ModalState {
-    show: boolean
+    show: boolean,
+    name: string
 }
 
 const initialState: ModalState = {
-    show: false
+    show: false,
+    name: ''
 }
 
 export const drawerSlice = createSlice({
     name:'drawer',
     initialState,
     reducers: {
-        show: (state) => {state.show = true},
+        show: (state, action: PayloadAction<string>) => {
+            state.show = true,
+            state.name = action.payload
+        },
         close: (state) => {state.show = false}
     }
 })

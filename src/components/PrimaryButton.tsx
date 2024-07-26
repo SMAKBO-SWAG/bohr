@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
-const PrimaryButton = ({children} : {children : ReactNode}) => {
+const PrimaryButton = ({children, onClick} : {children : ReactNode, onClick : () => void}) => {
     const router = useRouter()
     return (
         <button 
@@ -9,7 +9,7 @@ const PrimaryButton = ({children} : {children : ReactNode}) => {
                 transition ease-in-out duration-150 transform 
                 active:scale-95
                 hover:bg-darker"
-                onClick={() => router.push('/cart')}>
+                onClick={onClick}>
                 {children}
         </button>
     );

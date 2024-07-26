@@ -9,7 +9,10 @@ import { Providers } from '@/redux/provider'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SMAKBO SWAG"
+  title: "SMAKBO SWAG",
+  icons: {
+    icon: '/icon.ico'
+  }
 };
 
 export default function RootLayout({
@@ -22,8 +25,8 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 
-                    <div className="bg-base w-screen h-screen flex justify-center font-gotham">
-                        <div className="bg-white w-[480px] overflow-y-auto p-5 no-scrollbar">
+                    <div className="bg-base w-screen min-h-screen flex justify-center font-gotham">
+                        <div className="bg-white w-[480px] overflow-auto p-5 no-scrollbar">
                             {children}
                         </div>
                         <CheckoutFloatingButton/> 

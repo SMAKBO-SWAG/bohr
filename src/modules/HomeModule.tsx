@@ -1,21 +1,24 @@
 'use client'
 import Image from "next/image";
 import { FilterToggle } from "@/components/FilterToggle";
-import { ProductCard } from "@/components/ProductCard";
-import { useEffect, useState } from "react";
-import { CartButton } from "@/components/CartButton";
-import { CheckoutButton } from "@/components/CheckoutButton";
+import { ProductThumbnail } from "@/components/ProductThumbnail";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { setFilter } from "@/redux/slices/filterSlice";
+import { allProducts } from "@/data/products";
+import { useEffect } from "react";
+import { show } from "@/redux/slices/checkoutSlice";
 
 export default function HomeModule() {
-  const [filter, setFilter] = useState<string>("");
+  const dispatch = useDispatch();
+  const filter = useSelector((state: RootState) => state.filter.filter);
+  const checkoutShow = useSelector((state: RootState) => state.checkout.show);
+
+  const products = (filter === 'All')? allProducts : allProducts.filter((product) => product.type === filter)
 
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilter(event.target.value);
+    dispatch(setFilter(event.target.value));
   };
-
-  useEffect(() => {
-    console.log(filter);
-  }, [filter]);
 
   return (
     <div className="relative gap-5 flex flex-col">          
@@ -28,22 +31,37 @@ export default function HomeModule() {
 
         <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2 overflow-x-auto py-2 px-5 mx-[-20px] no-scrollbar">
-                <FilterToggle onChange={handleFilter} type="All">All</FilterToggle>
-                <FilterToggle onChange={handleFilter} type="Bracelet">Bracelet</FilterToggle>
-                <FilterToggle onChange={handleFilter} type="Sticker">Sticker</FilterToggle>
-                <FilterToggle onChange={handleFilter} type="T-shirt">T-shirt</FilterToggle>
-                <FilterToggle onChange={handleFilter} type="Hoodie">Hoodie</FilterToggle>
+                <FilterToggle onChange={handleFilter} type="All" checked={filter==='All'} >All</FilterToggle>
+                <FilterToggle onChange={handleFilter} type="Bracelet" checked={filter==='Bracelet'}>Bracelet</FilterToggle>
+                <FilterToggle onChange={handleFilter} type="Sticker" checked={filter==='Sticker'}>Sticker</FilterToggle>
+                <FilterToggle onChange={handleFilter} type="T-shirt" checked={filter==='T-shirt'}>T-shirt</FilterToggle>
+                <FilterToggle onChange={handleFilter} type="Hoodie" checked={filter==='Hoodie'}>Hoodie</FilterToggle>
                 <p className="text-nowrap text-dark">and more to come...</p>
             </div>
 
             <div className="flex flex-col items-center gap-5">
-                <ProductCard isNew={true} isPreOrder={true} accent="#ffffff" accentComplement="#132042" name="fluore" type="Bracelet" price="25.000"/>
-                <ProductCard isNew={false} isPreOrder={true} accent="#132042" accentComplement="#ffffff" name="classic" type="Bracelet" price="25.000"/>
+
+                {products.map((product, key) => {
+                    return <ProductThumbnail 
+                    name={product.name} 
+                    type={product.type}
+                    price={product.price}
+                    isNew={product.isNew} 
+                    isPreOrder={product.isPreOrder} 
+                    accent={product.accent} 
+                    accentComplement={product.accentComplement}
+                    key={key}/>
+                })}
+
+                {
+                    checkoutShow?
+                    <div className="h-14">
+
+                    </div>: null
+                }
+
             </div>
         </div>
-
-        <CartButton></CartButton>
-        <CheckoutButton></CheckoutButton>
 
     </div>
   );

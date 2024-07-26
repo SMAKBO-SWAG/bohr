@@ -1,41 +1,64 @@
 'use client';
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { close } from "@/redux/slices/drawerSlice";
 import { RootState } from "@/redux/store";
 import { CartButton } from "./CartButton";
 import { CheckoutButton } from "./CheckoutButton";
+import { show } from "@/redux/slices/checkoutSlice";
+import { usePathname, useRouter } from 'next/navigation'
 
 export default function CheckoutFloatingButton() {
-    const show = useSelector((state: RootState) => state.checkout.show);
     const dispatch = useDispatch();
+    const router = useRouter();
+    const pathname = usePathname();
 
-    const [visible, setVisible] = useState(show);
+    const showButton = useSelector((state: RootState) => state.checkout.show);
+
+    const [visible, setVisible] = useState(showButton);
     const [slideClass, setSlideClass] = useState("");
-    const [fadeClass, setFadeClass] = useState("");
+
+    const handleCheckout = () => {
+        if (pathname === "/checkout") {
+
+            console.log('TODO')
+            localStorage.removeItem('cart')
+            router.push("/success")
+        } else {
+            router.push("/checkout")
+        }
+    }
 
     useEffect(() => {
-        if (show) {
+        if (showButton) {
             setVisible(true);
             setSlideClass("animate-slideIn");
-            setFadeClass("animate-fadeIn");
         } else {
             setSlideClass("animate-slideOut");
-            setFadeClass("animate-fadeOut");
-            setTimeout(() => setVisible(false), 280);
+            // setTimeout(() => setVisible(false), 280);
         }
-    }, [show]);
+    }, [showButton]);
+
+    useEffect(() => {
+        const cart = localStorage.getItem('cart')
+    
+        if (cart) {
+            dispatch(show())
+        }
+
+      }, [])
 
     if (!visible) return null;
 
     return (
         <>
+            {pathname !== '/success' ?
             <div className={`fixed w-screen sm:w-[480px] h-full z-50 p-5 flex justify-center items-end pointer-events-none`}>
-                <div className="flex gap-4 w-full pointer-events-auto">
+                <div className={`flex gap-4 w-full pointer-events-auto ${slideClass}`}>
                     <CartButton/>
-                    <CheckoutButton/>
+                    <CheckoutButton onClick = {() => handleCheckout()}/>
                 </div>
-            </div>
+            </div> : null
+            }
         </>
     );
 }

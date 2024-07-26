@@ -1,8 +1,11 @@
 'use client'
 import { PrimaryButton } from "@/components/PrimaryButton";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function HomeModule() {
+
+    const router = useRouter()
 
   return (
     <div className="relative gap-5 flex items-center justify-center h-full text-black"> 
@@ -20,7 +23,7 @@ export default function HomeModule() {
                     <p className="text-2xl font-bold">Order Successful!</p>
                     <p className="text-s font-medium">You will receive a confirmation message through Whatsapp shortly. </p>
                 </div>
-                    <PrimaryButton>Back to Home</PrimaryButton>
+                    <PrimaryButton onClick={() => router.push('/')}>Back to Home</PrimaryButton>
             </div>
         </div>
 

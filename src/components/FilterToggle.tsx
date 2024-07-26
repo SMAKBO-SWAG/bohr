@@ -4,9 +4,10 @@ interface FilterToggleProps {
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
     type: string;
     children: ReactNode;
+    checked?: boolean
 }
 
-const FilterToggle = ({ onChange, type, children }: FilterToggleProps) => {
+const FilterToggle = ({ onChange, type, children, checked}: FilterToggleProps) => {
     const defaultInputClass = `hidden peer`;
     const defaultLabelClass = `
         font-medium
@@ -25,6 +26,7 @@ const FilterToggle = ({ onChange, type, children }: FilterToggleProps) => {
                 id={type}
                 className={defaultInputClass}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => onChange(event)}
+                checked={checked}
             />
             <label
                 htmlFor={type}

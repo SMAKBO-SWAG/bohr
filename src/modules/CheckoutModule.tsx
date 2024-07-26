@@ -1,12 +1,17 @@
 'use client'
 import { BackButton } from "@/components/BackButton";
+import { ProductCard } from "@/components/ProductCard";
 import { show } from "@/redux/slices/modalSlice";
+import { RootState } from "@/redux/store";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 export default function CheckoutModule() {
     const dispatch = useDispatch()
+    const checkoutShow = useSelector((state: RootState) => state.checkout.show);
+
+    const cart = useSelector((state: RootState) => state.cart.cart);
 
   return (
     <div className="relative flex flex-col items-center gap-6 text-black">          
@@ -57,52 +62,22 @@ export default function CheckoutModule() {
 
         <div className="flex flex-col gap-2 w-full">
             <p>Order Items</p>
-            <div className="flex flex-col gap-4">
-                <div className="flex flex-row items-center gap-4">
-                    <Image
-                        src={`/png/fluore-thumbnail-s.png`}
-                        alt={`fluore-thumbnail-s`}
-                        width={84}
-                        height={84}
-                        unoptimized
-                    />
-                    <div className="flex w-full h-full justify-between">
-                        <div className="flex flex-col gap-2 ">
-                            <p>Bracelet</p>
-                            <p className="text-xl font-bold leading-5">FLUORE</p>
-                            <p>Rp25.000</p>
-                        </div>
-                        <div className="flex flex-col items-end justify-center">
-                            <p>x2</p>
-                        </div>
-                    </div>
-                </div>
+            <div className="flex flex-col w-full gap-4">
 
+                {cart.map((product: { name: string, size: string, amount: number }, index: number, key: any, ) => {
+                    return <ProductCard name={product.name} index={index} key={key} editable={false}></ProductCard>
+                })}
 
-                <div className="flex flex-row items-center gap-4">
-                    <Image
-                        src={`/png/fluore-thumbnail-s.png`}
-                        alt={`fluore-thumbnail-s`}
-                        width={84}
-                        height={84}
-                        unoptimized
-                    />
-                    <div className="flex w-full h-full justify-between">
-                        <div className="flex flex-col gap-2 ">
-                            <p>Bracelet</p>
-                            <p className="text-xl font-bold leading-5">FLUORE</p>
-                            <p>Rp25.000</p>
-                        </div>
-                        <div className="flex flex-col items-end justify-center">
-                            <p>x2</p>
-                        </div>
-                    </div>
-                </div>
+                {
+                    checkoutShow?
+                    <div className="h-14">
+
+                    </div>: null
+                }
                 
             </div>
             
         </div>
-        <button onClick={() => dispatch(show())} >Modal</button>
 
     </div>
   );

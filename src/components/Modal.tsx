@@ -46,7 +46,7 @@ export default function Drawer() {
                         </div>
 
                         <div className="flex w-full justify-center gap-4">
-                            <PrimaryButton>Cancel</PrimaryButton>
+                            <PrimaryButton onClick={()=>null}>Cancel</PrimaryButton>
                             <SecondaryButton>remove</SecondaryButton>
                         </div>
 

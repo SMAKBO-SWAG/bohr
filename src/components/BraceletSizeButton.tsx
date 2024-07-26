@@ -4,9 +4,10 @@ import Image from "next/image";
 interface BraceletFilterButtonProps {
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
     type: string;
+    checked: boolean
 }
 
-const BraceletFilterButton = ({ onChange, type }: BraceletFilterButtonProps) => {
+const BraceletFilterButton = ({ onChange, type, checked}: BraceletFilterButtonProps) => {
     const defaultInputClass = `hidden peer`;
 
     return (
@@ -18,6 +19,7 @@ const BraceletFilterButton = ({ onChange, type }: BraceletFilterButtonProps) => 
                 id={type}
                 className={defaultInputClass}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => onChange(event)}
+                checked = {checked}
             />
             <label htmlFor={type} className="w-full rounded-xl border border-transparent peer-checked:border-darker peer-checked:border-2 inline-block">
                 <Image

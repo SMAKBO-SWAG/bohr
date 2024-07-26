@@ -1,13 +1,10 @@
 import Image from "next/image";
-import { useDispatch } from 'react-redux'
-import { show } from "@/redux/slices/drawerSlice";
 
-const AddToCartButton = () => {
-    const dispatch = useDispatch()
+const AddToCartButton = ({onClick} : {onClick : () => void}) => {
 
     return (
         <button 
-            onClick={(e) => { e.stopPropagation() ; dispatch(show()) }}
+            onClick={(e) => { e.stopPropagation() ; onClick() }}
             className="
                 flex py-2 px-4 gap-2 text-white items-center justify-center bg-dark rounded-full
                 transition ease-in-out duration-150 transform 
