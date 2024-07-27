@@ -7,14 +7,21 @@ import Image from "next/image";
 import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
 import { remove } from "@/redux/slices/cartSlice";
-
-const actionHandlers = {
-    removeItem: (dispatch: any, params: any) => {
-        dispatch(remove(params));
-    },
-};
+import { useRouter } from "next/navigation";
 
 export default function Modal() {
+    const router = useRouter()
+
+    const actionHandlers = {
+        removeItem: (dispatch: any, params: any) => {
+            dispatch(remove(params));
+        },
+        proceedCOD: (dispatch: any, params: any) => {
+            // TODO BE
+            router.push('/success')
+        }
+    };
+
 	const { show, content } = useSelector((state: RootState) => ({
 		show: state.modal.show,
 		content: state.modal.content,
@@ -50,7 +57,7 @@ export default function Modal() {
 
 				<div className="z-10 w-screen sm:w-[480px] mx-5 bg-white gap-4 p-10 flex flex-col items-center justify-center rounded-3xl">
 					<Image
-						src={`/svg/illustrations/deletion-confirm-illustration.svg`}
+						src={content.illustration}
 						alt={`deletion-confirm-illustration`}
 						width={250}
 						height={0}
@@ -65,12 +72,12 @@ export default function Modal() {
 						</div>
 
 						<div className="flex w-full justify-center gap-4">
-							<PrimaryButton onClick={() => dispatch(close())}>
-								Cancel
-							</PrimaryButton>
-							<SecondaryButton onClick={() => handleProceed()}>
-								Remove
+							<SecondaryButton onClick={() => dispatch(close())}>
+                                Cancel
 							</SecondaryButton>
+                            <PrimaryButton onClick={() => handleProceed()}>
+                                {content.button}
+							</PrimaryButton>
 						</div>
 					</div>
 				</div>

@@ -4,8 +4,7 @@ import { AmountButton } from "./AmountButton";
 import { allProducts } from "@/data/products";
 import {
 	incrementAmount,
-	decrementAmount,
-	remove,
+	decrementAmount
 } from "@/redux/slices/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -39,10 +38,12 @@ const ProductCard = ({ name, index, editable }: ProductCardProps) => {
 		if (amount <= 1) {
 			dispatch(
 				show({
+                    illustration: "/svg/illustrations/deletion-confirm-illustration.svg",
 					title: "Confirm Deletion",
 					body: "Are you sure you want to remove this item from your cart?",
 					action: "removeItem",
-                    params: {name, size}
+                    button: "Remove",
+					params: { name, size },
 				})
 			);
 			return;
@@ -73,11 +74,11 @@ const ProductCard = ({ name, index, editable }: ProductCardProps) => {
 					<p>Rp{product?.price}</p>
 				</div>
 				<div
-					className={`flex flex-col items-end ${
+					className={`flex flex-col items-end  gap-2 ${
 						editable ? "justify-end" : "justify-center"
 					}`}
 				>
-					<p>{amount}</p>
+					<p className="mr-2">x{amount}</p>
 					{editable ? (
 						<div className="flex gap-2">
 							<AmountButton onClick={() => handleDecrement()}>

@@ -16,6 +16,7 @@ import drawerReducer from "./slices/drawerSlice";
 import modalReducer from "./slices/modalSlice";
 import filterReducer from "./slices/filterSlice";
 import cartReducer from "./slices/cartSlice";
+import userReducer from "./slices/userSlice";
 
 const cartPersistConfig = {
 	key: "cart",
@@ -30,6 +31,7 @@ export const store = configureStore({
 		modal: modalReducer,
 		filter: filterReducer,
 		cart: persistedCartReducer,
+		user: userReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

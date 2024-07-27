@@ -2,7 +2,7 @@ import { ChangeEvent, ReactNode } from "react";
 import Image from "next/image";
 
 interface BraceletFilterButtonProps {
-	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+	onChange: () => void;
 	type: string;
 	checked: boolean;
 }
@@ -19,12 +19,9 @@ const BraceletFilterButton = ({
 			<input
 				type="radio"
 				name="bracelet-size"
-				value={type}
 				id={type}
 				className={defaultInputClass}
-				onChange={(event: ChangeEvent<HTMLInputElement>) =>
-					onChange(event)
-				}
+				onChange={() => onChange()}
 				checked={checked}
 			/>
 			<label

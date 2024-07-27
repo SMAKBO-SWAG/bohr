@@ -1,20 +1,27 @@
 "use client";
-import { BackButton } from "@/components/BackButton";
+import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
+import { setName, setNumber, setPaymentMethod } from "@/redux/slices/userSlice";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CheckoutModule() {
+	const router = useRouter();
+	const dispatch = useDispatch();
 	const cart = useSelector((state: RootState) => state.cart.cart);
+
+	useEffect(() => {
+		if (cart.length === 0) {
+			router.push("/");
+		}
+	}, [cart]);
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
-			<div className="w-full flex justify-between items-center">
-				<BackButton />
-				<p className="text-2xl font-bold tracking-wide">Checkout</p>
-				<div className="w-[54px]"></div>
-			</div>
+			<Header>Checkout</Header>
 			<div className="flex w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl">
 				<Image
 					src="/svg/icons/info-icon.svg"
@@ -39,27 +46,43 @@ export default function CheckoutModule() {
 			<div className="flex flex-col gap-2 w-full">
 				<p>Name</p>
 				<input
+                    type="text"
 					className="flex w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl"
 					placeholder="Budi"
+					onChange={(e) => dispatch(setName(e.target.value))}
 				></input>
 			</div>
 
 			<div className="flex flex-col gap-2 w-full">
 				<p>Number/Whatsapp</p>
 				<input
+                    type="number"
 					className="flex w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl"
 					placeholder="0812345678"
+					onChange={(e) => dispatch(setNumber(e.target.value))}
 				></input>
 			</div>
 
 			<div className="flex flex-col gap-2 w-full">
 				<p>Payment Method</p>
 				<div className="flex gap-2">
-					<input type="radio" id="cod" name="paymentMethod"></input>
+					<input
+						type="radio"
+						value="cod"
+						id="cod"
+						name="paymentMethod"
+						onChange={(e) => dispatch(setPaymentMethod(e.target.value))}
+					></input>
 					<label htmlFor="cod"> Cash on Delivery (SMAKBO)</label>
 				</div>
 				<div className="flex gap-2">
-					<input type="radio" id="qris" name="paymentMethod"></input>
+					<input
+						type="radio"
+						value="qris"
+						id="qris"
+						name="paymentMethod"
+						onChange={(e) => dispatch(setPaymentMethod(e.target.value))}
+					></input>
 					<label htmlFor="qris"> QRIS Payment</label>
 				</div>
 			</div>
@@ -74,7 +97,7 @@ export default function CheckoutModule() {
 								size: string;
 								amount: number;
 							},
-							index: number,
+							index: number
 						) => {
 							return (
 								<ProductCard
@@ -87,7 +110,7 @@ export default function CheckoutModule() {
 						}
 					)}
 
-					{cart.length !== 0 && <div className="h-14" />}
+					<div className="h-14" />
 				</div>
 			</div>
 		</div>

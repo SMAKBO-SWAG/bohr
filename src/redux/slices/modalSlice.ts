@@ -2,26 +2,30 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface ModalContentState  {
-    title: string,
-    body: string,
-    action: string,
-    params: any
+export interface ModalContentState {
+	illustration: string;
+	title: string;
+	body: string;
+	action: string;
+    button: string;
+	params: any;
 }
 
 export interface ModalState {
 	show: boolean;
-    content: ModalContentState;
+	content: ModalContentState;
 }
 
 const initialState: ModalState = {
 	show: false,
-    content: {
-        title: "",
-        body: "",
-        action: "",
-        params: null
-    }
+	content: {
+		illustration: "",
+		title: "",
+		body: "",
+		action: "",
+        button: "",
+		params: null,
+	},
 };
 
 export const modalSlice = createSlice({
@@ -29,8 +33,7 @@ export const modalSlice = createSlice({
 	initialState,
 	reducers: {
 		show: (state, action: PayloadAction<ModalContentState>) => {
-			state.show = true,
-            state.content = action.payload;
+			(state.show = true), (state.content = action.payload);
 		},
 		close: (state) => {
 			state.show = false;

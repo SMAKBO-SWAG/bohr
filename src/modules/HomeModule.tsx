@@ -18,7 +18,7 @@ export default function HomeModule() {
 			: allProducts.filter((product) => product.type === filter);
 
 	return (
-		<div className="relative gap-5 flex flex-col">
+		<div className="relative gap-5 flex flex-col h-full">
 			<Image
 				src="/svg/logo.svg"
 				width={225}
@@ -26,7 +26,7 @@ export default function HomeModule() {
 				alt="SMAKBO SWAG Logo"
 			/>
 
-			<div className="flex flex-col gap-4">
+			<div className="flex flex-col gap-4 h-full">
 				<div className="flex items-center gap-2 overflow-x-auto py-2 px-5 mx-[-20px] no-scrollbar">
 					<FilterToggle type="All" checked={filter === "All"} />
 					<FilterToggle
@@ -45,24 +45,30 @@ export default function HomeModule() {
 					<p className="text-nowrap text-dark">and more to come...</p>
 				</div>
 
-				<div className="flex flex-col items-center gap-5">
-					{products.map((product, index) => {
-						return (
-							<ProductThumbnail
-								name={product.name}
-								type={product.type}
-								price={product.price}
-								isNew={product.isNew}
-								isPreOrder={product.isPreOrder}
-								accent={product.accent}
-								accentComplement={product.accentComplement}
-								key={index}
-							/>
-						);
-					})}
+				{products.length !== 0 ? (
+					<div className="flex flex-col items-center gap-5">
+						{products.map((product, index) => {
+							return (
+								<ProductThumbnail
+									name={product.name}
+									type={product.type}
+									price={product.price}
+									isNew={product.isNew}
+									isPreOrder={product.isPreOrder}
+									accent={product.accent}
+									accentComplement={product.accentComplement}
+									key={index}
+								/>
+							);
+						})}
 
-					{cart.length !== 0 && <div className="h-14" />}
-				</div>
+						{cart.length !== 0 && <div className="h-14" />}
+					</div>
+				) : (
+					<div className="flex items-center justify-center h-full font-medium">
+						Hang tight, we are cooking something...
+					</div>
+				)}
 			</div>
 		</div>
 	);

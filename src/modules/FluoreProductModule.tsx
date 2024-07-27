@@ -1,5 +1,6 @@
 "use client";
 import { BackButton } from "@/components/BackButton";
+import { Header } from "@/components/Header";
 import { ProductThumbnail } from "@/components/ProductThumbnail";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
@@ -10,11 +11,7 @@ export default function FluoreProductModule() {
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
-			<div className="w-full flex justify-between items-center">
-				<BackButton />
-				<p className="text-2xl font-bold tracking-wide">Fluore</p>
-				<div className="w-[54px]"></div>
-			</div>
+			<Header>Fluore</Header>
 			<ProductThumbnail
 				isNew={true}
 				isPreOrder={true}

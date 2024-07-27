@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { Header } from "@/components/Header";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export interface CartState {
 	name: string;
@@ -12,7 +13,14 @@ export interface CartState {
 }
 
 export default function CartModule() {
+    const router = useRouter()
 	const cart = useSelector((state: RootState) => state.cart.cart);
+
+	useEffect(() => {
+		if (cart.length === 0) {
+			router.push("/");
+		}
+	}, [cart]);
 
 	return (
 		<div className="relative flex flex-col items-center gap-8 text-black">
@@ -21,7 +29,7 @@ export default function CartModule() {
 				{cart?.map(
 					(
 						product: { name: string; size: string; amount: number },
-						index: number,
+						index: number
 					) => {
 						return (
 							<ProductCard
@@ -33,7 +41,7 @@ export default function CartModule() {
 						);
 					}
 				)}
-				{cart.length !== 0 && <div className="h-14" />}
+				<div className="h-14" />
 			</div>
 		</div>
 	);
