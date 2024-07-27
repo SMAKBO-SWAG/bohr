@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
 const PrimaryButton = ({
@@ -8,7 +7,6 @@ const PrimaryButton = ({
 	children: ReactNode;
 	onClick: () => void;
 }) => {
-	const router = useRouter();
 	return (
 		<button
 			className="rounded-full bg-dark px-5 py-2 flex items-center justify-center text-white

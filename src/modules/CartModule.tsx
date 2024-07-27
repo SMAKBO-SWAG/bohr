@@ -3,6 +3,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { Header } from "@/components/Header";
+import { useEffect } from "react";
 
 export interface CartState {
 	name: string;
@@ -10,7 +11,7 @@ export interface CartState {
 	amount: number;
 }
 
-export default function ClassicProductModule() {
+export default function CartModule() {
 	const cart = useSelector((state: RootState) => state.cart.cart);
 
 	return (
@@ -21,13 +22,12 @@ export default function ClassicProductModule() {
 					(
 						product: { name: string; size: string; amount: number },
 						index: number,
-						key: any
 					) => {
 						return (
 							<ProductCard
 								name={product.name}
 								index={index}
-								key={key}
+								key={index}
 								editable={true}
 							></ProductCard>
 						);

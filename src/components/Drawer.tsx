@@ -30,7 +30,14 @@ export default function Drawer() {
 		} else {
 			setSlideClass("animate-slideOut");
 			setFadeClass("animate-fadeOut");
-			setTimeout(() => setVisible(false), 280);
+
+			const clearState = setTimeout(() => {
+                setVisible(false);
+                setSize("m");
+                setAmount(1);
+            }, 280);
+    
+            return () => clearTimeout(clearState);
 		}
 	}, [show]);
 
@@ -42,10 +49,6 @@ export default function Drawer() {
 	const handleAddToCart = () => {
 		dispatch(setCart({ name, size, amount }));
 		dispatch(close());
-
-		// Clear state
-		setSize("m");
-		setAmount(1);
 	};
 
 	if (!visible) return null;

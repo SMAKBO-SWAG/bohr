@@ -19,6 +19,7 @@ export default function CheckoutFloatingButton() {
 			setSlideClass("animate-slideIn");
 		} else {
 			setSlideClass("animate-slideOut");
+			setTimeout(() => setVisible(false), 280);
 		}
 	}, [cart]);
 
@@ -26,18 +27,18 @@ export default function CheckoutFloatingButton() {
 
 	return (
 		<>
-			{pathname !== "/success" ? (
+			{pathname !== "/success" && (
 				<div
 					className={`fixed w-screen sm:w-[480px] h-full z-50 p-5 flex justify-center items-end pointer-events-none`}
 				>
 					<div
 						className={`flex gap-4 w-full pointer-events-auto ${slideClass}`}
 					>
-						<CartButton />
+						{pathname !== "/cart" && <CartButton />}
 						<CheckoutButton pathname={pathname} />
 					</div>
 				</div>
-			) : null}
+			)}
 		</>
 	);
 }

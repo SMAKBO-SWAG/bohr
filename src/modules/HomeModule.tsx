@@ -46,7 +46,7 @@ export default function HomeModule() {
 				</div>
 
 				<div className="flex flex-col items-center gap-5">
-					{products.map((product, key) => {
+					{products.map((product, index) => {
 						return (
 							<ProductThumbnail
 								name={product.name}
@@ -56,7 +56,7 @@ export default function HomeModule() {
 								isPreOrder={product.isPreOrder}
 								accent={product.accent}
 								accentComplement={product.accentComplement}
-								key={key}
+								key={index}
 							/>
 						);
 					})}

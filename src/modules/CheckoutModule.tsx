@@ -75,13 +75,12 @@ export default function CheckoutModule() {
 								amount: number;
 							},
 							index: number,
-							key: any
 						) => {
 							return (
 								<ProductCard
 									name={product.name}
 									index={index}
-									key={key}
+									key={index}
 									editable={false}
 								></ProductCard>
 							);

@@ -19,17 +19,17 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<ReduxProviders>
 			<html lang="en">
 				<body className="w-screen min-h-screen flex justify-center font-gotham">
-					<div className="w-[480px] p-5 bg-white overflow-auto no-scrollbar">
-						{children}
-					</div>
-					<CheckoutFloatingButton />
-					<Drawer />
-					<Modal />
+                    <ReduxProviders>
+                        <div className="w-[480px] p-5 bg-white overflow-auto no-scrollbar">
+                            {children}
+                        </div>
+                        <CheckoutFloatingButton />
+                        <Drawer />
+                        <Modal />
+                    </ReduxProviders>
 				</body>
 			</html>
-		</ReduxProviders>
 	);
 }

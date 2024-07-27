@@ -6,9 +6,19 @@ import { RootState } from "@/redux/store";
 import Image from "next/image";
 import { PrimaryButton } from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
+import { remove } from "@/redux/slices/cartSlice";
 
-export default function Drawer() {
-	const show = useSelector((state: RootState) => state.modal.show);
+const actionHandlers = {
+    removeItem: (dispatch: any, params: any) => {
+        dispatch(remove(params));
+    },
+};
+
+export default function Modal() {
+	const { show, content } = useSelector((state: RootState) => ({
+		show: state.modal.show,
+		content: state.modal.content,
+	}));
 	const dispatch = useDispatch();
 
 	const [visible, setVisible] = useState(show);
@@ -20,6 +30,11 @@ export default function Drawer() {
 			setVisible(false);
 		}
 	}, [show]);
+
+    const handleProceed = () => {
+        (actionHandlers as any)[content.action](dispatch, content.params)
+        dispatch(close())
+    }
 
 	if (!visible) return null;
 
@@ -44,19 +59,18 @@ export default function Drawer() {
 					<div className="flex flex-col gap-6 items-center">
 						<div className="flex flex-col text-center gap-2">
 							<p className="text-2xl font-bold">
-								Confirm Deletion
+								{content.title}
 							</p>
-							<p className="text-s font-medium">
-								Are you sure you want to remove this item from
-								your cart?
-							</p>
+							<p className="text-s font-medium">{content.body}</p>
 						</div>
 
 						<div className="flex w-full justify-center gap-4">
-							<PrimaryButton onClick={() => null}>
+							<PrimaryButton onClick={() => dispatch(close())}>
 								Cancel
 							</PrimaryButton>
-							<SecondaryButton>remove</SecondaryButton>
+							<SecondaryButton onClick={() => handleProceed()}>
+								Remove
+							</SecondaryButton>
 						</div>
 					</div>
 				</div>

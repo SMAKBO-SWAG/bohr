@@ -2,11 +2,16 @@
 import Image from "next/image";
 import { AmountButton } from "./AmountButton";
 import { allProducts } from "@/data/products";
-import { incrementAmount, decrementAmount } from "@/redux/slices/cartSlice";
+import {
+	incrementAmount,
+	decrementAmount,
+	remove,
+} from "@/redux/slices/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { show } from "@/redux/slices/modalSlice";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
 	name: string;
@@ -16,6 +21,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ name, index, editable }: ProductCardProps) => {
 	const dispatch = useDispatch();
+	const router = useRouter();
 
 	const product = allProducts.find((item) => item.name === name);
 
@@ -31,7 +37,14 @@ const ProductCard = ({ name, index, editable }: ProductCardProps) => {
 
 	const handleDecrement = () => {
 		if (amount <= 1) {
-			dispatch(show());
+			dispatch(
+				show({
+					title: "Confirm Deletion",
+					body: "Are you sure you want to remove this item from your cart?",
+					action: "removeItem",
+                    params: {name, size}
+				})
+			);
 			return;
 		}
 		dispatch(decrementAmount({ name, size }));
@@ -46,6 +59,8 @@ const ProductCard = ({ name, index, editable }: ProductCardProps) => {
 				width={84}
 				height={84}
 				unoptimized
+				className="cursor-pointer"
+				onClick={() => router.push(`/product/${name}`)}
 			/>
 			<div className="flex w-full h-full justify-between">
 				<div className="flex flex-col gap-2 ">
