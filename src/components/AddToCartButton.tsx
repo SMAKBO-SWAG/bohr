@@ -18,7 +18,7 @@ const AddToCartButton = ({onClick} : {onClick : () => void}) => {
                     0px_2px_4px_0px_rgba(0,0,0,0.10)
                     ]">
             <Image
-                src={`/svg/add-to-cart-icon.svg`}
+                src={`/svg/icons/add-to-cart-icon.svg`}
                 alt={`add-to-cart-icon`}
                 width={21}
                 height={21}

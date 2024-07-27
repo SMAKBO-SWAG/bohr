@@ -12,7 +12,7 @@ export default function HomeModule() {
 
         <div className="z-10 gap-4 p-10 flex flex-col items-center justify-center rounded-3xl">
             <Image
-                src={`/svg/success-illustration.svg`}
+                src={`/svg/illustrations/success-illustration.svg`}
                 alt={`success-illustration`}
                 width={250}
                 height={0}

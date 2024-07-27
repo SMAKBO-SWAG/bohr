@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { AmountButton } from "./AmountButton";
 import { allProducts } from "@/data/products";
-import { setCart } from "@/redux/slices/cartSlice";
+import { incrementAmount, decrementAmount } from "@/redux/slices/cartSlice";
 import { useSelector, useDispatch} from "react-redux";
 import { RootState } from "@/redux/store";
 
@@ -23,20 +23,13 @@ const ProductCard = ({ name, index , editable}: ProductCardProps) => {
 
     const size = cart[index].size
     const amount = cart[index].amount
-    
-    const localCart = localStorage.getItem('cart')
-    const cartJSON = JSON.parse(localCart!)
 
     const handleIncrement = () => {
-        cartJSON[index].amount += 1
-        localStorage.setItem('cart', JSON.stringify(cartJSON));
-        dispatch(setCart(cartJSON))
+        dispatch(incrementAmount({name, size, amount}))
     }
 
     const handleDecrement = () => {
-        cartJSON[index].amount -= 1
-        localStorage.setItem('cart', JSON.stringify(cartJSON));
-        dispatch(setCart(cartJSON))
+        dispatch(decrementAmount({name, size, amount}))
     }
 
     return (

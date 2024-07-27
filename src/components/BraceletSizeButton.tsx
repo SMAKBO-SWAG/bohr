@@ -23,7 +23,7 @@ const BraceletFilterButton = ({ onChange, type, checked}: BraceletFilterButtonPr
             />
             <label htmlFor={type} className="w-full rounded-xl border border-transparent peer-checked:border-darker peer-checked:border-2 inline-block">
                 <Image
-                    src={`/svg/size-bracelet-${type}.svg`}
+                    src={`/svg/illustrations/size-bracelet-illustration-${type}.svg`}
                     alt={`size-bracelet-${type}`}
                     width={0}
                     height={0}

@@ -3,102 +3,69 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'Gotham Rounded';
-    font-weight: 300;
-    src: url('/fonts/gotham-rounded/gotham-rounded-light.otf');
+	font-family: "Gotham Rounded";
+	font-weight: 500;
+	src: url("/fonts/gotham-rounded-medium.otf");
 }
 
 @font-face {
-    font-family: 'Gotham Rounded';
-    font-weight: 500;
-    src: url('/fonts/gotham-rounded/gotham-rounded-medium.otf');
+	font-family: "Gotham Rounded";
+	font-weight: 700;
+	src: url("/fonts/gotham-rounded-bold.otf");
 }
-
-@font-face {
-    font-family: 'Gotham Rounded';
-    font-weight: 700;
-    src: url('/fonts/gotham-rounded/gotham-rounded-bold.otf');
-}
-
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 @keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
 }
 
 @keyframes slideIn {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(0);
-    }
+	from {
+		transform: translateY(100%);
+	}
+	to {
+		transform: translateY(0);
+	}
 }
 
 @keyframes slideOut {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(100%);
-    }
-}
-
-.animate-fadeIn {
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-.animate-fadeOut {
-    animation: fadeOut 0.3s ease-in-out;
-}
-
-.animate-slideIn {
-    animation: slideIn 0.3s ease-in-out;
-}
-
-.animate-slideOut {
-    animation: slideOut 0.3s ease-in-out;
-}
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(100%);
+	}
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	background: #f7f7f7;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.animate-fadeIn {
+	animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-fadeOut {
+	animation: fadeOut 0.3s ease-in-out;
+}
+
+.animate-slideIn {
+	animation: slideIn 0.3s ease-in-out;
+}
+
+.animate-slideOut {
+	animation: slideOut 0.3s ease-in-out;
 }

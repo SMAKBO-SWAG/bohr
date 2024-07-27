@@ -10,7 +10,7 @@ const BackButton = () => {
                 hover:bg-darker rotate-180"
                 onClick={() => window.history.back()}>
             <Image
-                src={`/svg/arrow.svg`}
+                src={`/svg/icons/arrow-icon.svg`}
                 alt={`arrow`}
                 width={21}
                 height={20}

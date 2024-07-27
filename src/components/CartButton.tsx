@@ -11,7 +11,7 @@ const CartButton = () => {
                 hover:bg-darker"
                 onClick={() => router.push('/cart')}>
             <Image
-                src={`/svg/cart-icon.svg`}
+                src={`/svg/icons/cart-icon.svg`}
                 alt={`cart-icon`}
                 width={22}
                 height={23}

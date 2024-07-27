@@ -1,64 +1,46 @@
-'use client';
+"use client";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { CartButton } from "./CartButton";
 import { CheckoutButton } from "./CheckoutButton";
-import { show } from "@/redux/slices/checkoutSlice";
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 export default function CheckoutFloatingButton() {
-    const dispatch = useDispatch();
-    const router = useRouter();
-    const pathname = usePathname();
+	const pathname = usePathname();
 
-    const showButton = useSelector((state: RootState) => state.checkout.show);
+	const cart = useSelector((state: RootState) => state.cart.cart);
+	const [visible, setVisible] = useState(false);
+	const [slideClass, setSlideClass] = useState("");
 
-    const [visible, setVisible] = useState(showButton);
-    const [slideClass, setSlideClass] = useState("");
+	useEffect(() => {
+		const localCart = localStorage.getItem("cart");
 
-    const handleCheckout = () => {
-        if (pathname === "/checkout") {
+		if (localCart) {
+			setVisible(true);
+			setSlideClass("animate-slideIn");
+		} else {
+			setSlideClass("animate-slideOut");
+			// setTimeout(() => setVisible(false), 280);
+		}
+	}, [cart]);
 
-            console.log('TODO')
-            localStorage.removeItem('cart')
-            router.push("/success")
-        } else {
-            router.push("/checkout")
-        }
-    }
+	if (!visible) return null;
 
-    useEffect(() => {
-        if (showButton) {
-            setVisible(true);
-            setSlideClass("animate-slideIn");
-        } else {
-            setSlideClass("animate-slideOut");
-            // setTimeout(() => setVisible(false), 280);
-        }
-    }, [showButton]);
-
-    useEffect(() => {
-        const cart = localStorage.getItem('cart')
-    
-        if (cart) {
-            dispatch(show())
-        }
-
-      }, [])
-
-    if (!visible) return null;
-
-    return (
-        <>
-            {pathname !== '/success' ?
-            <div className={`fixed w-screen sm:w-[480px] h-full z-50 p-5 flex justify-center items-end pointer-events-none`}>
-                <div className={`flex gap-4 w-full pointer-events-auto ${slideClass}`}>
-                    <CartButton/>
-                    <CheckoutButton onClick = {() => handleCheckout()}/>
-                </div>
-            </div> : null
-            }
-        </>
-    );
+	return (
+		<>
+			{pathname !== "/success" ? (
+				<div
+					className={`fixed w-screen sm:w-[480px] h-full z-50 p-5 flex justify-center items-end pointer-events-none`}
+				>
+					<div
+						className={`flex gap-4 w-full pointer-events-auto ${slideClass}`}
+					>
+						<CartButton />
+						<CheckoutButton pathname={pathname} />
+					</div>
+				</div>
+			) : null}
+		</>
+	);
 }

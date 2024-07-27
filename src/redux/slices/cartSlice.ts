@@ -1,19 +1,18 @@
 'use client'
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { stat } from 'fs'
 
-export interface CartState {
+export interface ItemState {
     name: string,
     size: string,
     amount: number,
-    cart: CartState[]
+}
+
+export interface CartState {
+    cart: ItemState[]
 }
 
 const initialState: CartState = {
-    name: '',
-    size: '',
-    amount: 0,
     cart: []
 }
 
@@ -21,31 +20,58 @@ export const cartSlice = createSlice({
     name:'cart',
     initialState,
     reducers: {
-        setCart: (state, action: PayloadAction<CartState[]>) => {
-            state.cart = action.payload
-        },
-        setName: (state, action: PayloadAction<string>) => {
-            state.name = action.payload
-        },
-        setSize: (state, action: PayloadAction<string>) => {
-            state.size = action.payload
-        },
-        incrementAmount: (state) => {
-            state.amount += 1
-        },
-        decrementAmount: (state) => {
-            if (state.amount > 1) {
-                state.amount -= 1;
+        setCart: (state, action: PayloadAction<ItemState>) => {
+            const product = action.payload
+            const cart = localStorage.getItem('cart');
+    
+            if (!cart) {
+                localStorage.setItem('cart', JSON.stringify([product]));
+                state.cart = [product]
+                return;
             }
-        },
-        clear: (state) => {
-            state.size = '',
-            state.amount = 0
-        }
         
+            let cartJSON = JSON.parse(cart);
+            const productIndex = cartJSON.findIndex((item : any) => item.name === product.name && item.size === product.size);
+        
+            if (productIndex !== -1) {
+                cartJSON[productIndex].amount += product.amount;
+            } else {
+                cartJSON.push({ name: product.name, size: product.size, amount: product.amount });
+            }
+        
+            localStorage.setItem('cart', JSON.stringify(cartJSON));
+
+            state.cart = cartJSON
+        },
+        incrementAmount: (state, action: PayloadAction<ItemState>) => {
+            const cart = localStorage.getItem('cart');
+            let cartJSON = JSON.parse(cart!);
+
+            const payload = action.payload
+            const productIndex = cartJSON.findIndex((item : any) => item.name === payload.name && item.size === payload.size);
+
+            cartJSON[productIndex].amount += 1
+        
+            localStorage.setItem('cart', JSON.stringify(cartJSON));
+
+            state.cart = cartJSON
+        },
+        decrementAmount: (state, action: PayloadAction<ItemState>) => {
+            const cart = localStorage.getItem('cart');
+            let cartJSON = JSON.parse(cart!);
+
+            const payload = action.payload
+            const productIndex = cartJSON.findIndex((item : any) => item.name === payload.name && item.size === payload.size);
+
+            cartJSON[productIndex].amount -= 1
+        
+            localStorage.setItem('cart', JSON.stringify(cartJSON));
+
+            state.cart = cartJSON
+        }
     }
 })
 
-export const { setCart, setName, setSize, incrementAmount, decrementAmount, clear } = cartSlice.actions;
+export const { setCart, incrementAmount, decrementAmount} = cartSlice.actions;
 
 export default cartSlice.reducer;

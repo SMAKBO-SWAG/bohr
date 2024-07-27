@@ -2,13 +2,34 @@ import { allProducts } from "@/data/products";
 import { setCart } from "@/redux/slices/cartSlice";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-const CheckoutButton = ({onClick} : {onClick : () => void}) => {
-    const dispatch = useDispatch()
-
+const CheckoutButton = ({pathname} : {pathname : string}) => {
+    const router = useRouter()
     const cart = useSelector((state : RootState) => state.cart.cart)
+
+    // useEffect(() => {
+    //     const cart = localStorage.getItem('cart')
+    
+    //     if (cart) {
+    //         dispatch(show())
+    //     }
+
+    //   }, [])
+      
+    const handleCheckout = () => {
+        if (pathname === "/checkout") {
+
+            console.log('TODO')
+            localStorage.removeItem('cart')
+            router.push("/success")
+        } else {
+            router.push("/checkout")
+        }
+    }
+
     const [totalPrice, setTotalPrice] = useState(0)
 
     const getPrice = (name : string) => {
@@ -35,30 +56,19 @@ const CheckoutButton = ({onClick} : {onClick : () => void}) => {
 
     },[cart])
 
-    useEffect(() => {
-        const products = localStorage.getItem('cart')
-        let productsJSON = null
-      
-        if (products){
-          productsJSON = JSON.parse(products)
-        }
-    
-        dispatch(setCart(productsJSON))
-    }, [])
-
     return (
         <button 
             className="rounded-full bg-dark w-full h-[54px] flex items-center justify-between p-5 text-white
                 transition ease-in-out duration-150 transform 
                 active:scale-[0.98]
                 hover:bg-darker "
-                onClick={onClick}>
+                onClick={() => handleCheckout()}>
 
             <p>Rp{totalPrice}</p>
             <div className="flex gap-2">
                 <p>Checkout</p>
                 <Image
-                    src={`/svg/arrow.svg`}
+                    src={`/svg/icons/arrow-icon.svg`}
                     alt={`arrow`}
                     width={21}
                     height={20}

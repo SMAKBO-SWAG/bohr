@@ -12,13 +12,7 @@ const config: Config = {
         fontFamily: {
             gotham: ['"Gotham Rounded"', 'sans-serif'],
         },
-        backgroundImage: {
-            "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-            "gradient-conic":
-            "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        },
         colors: {
-            base: '#F7F7F7',
             light: '#E4F6FF',
             medium: '#A5D4EE',
             dark: '#068CD0',
