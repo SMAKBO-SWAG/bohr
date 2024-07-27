@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 export default function CheckoutModule() {
 	const cart = useSelector((state: RootState) => state.cart.cart);
-	const localCart = localStorage.getItem("cart");
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
@@ -89,7 +88,7 @@ export default function CheckoutModule() {
 						}
 					)}
 
-					{localCart ? <div className="h-14"></div> : null}
+					{cart.length !== 0 && <div className="h-14" />}
 				</div>
 			</div>
 		</div>

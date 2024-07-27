@@ -33,6 +33,7 @@ export default function ClassicProductModule() {
 						);
 					}
 				)}
+				{cart.length !== 0 && <div className="h-14" />}
 			</div>
 		</div>
 	);

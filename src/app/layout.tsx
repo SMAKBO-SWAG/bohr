@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Providers } from "@/redux/provider";
+import { ReduxProviders } from "@/redux/provider";
 import { Metadata } from "next";
 
 import CheckoutFloatingButton from "@/components/CheckoutFloatingButton";
@@ -19,7 +19,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<Providers>
+		<ReduxProviders>
 			<html lang="en">
 				<body className="w-screen min-h-screen flex justify-center font-gotham">
 					<div className="w-[480px] p-5 bg-white overflow-auto no-scrollbar">
@@ -30,6 +30,6 @@ export default function RootLayout({
 					<Modal />
 				</body>
 			</html>
-		</Providers>
+		</ReduxProviders>
 	);
 }

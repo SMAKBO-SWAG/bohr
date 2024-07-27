@@ -9,21 +9,11 @@ import { useSelector } from "react-redux";
 const CheckoutButton = ({pathname} : {pathname : string}) => {
     const router = useRouter()
     const cart = useSelector((state : RootState) => state.cart.cart)
-
-    // useEffect(() => {
-    //     const cart = localStorage.getItem('cart')
-    
-    //     if (cart) {
-    //         dispatch(show())
-    //     }
-
-    //   }, [])
       
     const handleCheckout = () => {
         if (pathname === "/checkout") {
 
-            console.log('TODO')
-            localStorage.removeItem('cart')
+            // TODO
             router.push("/success")
         } else {
             router.push("/checkout")

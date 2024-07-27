@@ -2,16 +2,16 @@ import { ReactNode } from "react";
 import { BackButton } from "./BackButton";
 
 interface HeaderProps {
-    children : ReactNode
+	children: ReactNode;
 }
 
-const Header = ({children} : HeaderProps) => {
+const Header = ({ children }: HeaderProps) => {
 	return (
 		<div className="w-full flex justify-between items-center">
-				<BackButton />
-				<p className="text-2xl font-medium tracking-wide">{children}</p>
-				<div className="w-[54px]"></div>
-			</div>
+			<BackButton />
+			<p className="text-2xl font-medium tracking-wide">{children}</p>
+			<div className="w-[54px]"></div>
+		</div>
 	);
 };
 

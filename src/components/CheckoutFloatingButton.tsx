@@ -14,14 +14,11 @@ export default function CheckoutFloatingButton() {
 	const [slideClass, setSlideClass] = useState("");
 
 	useEffect(() => {
-		const localCart = localStorage.getItem("cart");
-
-		if (localCart) {
+		if (cart.length !== 0) {
 			setVisible(true);
 			setSlideClass("animate-slideIn");
 		} else {
 			setSlideClass("animate-slideOut");
-			// setTimeout(() => setVisible(false), 280);
 		}
 	}, [cart]);
 

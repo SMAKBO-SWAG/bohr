@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface FilterSlice {
-    filter: string;
+	filter: string;
 }
 
 const initialState: FilterSlice = {
-    filter: 'All'
+	filter: "All",
 };
 
 export const filterSlice = createSlice({
-    name: 'filter',
-    initialState,
-    reducers: {
-        setFilter: (state, action: PayloadAction<string>) => {
-            state.filter = action.payload;
-        }
-    }
+	name: "filter",
+	initialState,
+	reducers: {
+		setFilter: (state, action: PayloadAction<string>) => {
+			state.filter = action.payload;
+		},
+	},
 });
 
 export const { setFilter } = filterSlice.actions;

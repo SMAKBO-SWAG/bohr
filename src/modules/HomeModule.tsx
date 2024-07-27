@@ -7,8 +7,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
 export default function HomeModule() {
-	const filter = useSelector((state: RootState) => state.filter.filter);
-    const localCart = localStorage.getItem("cart");
+	const { cart, filter } = useSelector((state: RootState) => ({
+		cart: state.cart.cart,
+		filter: state.filter.filter,
+	}));
 
 	const products =
 		filter === "All"
@@ -26,10 +28,7 @@ export default function HomeModule() {
 
 			<div className="flex flex-col gap-4">
 				<div className="flex items-center gap-2 overflow-x-auto py-2 px-5 mx-[-20px] no-scrollbar">
-					<FilterToggle 
-                        type="All" 
-                        checked={filter === "All"} 
-                    />
+					<FilterToggle type="All" checked={filter === "All"} />
 					<FilterToggle
 						type="Bracelet"
 						checked={filter === "Bracelet"}
@@ -42,10 +41,7 @@ export default function HomeModule() {
 						type="T-shirt"
 						checked={filter === "T-shirt"}
 					/>
-					<FilterToggle 
-                        type="Hoodie" 
-                        checked={filter === "Hoodie"}
-                    />
+					<FilterToggle type="Hoodie" checked={filter === "Hoodie"} />
 					<p className="text-nowrap text-dark">and more to come...</p>
 				</div>
 
@@ -65,7 +61,7 @@ export default function HomeModule() {
 						);
 					})}
 
-					{localCart && <div className="h-14" />}
+					{cart.length !== 0 && <div className="h-14" />}
 				</div>
 			</div>
 		</div>

@@ -12,7 +12,6 @@ import { setCart } from "@/redux/slices/cartSlice";
 
 export default function Drawer() {
 	const dispatch = useDispatch();
-    const cart = useSelector((state : RootState) => state.cart.cart)
 
 	// Drawer states
 	const show = useSelector((state: RootState) => state.drawer.show);
@@ -42,9 +41,9 @@ export default function Drawer() {
 
 	const handleAddToCart = () => {
 		dispatch(setCart({ name, size, amount }));
-        dispatch(close())
+		dispatch(close());
 
-        // Clear state
+		// Clear state
 		setSize("m");
 		setAmount(1);
 	};

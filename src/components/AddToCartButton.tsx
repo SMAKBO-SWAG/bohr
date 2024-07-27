@@ -1,11 +1,13 @@
 import Image from "next/image";
 
-const AddToCartButton = ({onClick} : {onClick : () => void}) => {
-
-    return (
-        <button 
-            onClick={(e) => { e.stopPropagation() ; onClick() }}
-            className="
+const AddToCartButton = ({ onClick }: { onClick: () => void }) => {
+	return (
+		<button
+			onClick={(e) => {
+				e.stopPropagation();
+				onClick();
+			}}
+			className="
                 flex py-2 px-4 gap-2 text-white items-center justify-center bg-dark rounded-full
                 transition ease-in-out duration-150 transform 
                 active:scale-95
@@ -16,19 +18,20 @@ const AddToCartButton = ({onClick} : {onClick : () => void}) => {
                     0px_15px_9px_0px_rgba(0,0,0,0.05),
                     0px_7px_7px_0px_rgba(0,0,0,0.09),
                     0px_2px_4px_0px_rgba(0,0,0,0.10)
-                    ]">
-            <Image
-                src={`/svg/icons/add-to-cart-icon.svg`}
-                alt={`add-to-cart-icon`}
-                width={21}
-                height={21}
-                unoptimized
-            />
-            <p>Add to Cart</p>
-        </button>
-    );
+                    ]"
+		>
+			<Image
+				src={`/svg/icons/add-to-cart-icon.svg`}
+				alt={`add-to-cart-icon`}
+				width={21}
+				height={21}
+				unoptimized
+			/>
+			<p>Add to Cart</p>
+		</button>
+	);
 };
 
-AddToCartButton.displayName = 'AddToCartButton';
+AddToCartButton.displayName = "AddToCartButton";
 
 export { AddToCartButton };
