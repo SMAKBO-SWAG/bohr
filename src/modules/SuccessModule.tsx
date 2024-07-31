@@ -1,5 +1,5 @@
 "use client";
-import { PrimaryButton } from "@/components/PrimaryButton";
+import { PrimaryButton } from "@/components/buttons/PrimaryButton";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 

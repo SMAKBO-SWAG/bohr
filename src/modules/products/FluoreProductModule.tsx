@@ -1,5 +1,4 @@
 "use client";
-import { BackButton } from "@/components/BackButton";
 import { Header } from "@/components/Header";
 import { ProductThumbnail } from "@/components/ProductThumbnail";
 import { RootState } from "@/redux/store";
@@ -9,18 +8,22 @@ import { useSelector } from "react-redux";
 export default function FluoreProductModule() {
 	const cart = useSelector((state: RootState) => state.cart.cart);
 
+	const product = {
+		name: "fluore",
+		type: "Bracelet",
+		price: 25000,
+		thumbnail: {
+			isNew: true,
+			isPreOrder: true,
+			accent: "#ffffff",
+			accentComplement: "#132042",
+		},
+	};
+
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
 			<Header>Fluore</Header>
-			<ProductThumbnail
-				isNew={true}
-				isPreOrder={true}
-				accent="#ffffff"
-				accentComplement="#132042"
-				name="fluore"
-				type="Bracelet"
-				price={25000}
-			/>
+			<ProductThumbnail product={product} />
 			<p>
 				Kenalin Fluore, gelang dengan desain minimalis tulisan SMAKBO.
 				Terinspirasi dari karakteristik fluorescent, gelang ini bisa
@@ -40,7 +43,7 @@ export default function FluoreProductModule() {
 				minimalis!
 			</p>
 
-			{cart.length !== 0 ? <div className="h-14"></div> : null}
+			{cart.length !== 0 && <div className="h-14"></div>}
 		</div>
 	);
 }

@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { CartButton } from "./CartButton";
-import { CheckoutButton } from "./CheckoutButton";
 import { usePathname } from "next/navigation";
+import { CheckoutButton } from "./buttons/CheckoutButton";
 
-export default function CheckoutFloatingButton() {
+export default function BottomBar() {
 	const pathname = usePathname();
 
 	const cart = useSelector((state: RootState) => state.cart.cart);
@@ -14,7 +14,7 @@ export default function CheckoutFloatingButton() {
 	const [slideClass, setSlideClass] = useState("");
 
 	useEffect(() => {
-		if (cart.length !== 0) {
+		if (cart.length) {
 			setVisible(true);
 			setSlideClass("animate-slideIn");
 		} else {

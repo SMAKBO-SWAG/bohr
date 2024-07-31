@@ -11,7 +11,7 @@ export interface userState {
 const initialState: userState = {
 	name: "",
 	number: "",
-	paymentMethod: "",
+	paymentMethod: "cod",
 };
 
 export const userSlice = createSlice({

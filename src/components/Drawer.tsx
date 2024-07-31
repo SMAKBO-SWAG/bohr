@@ -2,28 +2,32 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { close } from "@/redux/slices/drawerSlice";
+import { closeDrawer } from "@/redux/slices/drawerSlice";
 import { RootState } from "@/redux/store";
-import { BraceletFilterButton } from "./BraceletSizeButton";
-import { AmountButton } from "./AmountButton";
-import { allProducts } from "@/data/products";
-import { AddToCartButton } from "./AddToCartButton";
+import { BraceletFilterButton } from "./buttons/BraceletSizeButton";
+import { AmountButton } from "./buttons/AmountButton";
+import { AddToCartButton } from "./buttons/AddToCartButton";
 import { setCart } from "@/redux/slices/cartSlice";
 
 export default function Drawer() {
 	const dispatch = useDispatch();
 
-	// Drawer states
-	const show = useSelector((state: RootState) => state.drawer.show);
-	const name = useSelector((state: RootState) => state.drawer.name);
+	const { showDrawer, drawerContent } = useSelector((state: RootState) => ({
+		showDrawer: state.drawer.showDrawer,
+		drawerContent: state.drawer.drawerContent!,
+	}));
 
 	// Animation states
-	const [visible, setVisible] = useState(show);
+	const [visible, setVisible] = useState(showDrawer);
 	const [slideClass, setSlideClass] = useState("");
 	const [fadeClass, setFadeClass] = useState("");
 
+	// Attribute states
+	const [size, setSize] = useState<string>("m");
+	const [amount, setAmount] = useState<number>(1);
+
 	useEffect(() => {
-		if (show) {
+		if (showDrawer) {
 			setVisible(true);
 			setSlideClass("animate-slideIn");
 			setFadeClass("animate-fadeIn");
@@ -32,23 +36,18 @@ export default function Drawer() {
 			setFadeClass("animate-fadeOut");
 
 			const clearState = setTimeout(() => {
-                setVisible(false);
-                setSize("m");
-                setAmount(1);
-            }, 280);
-    
-            return () => clearTimeout(clearState);
-		}
-	}, [show]);
+				setVisible(false);
+				setSize("m");
+				setAmount(1);
+			}, 280);
 
-	// Product states
-	const product = allProducts.find((product) => product.name === name);
-	const [size, setSize] = useState<string>("m");
-	const [amount, setAmount] = useState<number>(1);
+			return () => clearTimeout(clearState);
+		}
+	}, [showDrawer]);
 
 	const handleAddToCart = () => {
-		dispatch(setCart({ name, size, amount }));
-		dispatch(close());
+		dispatch(setCart({ ...drawerContent, size, amount }));
+		dispatch(closeDrawer());
 	};
 
 	if (!visible) return null;
@@ -60,7 +59,7 @@ export default function Drawer() {
 			>
 				<div
 					className={`w-full h-full bg-black bg-opacity-30 backdrop-blur-sm absolute ${fadeClass}`}
-					onClick={() => dispatch(close())}
+					onClick={() => dispatch(closeDrawer())}
 				></div>
 				<div
 					className={`z-10 p-5 h-fit flex flex-col gap-5 w-full bg-white rounded-[20px_20px_0px_0px] ${slideClass}`}
@@ -74,17 +73,21 @@ export default function Drawer() {
 							unoptimized
 						/>
 						<div className="flex flex-col gap-2 ">
-							<p>{product?.type}</p>
+							<p>{drawerContent?.type}</p>
 							<p className="text-xl font-bold leading-5">
-								{product?.name.toUpperCase()}
+								{drawerContent?.name.toUpperCase()}
 							</p>
-							<p>{product?.price}</p>
+							<p>
+								{drawerContent?.price
+									.toString()
+									.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+							</p>
 						</div>
 					</div>
 
 					<div className="flex flex-col gap-4">
 						<hr className="border-t border-[#E4F6FF] border-1" />
-						<p>Sizes(Keliling)</p>
+						<p>Sizes (Keliling)</p>
 						<div className="flex w-full flex-row items-center justify-between gap-8">
 							<BraceletFilterButton
 								type="s"

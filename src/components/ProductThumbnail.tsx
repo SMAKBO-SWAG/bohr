@@ -1,35 +1,20 @@
 "use client";
 import Image from "next/image";
-import { AddToCartButton } from "./AddToCartButton";
+import { AddToCartButton } from "./buttons/AddToCartButton";
 import { useRouter } from "next/navigation";
-import { show } from "@/redux/slices/drawerSlice";
+import { showDrawer } from "@/redux/slices/drawerSlice";
 import { useDispatch } from "react-redux";
 import { Tag } from "./Tag";
+import { Product } from "@/types/product";
 
-interface ProductProps {
-	isNew: boolean;
-	isPreOrder: boolean;
-	accent: string;
-	accentComplement: string;
-	name: string;
-	type: string;
-	price: number;
-}
-
-const ProductThumbnail = ({
-	isNew,
-	isPreOrder,
-	accent,
-	accentComplement,
-	name,
-	type,
-	price,
-}: ProductProps) => {
+const ProductThumbnail = ({ product }: { product: Product }) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
 
-	const handleProductClick = () => [router.push(`/product/${name}`)];
-	const handleAddToCartDrawer = () => [dispatch(show(name))];
+	const thumbnail = product.thumbnail!;
+
+	const handleProductClick = () => [router.push(`/product/${product.name}`)];
+	const handleAddToCartDrawer = () => [dispatch(showDrawer(product))];
 
 	return (
 		<div
@@ -37,10 +22,10 @@ const ProductThumbnail = ({
 			onClick={() => handleProductClick()}
 		>
 			<Image
-				src={`/images/${name}-thumbnail.png`}
+				src={`/images/${product.name}-thumbnail.png`}
 				className="w-full h-full rounded-3xl absolute"
 				style={{ objectFit: "cover" }}
-				alt={`${name}-thumbnail`}
+				alt={`${product.name}-thumbnail`}
 				width={0}
 				height={0}
 				unoptimized
@@ -49,41 +34,43 @@ const ProductThumbnail = ({
 				<div className="flex justify-between items-start">
 					<div
 						className="flex flex-col gap-4"
-						style={{ color: accent }}
+						style={{ color: thumbnail.accent }}
 					>
 						<div className="flex flex-row gap-2 items-center">
-							{isPreOrder && (
+							{thumbnail.isPreOrder && (
 								<Tag
-									accent={accent}
-									accentComplement={accentComplement}
+									accent={thumbnail.accent}
+									accentComplement={
+										thumbnail.accentComplement
+									}
 								>
 									Pre-Order
 								</Tag>
 							)}
 							<Tag
-								accent={accent}
-								accentComplement={accentComplement}
+								accent={thumbnail.accent}
+								accentComplement={thumbnail.accentComplement}
 							>
-								{type}
+								{product.type}
 							</Tag>
 						</div>
 						<div className="flex flex-col gap-2">
 							<p className="text-3xl font-bold leading-6 tracking-wider">
-								{name.toUpperCase()}
+								{product.name.toUpperCase()}
 							</p>
 							<p className="text-lg">
 								Rp
-								{price
+								{product.price
 									.toString()
 									.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
 							</p>
 						</div>
 					</div>
-					{isNew && (
+					{thumbnail.isNew && (
 						<Image
-							src={`/svg/${name}-new-tag.svg`}
+							src={`/svg/${product.name}-new-tag.svg`}
 							style={{ objectFit: "cover" }}
-							alt={`/${name}-new-tag`}
+							alt={`/${product.name}-new-tag`}
 							width={105}
 							height={85}
 							unoptimized

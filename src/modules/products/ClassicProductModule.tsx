@@ -1,26 +1,29 @@
 "use client";
-import { BackButton } from "@/components/BackButton";
+import Image from "next/image";
 import { Header } from "@/components/Header";
 import { ProductThumbnail } from "@/components/ProductThumbnail";
 import { RootState } from "@/redux/store";
-import Image from "next/image";
 import { useSelector } from "react-redux";
 
 export default function CartModule() {
 	const cart = useSelector((state: RootState) => state.cart.cart);
 
+	const product = {
+		name: "classic",
+		type: "Bracelet",
+		price: 25000,
+		thumbnail: {
+			isNew: false,
+			isPreOrder: true,
+			accent: "#132042",
+			accentComplement: "#ffffff",
+		},
+	};
+
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
 			<Header>Classic</Header>
-			<ProductThumbnail
-				isNew={false}
-				isPreOrder={true}
-				accent="#132042"
-				accentComplement="#ffffff"
-				name="classic"
-				type="Bracelet"
-				price={25000}
-			/>
+			<ProductThumbnail product={product} />
 			<p>
 				#BanggaBersama dengan Classic Bracelet! Didesain dengan siluet
 				elegan logo SMAKBO, gelang ini memadukan gaya modern yang cocok
@@ -40,7 +43,7 @@ export default function CartModule() {
 				SMAKBO!
 			</p>
 
-			{cart.length !== 0 ? <div className="h-14"></div> : null}
+			{cart.length  !== 0 && <div className="h-14"></div>}
 		</div>
 	);
 }

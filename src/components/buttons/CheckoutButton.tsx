@@ -1,15 +1,14 @@
-import { allProducts } from "@/data/products";
-import { setCart } from "@/redux/slices/cartSlice";
-import { show } from "@/redux/slices/modalSlice";
-import { RootState } from "@/redux/store";
 import Image from "next/image";
+import { RootState } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { showModal } from "@/redux/slices/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
+import CODConfirmModal from "../modals/CODConfirmModal";
 
 const CheckoutButton = ({ pathname }: { pathname: string }) => {
 	const router = useRouter();
-    const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const cart = useSelector((state: RootState) => state.cart.cart);
 
 	const { name, number, paymentMethod } = useSelector((state: RootState) => ({
@@ -18,40 +17,18 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 		paymentMethod: state.user.paymentMethod,
 	}));
 
-    const [totalPrice, setTotalPrice] = useState(0);
+	const [totalPrice, setTotalPrice] = useState(0);
 
 	const handleCheckout = () => {
 		if (pathname === "/checkout") {
 			if (paymentMethod === "cod") {
-                dispatch(
-                    show({
-                        illustration: "/svg/illustrations/cod-confirm-illustration.svg",
-                        title: "Confirm COD Order",
-                        body: "Are you sure you want to proceed with the COD payment method?",
-                        button: "Proceed",
-                        action: "proceedCOD",
-                        params: { name, number, paymentMethod, totalPrice, cart},
-                    })
-                );
+				dispatch(showModal(<CODConfirmModal />));
 			} else if (paymentMethod === "qris") {
 				// TODO API Gateaway
-                // TODO BE
 			}
-
 		} else {
 			router.push("/checkout");
 		}
-	};
-
-	const getPrice = (name: string) => {
-		const product = allProducts.find((item) => item.name === name);
-
-		if (product) {
-			const price = product.price;
-			return price;
-		}
-
-		return -1;
 	};
 
 	useEffect(() => {
@@ -59,7 +36,7 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 
 		if (cart)
 			cart.map((item) => {
-				price += getPrice(item.name) * item.amount;
+				price += item.price * item.amount!;
 			});
 
 		setTotalPrice(price);
@@ -73,7 +50,9 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
                 hover:bg-darker "
 			onClick={() => handleCheckout()}
 		>
-			<p>Rp{totalPrice}</p>
+			<p>
+				Rp{totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+			</p>
 			<div className="flex gap-2">
 				<p>Checkout</p>
 				<Image

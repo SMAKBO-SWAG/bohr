@@ -1,77 +1,71 @@
 "use client";
 import Image from "next/image";
-import { AmountButton } from "./AmountButton";
-import { allProducts } from "@/data/products";
-import {
-	incrementAmount,
-	decrementAmount
-} from "@/redux/slices/cartSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/redux/store";
-import { useState } from "react";
-import { show } from "@/redux/slices/modalSlice";
+import { AmountButton } from "./buttons/AmountButton";
+import { incrementAmount, decrementAmount } from "@/redux/slices/cartSlice";
+import { showModal } from "@/redux/slices/modalSlice";
 import { useRouter } from "next/navigation";
+import { Product } from "@/types/product";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import DeletionConfirmModal from "./modals/DeletionConfirmModal";
 
 interface ProductCardProps {
-	name: string;
-	index: number;
+	product: Product;
 	editable: boolean;
 }
 
-const ProductCard = ({ name, index, editable }: ProductCardProps) => {
+const ProductCard = ({ product, editable }: ProductCardProps) => {
 	const dispatch = useDispatch();
 	const router = useRouter();
 
-	const product = allProducts.find((item) => item.name === name);
-
-	const cart = useSelector((state: RootState) => state.cart.cart);
-
-	const size = cart[index].size;
-	const [amount, setAmount] = useState<number>(cart[index].amount);
+	const [amount, setAmount] = useState<number>(product.amount!);
 
 	const handleIncrement = () => {
-		dispatch(incrementAmount({ name, size }));
+		dispatch(incrementAmount({ name: product.name, size: product.size! }));
 		setAmount((prev) => prev + 1);
 	};
 
 	const handleDecrement = () => {
 		if (amount <= 1) {
 			dispatch(
-				show({
-                    illustration: "/svg/illustrations/deletion-confirm-illustration.svg",
-					title: "Confirm Deletion",
-					body: "Are you sure you want to remove this item from your cart?",
-					action: "removeItem",
-                    button: "Remove",
-					params: { name, size },
-				})
+				showModal(
+					<DeletionConfirmModal
+						name={product.name}
+						size={product.size!}
+					/>
+				)
 			);
 			return;
 		}
-		dispatch(decrementAmount({ name, size }));
+		dispatch(decrementAmount({ name: product.name, size: product.size! }));
 		setAmount((prev) => prev - 1);
 	};
 
 	return (
 		<div className="flex flex-row items-center gap-4">
 			<Image
-				src={`/images/${name}-thumbnail-s.png`}
-				alt={`${name}-thumbnail-s`}
+				src={`/images/${product.name}-thumbnail-s.png`}
+				alt={`${product.name}-thumbnail-s`}
 				width={84}
 				height={84}
 				unoptimized
 				className="cursor-pointer"
-				onClick={() => router.push(`/product/${name}`)}
+				onClick={() => router.push(`/product/${product.name}`)}
 			/>
 			<div className="flex w-full h-full justify-between">
 				<div className="flex flex-col gap-2 ">
 					<p>
-						{product?.type} ({size.toUpperCase()})
+						{product?.type} ({product.size!.toUpperCase()})
 					</p>
 					<p className="text-xl font-bold leading-5">
 						{product?.name.toUpperCase()}
 					</p>
-					<p>Rp{product?.price}</p>
+					<p>
+						Rp
+						{product?.price
+							.toString()
+							.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+					</p>
 				</div>
 				<div
 					className={`flex flex-col items-end  gap-2 ${

@@ -1,6 +1,7 @@
 "use client";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
+import { notes } from "@/data/notes";
 import { setName, setNumber, setPaymentMethod } from "@/redux/slices/userSlice";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
@@ -9,12 +10,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function CheckoutModule() {
-	const router = useRouter();
 	const dispatch = useDispatch();
+	const router = useRouter();
+
 	const cart = useSelector((state: RootState) => state.cart.cart);
 
 	useEffect(() => {
-		if (cart.length === 0) {
+		if (!cart.length) {
 			router.push("/");
 		}
 	}, [cart]);
@@ -32,13 +34,9 @@ export default function CheckoutModule() {
 
 				<div className="flex flex-col gap-2 font-medium text-sm">
 					<ul className="list-disc pl-2">
-						<li>
-							Pre-order berlangsung dari tanggal ... dan dilanjut
-							produksi. (estimasi 1 minggu){" "}
-						</li>
-						<li>
-							Pengambilan barang dilakukan di SMK-SMAK Bogor.{" "}
-						</li>
+						{notes.map((note) => 
+							<li>{note}</li>
+						)}
 					</ul>
 				</div>
 			</div>
@@ -46,7 +44,7 @@ export default function CheckoutModule() {
 			<div className="flex flex-col gap-2 w-full">
 				<p>Name</p>
 				<input
-                    type="text"
+					type="text"
 					className="flex w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl"
 					placeholder="Budi"
 					onChange={(e) => dispatch(setName(e.target.value))}
@@ -56,7 +54,7 @@ export default function CheckoutModule() {
 			<div className="flex flex-col gap-2 w-full">
 				<p>Number/Whatsapp</p>
 				<input
-                    type="number"
+					type="number"
 					className="flex w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl"
 					placeholder="0812345678"
 					onChange={(e) => dispatch(setNumber(e.target.value))}
@@ -71,7 +69,10 @@ export default function CheckoutModule() {
 						value="cod"
 						id="cod"
 						name="paymentMethod"
-						onChange={(e) => dispatch(setPaymentMethod(e.target.value))}
+                        defaultChecked={true}
+						onChange={(e) =>
+							dispatch(setPaymentMethod(e.target.value))
+						}
 					></input>
 					<label htmlFor="cod"> Cash on Delivery (SMAKBO)</label>
 				</div>
@@ -81,7 +82,9 @@ export default function CheckoutModule() {
 						value="qris"
 						id="qris"
 						name="paymentMethod"
-						onChange={(e) => dispatch(setPaymentMethod(e.target.value))}
+						onChange={(e) =>
+							dispatch(setPaymentMethod(e.target.value))
+						}
 					></input>
 					<label htmlFor="qris"> QRIS Payment</label>
 				</div>
@@ -90,25 +93,15 @@ export default function CheckoutModule() {
 			<div className="flex flex-col gap-2 w-full">
 				<p>Order Items</p>
 				<div className="flex flex-col w-full gap-4">
-					{cart.map(
-						(
-							product: {
-								name: string;
-								size: string;
-								amount: number;
-							},
-							index: number
-						) => {
-							return (
-								<ProductCard
-									name={product.name}
-									index={index}
-									key={index}
-									editable={false}
-								></ProductCard>
-							);
-						}
-					)}
+					{cart.map((product, index: number) => {
+						return (
+							<ProductCard
+								product={product}
+								key={index}
+								editable={false}
+							></ProductCard>
+						);
+					})}
 
 					<div className="h-14" />
 				</div>

@@ -1,15 +1,10 @@
 "use client";
 
+import { Product } from "@/types/product";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface ItemState {
-	name: string;
-	size: string;
-	amount: number;
-}
-
 export interface CartState {
-	cart: ItemState[];
+	cart: Product[];
 }
 
 const initialState: CartState = {
@@ -20,7 +15,7 @@ export const cartSlice = createSlice({
 	name: "cart",
 	initialState,
 	reducers: {
-		setCart: (state, action: PayloadAction<ItemState>) => {
+		setCart: (state, action: PayloadAction<Product>) => {
 			const product = action.payload;
 			const cart = state.cart;
 
@@ -35,13 +30,9 @@ export const cartSlice = createSlice({
 			);
 
 			if (productIndex !== -1) {
-				cart[productIndex].amount += product.amount;
+				cart[productIndex].amount! += product.amount!;
 			} else {
-				cart.push({
-					name: product.name,
-					size: product.size,
-					amount: product.amount,
-				});
+				cart.push(product);
 			}
 
 			state.cart = cart;
@@ -58,7 +49,7 @@ export const cartSlice = createSlice({
 					item.name === payload.name && item.size === payload.size
 			);
 
-			cart[productIndex].amount += 1;
+			cart[productIndex].amount! += 1;
 
 			state.cart = cart;
 		},
@@ -74,7 +65,7 @@ export const cartSlice = createSlice({
 					item.name === payload.name && item.size === payload.size
 			);
 
-			cart[productIndex].amount -= 1;
+			cart[productIndex].amount! -= 1;
 
 			state.cart = cart;
 		},

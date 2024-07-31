@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { BackButton } from "./BackButton";
+import { BackButton } from "./modals/BackButton";
 
 interface HeaderProps {
 	children: ReactNode;

@@ -1,4 +1,4 @@
-import ClassicProductModule from "@/modules/ClassicProductModule";
+import ClassicProductModule from "@/modules/products/ClassicProductModule";
 
 export default function ClassicProduct() {
 	return <ClassicProductModule />;

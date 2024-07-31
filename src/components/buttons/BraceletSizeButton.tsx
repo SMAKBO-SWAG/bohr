@@ -1,4 +1,3 @@
-import { ChangeEvent, ReactNode } from "react";
 import Image from "next/image";
 
 interface BraceletFilterButtonProps {
