@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { PrimaryButton } from "../buttons/PrimaryButton";
-import SecondaryButton from "../buttons/SecondaryButton";
+import { SecondaryButton } from "../buttons/SecondaryButton";
 import { useDispatch } from "react-redux";
 import { closeModal } from "@/redux/slices/modalSlice";
 

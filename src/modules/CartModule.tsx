@@ -14,7 +14,7 @@ export default function CartModule() {
 		if (!cart.length) {
 			router.push("/");
 		}
-	}, [cart]);
+	}, [cart, router]);
 
 	return (
 		<div className="relative flex flex-col items-center gap-8 text-black">

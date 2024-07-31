@@ -4,7 +4,7 @@ import { Metadata } from "next";
 
 import BottomBar from "@/components/BottomBar";
 import Drawer from "@/components/Drawer";
-import BaseModal from "@/components/buttons/BaseModal";
+import BaseModal from "@/components/modals/BaseModal";
 
 export const metadata: Metadata = {
 	title: "SMAKBO SWAG",

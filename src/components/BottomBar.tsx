@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { CartButton } from "./CartButton";
+import { CartButton } from "./buttons/CartButton";
 import { usePathname } from "next/navigation";
 import { CheckoutButton } from "./buttons/CheckoutButton";
 

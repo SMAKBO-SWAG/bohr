@@ -61,7 +61,7 @@ export default function HomeModule() {
 					</div>
 				) : (
 					<div className="flex items-center justify-center h-full font-medium">
-						Cookin' soon ..
+						Cookin&apos; soon ..
 					</div>
 				)}
 			</div>

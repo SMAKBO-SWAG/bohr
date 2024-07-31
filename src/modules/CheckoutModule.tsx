@@ -19,7 +19,7 @@ export default function CheckoutModule() {
 		if (!cart.length) {
 			router.push("/");
 		}
-	}, [cart]);
+	}, [cart, router]);
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
@@ -34,9 +34,9 @@ export default function CheckoutModule() {
 
 				<div className="flex flex-col gap-2 font-medium text-sm">
 					<ul className="list-disc pl-2">
-						{notes.map((note) => 
-							<li>{note}</li>
-						)}
+						{notes.map((note, index) => (
+							<li key={index}>{note}</li>
+						))}
 					</ul>
 				</div>
 			</div>
@@ -69,7 +69,7 @@ export default function CheckoutModule() {
 						value="cod"
 						id="cod"
 						name="paymentMethod"
-                        defaultChecked={true}
+						defaultChecked={true}
 						onChange={(e) =>
 							dispatch(setPaymentMethod(e.target.value))
 						}
