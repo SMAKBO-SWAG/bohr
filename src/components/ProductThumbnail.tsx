@@ -11,10 +11,16 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
 
+	const item = {
+		name: product.name,
+		type: product.type,
+		price: product.price,
+	};
+
 	const thumbnail = product.thumbnail!;
 
 	const handleProductClick = () => [router.push(`/product/${product.name}`)];
-	const handleAddToCartDrawer = () => [dispatch(showDrawer(product))];
+	const handleAddToCartDrawer = () => [dispatch(showDrawer(item))];
 
 	return (
 		<div

@@ -5,19 +5,23 @@ import { useEffect, useState } from "react";
 import { showModal } from "@/redux/slices/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import CODConfirmModal from "../modals/CODConfirmModal";
+import { setTotalPrice } from "@/redux/slices/userSlice";
 
 const CheckoutButton = ({ pathname }: { pathname: string }) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const cart = useSelector((state: RootState) => state.cart.cart);
+	const { cart, totalPrice } = useSelector((state: RootState) => ({
+		cart: state.cart.cart,
+		totalPrice: state.user.totalPrice,
+	}));
+
+	const [disabled, setDisabled] = useState<boolean>(false);
 
 	const { name, number, paymentMethod } = useSelector((state: RootState) => ({
 		name: state.user.name,
 		number: state.user.number,
 		paymentMethod: state.user.paymentMethod,
 	}));
-
-	const [totalPrice, setTotalPrice] = useState(0);
 
 	const handleCheckout = () => {
 		if (pathname === "/checkout") {
@@ -39,16 +43,24 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 				price += item.price * item.amount!;
 			});
 
-		setTotalPrice(price);
+		dispatch(setTotalPrice(price));
 	}, [cart]);
+
+	useEffect(() => {
+		if (pathname === "/checkout") {
+			setDisabled(name === "" || number === "");
+		} else {
+			setDisabled(false);
+		}
+	}, [name, number, pathname]);
 
 	return (
 		<button
-			className="rounded-full bg-dark w-full h-[54px] flex items-center justify-between p-5 text-white
-                transition ease-in-out duration-150 transform 
-                active:scale-[0.98]
-                hover:bg-darker "
+			className={` ${
+				disabled ? "bg-[#7D7D7D]" : "bg-dark hover:bg-darker"
+			} rounded-full w-full h-[54px] flex items-center justify-between p-5 text-white transition ease-in-out duration-150 transform active:scale-[0.98]`}
 			onClick={() => handleCheckout()}
+			disabled={disabled}
 		>
 			<p>
 				Rp{totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}

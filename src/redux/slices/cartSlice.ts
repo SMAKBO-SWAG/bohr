@@ -69,7 +69,7 @@ export const cartSlice = createSlice({
 
 			state.cart = cart;
 		},
-        remove: (
+		remove: (
 			state,
 			action: PayloadAction<{ name: string; size: string }>
 		) => {
@@ -81,13 +81,17 @@ export const cartSlice = createSlice({
 					item.name === payload.name && item.size === payload.size
 			);
 
-			cart.splice(productIndex, 1)
+			cart.splice(productIndex, 1);
 
 			state.cart = cart;
+		},
+		clearCart: (state) => {
+			state.cart = [];
 		},
 	},
 });
 
-export const { setCart, incrementAmount, decrementAmount, remove} = cartSlice.actions;
+export const { setCart, incrementAmount, decrementAmount, remove, clearCart } =
+	cartSlice.actions;
 
 export default cartSlice.reducer;

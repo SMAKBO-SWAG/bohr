@@ -1,10 +1,24 @@
 "use client";
 import { PrimaryButton } from "@/components/buttons/PrimaryButton";
+import { clearCart } from "@/redux/slices/cartSlice";
+import { clearUser } from "@/redux/slices/userSlice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 export default function HomeModule() {
 	const router = useRouter();
+	const dispatch = useDispatch();
+
+	const handleHome = () => {
+		router.push("/");
+	};
+
+	useEffect(() => {
+		dispatch(clearUser());
+		dispatch(clearCart());
+	}, []);
 
 	return (
 		<div className="relative gap-5 flex items-center justify-center h-full text-black">
@@ -24,7 +38,7 @@ export default function HomeModule() {
 							Whatsapp shortly.{" "}
 						</p>
 					</div>
-					<PrimaryButton onClick={() => router.push("/")}>
+					<PrimaryButton onClick={handleHome}>
 						Back to Home
 					</PrimaryButton>
 				</div>

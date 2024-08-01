@@ -2,18 +2,55 @@
 import Image from "next/image";
 import { PrimaryButton } from "../buttons/PrimaryButton";
 import { SecondaryButton } from "../buttons/SecondaryButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "@/redux/slices/modalSlice";
+import { RootState } from "@/redux/store";
+import { useRouter } from "next/navigation";
+
+const api_url = process.env.NEXT_PUBLIC_API_URL
 
 export default function CODConfirmModal() {
 	const dispatch = useDispatch();
+	const router = useRouter();
+
+	const { name, number, paymentMethod, totalPrice, cart } = useSelector(
+		(state: RootState) => ({
+			name: state.user.name,
+			number: state.user.number,
+			paymentMethod: state.user.paymentMethod,
+			totalPrice: state.user.totalPrice,
+			cart: state.cart.cart,
+		})
+	);
 
 	const handleCancel = () => {
 		dispatch(closeModal());
 	};
 
-	const handleConfirm = () => {
-		//TODO COD
+	const handleConfirm = async () => {
+		const response = await fetch(api_url + "orders/", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				name,
+				number,
+				paymentMethod,
+				totalPrice,
+				orders: cart,
+			}),
+		});
+
+		if (response.status !== 201) {
+			alert("Order error, please try again");
+            dispatch(closeModal());
+            router.push("/");
+            return
+		}
+
+        router.push("/success");
+
 		dispatch(closeModal());
 	};
 

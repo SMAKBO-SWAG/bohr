@@ -6,12 +6,14 @@ export interface userState {
 	name: string;
 	number: string;
 	paymentMethod: string;
+	totalPrice: number;
 }
 
 const initialState: userState = {
 	name: "",
 	number: "",
 	paymentMethod: "cod",
+	totalPrice: 0,
 };
 
 export const userSlice = createSlice({
@@ -27,9 +29,19 @@ export const userSlice = createSlice({
 		setPaymentMethod: (state, action: PayloadAction<string>) => {
 			state.paymentMethod = action.payload;
 		},
+		setTotalPrice: (state, action: PayloadAction<number>) => {
+			state.totalPrice = action.payload;
+		},
+		clearUser: (state) => {
+			state.name = "";
+			state.number = "";
+			state.paymentMethod = "";
+			state.totalPrice = 0;
+		},
 	},
 });
 
-export const { setName, setNumber, setPaymentMethod } = userSlice.actions;
+export const { setName, setNumber, setPaymentMethod, setTotalPrice, clearUser } =
+	userSlice.actions;
 
 export default userSlice.reducer;
