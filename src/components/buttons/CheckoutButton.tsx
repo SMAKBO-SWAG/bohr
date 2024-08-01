@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import CODConfirmModal from "../modals/CODConfirmModal";
 import { setTotalPrice } from "@/redux/slices/userSlice";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const CheckoutButton = ({ pathname }: { pathname: string }) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
@@ -23,12 +25,62 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 		paymentMethod: state.user.paymentMethod,
 	}));
 
-	const handleCheckout = () => {
+	const handleCheckout = async () => {
 		if (pathname === "/checkout") {
 			if (paymentMethod === "cod") {
 				dispatch(showModal(<CODConfirmModal />));
 			} else if (paymentMethod === "qris") {
-				// TODO API Gateaway
+				try {
+					const response = await fetch(API_URL + "payment/", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							name,
+							number,
+							paymentMethod,
+							totalPrice,
+							orders: cart,
+						}),
+					});
+
+					if (!response.ok) {
+						throw new Error("Network response was not ok");
+					}
+
+					const transaction: { token: string } =
+						await response.json();
+
+					if (!transaction || !transaction.token) {
+						throw new Error("Invalid transaction response");
+					}
+
+					(window as any).snap.pay(transaction.token, {
+						onSuccess: async function (result: any) {
+							const response = await fetch(API_URL + "orders/", {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json",
+								},
+								body: JSON.stringify({
+									name,
+									number,
+									paymentMethod,
+									totalPrice,
+									orders: cart,
+								}),
+							});
+
+							if (response.status === 201) {
+								router.push("/success");
+							}
+						},
+						onClose: function () {},
+					});
+				} catch (error) {
+					console.error("Fetch error:", error);
+				}
 			}
 		} else {
 			router.push("/checkout");

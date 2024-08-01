@@ -7,7 +7,7 @@ import { closeModal } from "@/redux/slices/modalSlice";
 import { RootState } from "@/redux/store";
 import { useRouter } from "next/navigation";
 
-const api_url = process.env.NEXT_PUBLIC_API_URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export default function CODConfirmModal() {
 	const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default function CODConfirmModal() {
 	};
 
 	const handleConfirm = async () => {
-		const response = await fetch(api_url + "orders/", {
+		const response = await fetch(API_URL + "orders/", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
