@@ -28,14 +28,15 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 
 	const handleCheckout = async () => {
 
-        if (!validator.isMobilePhone(number, 'id-ID')) {
-            dispatch(valid(false))
-            return;
-        } else {
-            dispatch(valid(true))
-        }
-
 		if (pathname === "/checkout") {
+
+            if (!validator.isMobilePhone(number, 'id-ID')) {
+                dispatch(valid(false))
+                return;
+            } else {
+                dispatch(valid(true))
+            }
+            
 			if (paymentMethod === "cod") {
 				dispatch(showModal(<CODConfirmModal />));
 			} else if (paymentMethod === "qris") {
