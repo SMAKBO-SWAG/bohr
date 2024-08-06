@@ -13,7 +13,10 @@ export default function CheckoutModule() {
 	const dispatch = useDispatch();
 	const router = useRouter();
 
-	const cart = useSelector((state: RootState) => state.cart.cart);
+	const { cart, valid } = useSelector((state: RootState) => ({
+		cart: state.cart.cart,
+		valid: state.user.valid,
+	}));
 
 	useEffect(() => {
 		if (!cart.length) {
@@ -52,13 +55,14 @@ export default function CheckoutModule() {
 			</div>
 
 			<div className="flex flex-col gap-2 w-full">
-				<p>Number/Whatsapp</p>
+				<p>Whatsapp</p>
 				<input
 					type="number"
 					className="flex w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl"
 					placeholder="0812345678"
 					onChange={(e) => dispatch(setNumber(e.target.value))}
 				></input>
+                {!valid && <span className="text-[#ED4337] text-sm">Not a valid phone number</span>}
 			</div>
 
 			<div className="flex flex-col gap-2 w-full">

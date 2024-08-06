@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { showModal } from "@/redux/slices/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import CODConfirmModal from "../modals/CODConfirmModal";
-import { setTotalPrice } from "@/redux/slices/userSlice";
+import { setTotalPrice, valid } from "@/redux/slices/userSlice";
+import validator from 'validator'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -26,6 +27,14 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 	}));
 
 	const handleCheckout = async () => {
+
+        if (!validator.isMobilePhone(number, 'id-ID')) {
+            dispatch(valid(false))
+            return;
+        } else {
+            dispatch(valid(true))
+        }
+
 		if (pathname === "/checkout") {
 			if (paymentMethod === "cod") {
 				dispatch(showModal(<CODConfirmModal />));
@@ -100,7 +109,7 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 
 	useEffect(() => {
 		if (pathname === "/checkout") {
-			setDisabled(name === "" || number === "");
+			setDisabled(name.trim() === "" || number.trim() === "");
 		} else {
 			setDisabled(false);
 		}
