@@ -42,7 +42,7 @@ export default function HomeModule() {
 						checked={filter === "Sticker"}
 					/>
 					<div onClick={() => dispatch(showModal(<MerchSuggestModal/>))} className="font-medium text-dark transition ease-in-out duration-150 transform active:scale-95 border-dark border-2 px-4 py-0.5 text-nowrap rounded-full cursor-pointer">
-						Suggest our next merch ...
+						Choose your next merch!
 					</div>
 				</div>
 

@@ -12,6 +12,8 @@ const options = [
 	{ value: "custom-emoney", label: "Custom E-money" },
 ];
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function MerchSelector() {
 	const dispatch = useDispatch();
 
@@ -31,11 +33,26 @@ export default function MerchSelector() {
 		setOtherOption(event.target.value);
 	};
 
-	const handleSubmit = () => {
-		selectedOptions.push(otherOption);
-		console.log(selectedOptions);
+	const handleSubmit = async () => {
 
-		// TODO BE
+		if (otherOption) {
+			selectedOptions.push(otherOption);
+		}
+
+		const response = await fetch(API_URL + "suggestions/", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(selectedOptions),
+		});
+
+		if (response.status !== 201) {
+			alert("Suggestion error, please try again");
+		} else {
+            alert("Suggestion recorded");
+        }
+
 		dispatch(closeModal());
 	};
 
@@ -59,7 +76,7 @@ export default function MerchSelector() {
 				<span>Or type your own merch wishes ...</span>
 				<input
 					type="text"
-					placeholder="ex. more bracelet please..."
+					placeholder="ex. gelang warna krem SMAKBO dong..."
 					value={otherOption}
 					onChange={handleOtherChange}
 					className="border border-gray-300 p-2 rounded-lg mt-2 w-full"
