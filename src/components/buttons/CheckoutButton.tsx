@@ -6,37 +6,29 @@ import { showModal } from "@/redux/slices/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import CODConfirmModal from "../modals/CODConfirmModal";
 import { setTotalPrice, valid } from "@/redux/slices/userSlice";
-import validator from 'validator'
+import validator from "validator";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const CheckoutButton = ({ pathname }: { pathname: string }) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const { cart, totalPrice } = useSelector((state: RootState) => ({
-		cart: state.cart.cart,
-		totalPrice: state.user.totalPrice,
-	}));
+	const { cart } = useSelector((state: RootState) => state.cart);
 
 	const [disabled, setDisabled] = useState<boolean>(false);
 
-	const { name, number, paymentMethod } = useSelector((state: RootState) => ({
-		name: state.user.name,
-		number: state.user.number,
-		paymentMethod: state.user.paymentMethod,
-	}));
+	const { name, number, province, city, address, paymentMethod, totalPrice } =
+		useSelector((state: RootState) => state.user);
 
 	const handleCheckout = async () => {
-
 		if (pathname === "/checkout") {
+			if (!validator.isMobilePhone(number, "id-ID")) {
+				dispatch(valid(false));
+				return;
+			} else {
+				dispatch(valid(true));
+			}
 
-            if (!validator.isMobilePhone(number, 'id-ID')) {
-                dispatch(valid(false))
-                return;
-            } else {
-                dispatch(valid(true))
-            }
-            
 			if (paymentMethod === "cod") {
 				dispatch(showModal(<CODConfirmModal />));
 			} else if (paymentMethod === "qris") {
@@ -105,16 +97,30 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 				price += item.price * item.amount!;
 			});
 
+		if (paymentMethod === "ship") {
+			// TODO calculate ongkir
+		}
+
 		dispatch(setTotalPrice(price));
-	}, [cart]);
+	}, [cart, paymentMethod, province, city]);
 
 	useEffect(() => {
 		if (pathname === "/checkout") {
-			setDisabled(name.trim() === "" || number.trim() === "");
+			if (paymentMethod === "ship") {
+				setDisabled(
+					name.trim() === "" ||
+						number.trim() === "" ||
+						address?.trim() === "" ||
+						province === "" ||
+						city === ""
+				);
+			} else {
+				setDisabled(name.trim() === "" || number.trim() === "");
+			}
 		} else {
 			setDisabled(false);
 		}
-	}, [name, number, pathname]);
+	}, [name, number, paymentMethod, province, city, address, pathname]);
 
 	return (
 		<button

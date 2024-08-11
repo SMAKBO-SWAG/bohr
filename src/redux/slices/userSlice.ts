@@ -6,6 +6,12 @@ export interface userState {
 	name: string;
 	number: string;
 	paymentMethod: string;
+
+    province?: string;
+    city?: string;
+    address?: string;
+
+    ongkir?: number;
 	totalPrice: number;
     valid: boolean
 }
@@ -14,6 +20,9 @@ const initialState: userState = {
 	name: "",
 	number: "",
 	paymentMethod: "cod",
+    province: "",
+    city: "",
+    address: "",
 	totalPrice: 0,
     valid: true
 };
@@ -31,6 +40,18 @@ export const userSlice = createSlice({
 		setPaymentMethod: (state, action: PayloadAction<string>) => {
 			state.paymentMethod = action.payload;
 		},
+        setProvince: (state, action: PayloadAction<string>) => {
+			state.province = action.payload;
+		},
+        setCity: (state, action: PayloadAction<string>) => {
+			state.city = action.payload;
+		},
+        setAddress: (state, action: PayloadAction<string>) => {
+			state.address = action.payload;
+		},
+        setOngkir: (state, action: PayloadAction<number>) => {
+			state.ongkir = action.payload;
+		},
 		setTotalPrice: (state, action: PayloadAction<number>) => {
 			state.totalPrice = action.payload;
 		},
@@ -46,7 +67,7 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { setName, setNumber, setPaymentMethod, setTotalPrice, valid, clearUser } =
+export const { setName, setNumber, setPaymentMethod, setProvince, setCity, setAddress, setOngkir, setTotalPrice, valid, clearUser } =
 	userSlice.actions;
 
 export default userSlice.reducer;

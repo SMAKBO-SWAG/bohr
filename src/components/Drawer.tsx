@@ -89,28 +89,15 @@ export default function Drawer() {
 						<hr className="border-t border-[#E4F6FF] border-1" />
 						<p>Size Chart</p>
 						<div className="flex w-full flex-row items-center justify-between gap-8">
-                            <Image
-                                src={`/images/illustrations/bracelet-size-chart-illustration.png`}
-                                alt={`bracelet-diameter`}
-                                width={0}
-                                height={0}
-                                className="w-full aspect-[3.2/1]"
-                                unoptimized
-                            />
-                            {/* <Image
-                                src={`/images/illustrations/bracelet-keliling-illustration.png`}
-                                alt={`bracelet-diameter`}
-                                width={124}
-                                height={124}
-                                unoptimized
-                            />
-                            <Image
-                                src={`/images/illustrations/bracelet-tebal-illustration.png`}
-                                alt={`bracelet-diameter`}
-                                width={124}
-                                height={124}
-                                unoptimized
-                            /> */}
+							<Image
+								src={`/images/illustrations/bracelet-size-chart-illustration.png`}
+								alt={`bracelet-diameter`}
+								width={0}
+								height={0}
+								className="w-full aspect-[3.5/1]"
+								unoptimized
+							/>
+
 							{/* <BraceletSizeButton
 								type="s"
 								onChange={() => setSize("s")}
