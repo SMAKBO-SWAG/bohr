@@ -27,7 +27,7 @@ export default function DeletionConfirmModal({
 	return (
 		<div className="z-10 w-screen sm:w-[480px] mx-5 bg-white gap-4 p-10 flex flex-col items-center justify-center rounded-3xl">
 			<Image
-				src="/svg/illustrations/deletion-confirm-illustration.svg"
+				src="/images/illustrations/deletion-confirm-illustration.png"
 				alt="deletion-confirm-illustration"
 				width={250}
 				height={0}

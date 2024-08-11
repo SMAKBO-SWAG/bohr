@@ -30,11 +30,11 @@ export default function FluoreProductModule() {
 				glow in the dark dan menambah keunikan serta kesan futuristik.{" "}
 			</p>
 			<Image
-				src="/images/fluore-thumbnail-m.png"
+				src="/images/thumbnails/fluore-thumbnail-m.png"
 				width={0}
 				height={0}
 				alt="SMAKBO SWAG Logo"
-				className="w-full aspect-[4/2]"
+				className="w-full aspect-[4/2] rounded-[32px]"
 				unoptimized
 			/>
 			<p>

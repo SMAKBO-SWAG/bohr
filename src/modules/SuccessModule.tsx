@@ -24,7 +24,7 @@ export default function HomeModule() {
 		<div className="relative gap-5 flex items-center justify-center h-full text-black">
 			<div className="z-10 gap-4 p-10 flex flex-col items-center justify-center rounded-3xl">
 				<Image
-					src={`/svg/illustrations/success-illustration.svg`}
+					src={`/images/illustrations/success-illustration.png`}
 					alt={`success-illustration`}
 					width={250}
 					height={0}

@@ -44,7 +44,7 @@ const ProductCard = ({ product, editable }: ProductCardProps) => {
 	return (
 		<div className="flex flex-row items-center gap-4">
 			<Image
-				src={`/images/${product.name}-thumbnail-s.png`}
+				src={`/images/thumbnails/${product.name}-thumbnail-s.png`}
 				alt={`${product.name}-thumbnail-s`}
 				width={84}
 				height={84}
@@ -55,7 +55,8 @@ const ProductCard = ({ product, editable }: ProductCardProps) => {
 			<div className="flex w-full h-full justify-between">
 				<div className="flex flex-col gap-2 ">
 					<p>
-						{product?.type} ({product.size!.toUpperCase()})
+						{product?.type}
+                        {/* ({product.size!.toUpperCase()}) */}
 					</p>
 					<p className="text-xl font-bold leading-5">
 						{product?.name.toUpperCase()}

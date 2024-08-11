@@ -30,11 +30,11 @@ export default function CartModule() {
 				banget buat semua kalangan.{" "}
 			</p>
 			<Image
-				src="/images/classic-thumbnail-m.png"
+				src="/images/thumbnails/classic-thumbnail-m.png"
 				width={0}
 				height={0}
 				alt="SMAKBO SWAG Logo"
-				className="w-full aspect-[4/2]"
+				className="w-full aspect-[4/2] rounded-[32px]"
 				unoptimized
 			/>
 			<p>

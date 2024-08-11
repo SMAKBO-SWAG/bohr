@@ -1,16 +1,16 @@
 import Image from "next/image";
 
-interface BraceletFilterButtonProps {
+interface BraceletSizeButtonProps {
 	onChange: () => void;
 	type: string;
 	checked: boolean;
 }
 
-const BraceletFilterButton = ({
+const BraceletSizeButton = ({
 	onChange,
 	type,
 	checked,
-}: BraceletFilterButtonProps) => {
+}: BraceletSizeButtonProps) => {
 	const defaultInputClass = `hidden peer`;
 
 	return (
@@ -28,7 +28,7 @@ const BraceletFilterButton = ({
 				className="w-full rounded-xl border border-transparent peer-checked:border-darker peer-checked:border-2 inline-block"
 			>
 				<Image
-					src={`/svg/illustrations/size-bracelet-illustration-${type}.svg`}
+					src={`/images/illustrations/size-bracelet-illustration-${type}.png`}
 					alt={`size-bracelet-${type}`}
 					width={0}
 					height={0}
@@ -40,6 +40,6 @@ const BraceletFilterButton = ({
 	);
 };
 
-BraceletFilterButton.displayName = "BraceletFilterButton";
+BraceletSizeButton.displayName = "BraceletFilterButton";
 
-export { BraceletFilterButton };
+export { BraceletSizeButton };

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { closeDrawer } from "@/redux/slices/drawerSlice";
 import { RootState } from "@/redux/store";
-import { BraceletFilterButton } from "./buttons/BraceletSizeButton";
+import { BraceletSizeButton } from "./buttons/BraceletSizeButton";
 import { AmountButton } from "./buttons/AmountButton";
 import { AddToCartButton } from "./buttons/AddToCartButton";
 import { setCart } from "@/redux/slices/cartSlice";
@@ -66,7 +66,7 @@ export default function Drawer() {
 				>
 					<div className="flex flex-row items-center gap-4">
 						<Image
-							src={`/images/fluore-thumbnail-s.png`}
+							src={`/images/thumbnails/fluore-thumbnail-s.png`}
 							alt={`fluore-thumbnail-s`}
 							width={84}
 							height={84}
@@ -87,23 +87,45 @@ export default function Drawer() {
 
 					<div className="flex flex-col gap-4">
 						<hr className="border-t border-[#E4F6FF] border-1" />
-						<p>Sizes (Keliling)</p>
+						<p>Size Chart</p>
 						<div className="flex w-full flex-row items-center justify-between gap-8">
-							<BraceletFilterButton
+                            <Image
+                                src={`/images/illustrations/bracelet-size-chart-illustration.png`}
+                                alt={`bracelet-diameter`}
+                                width={0}
+                                height={0}
+                                className="w-full aspect-[3.2/1]"
+                                unoptimized
+                            />
+                            {/* <Image
+                                src={`/images/illustrations/bracelet-keliling-illustration.png`}
+                                alt={`bracelet-diameter`}
+                                width={124}
+                                height={124}
+                                unoptimized
+                            />
+                            <Image
+                                src={`/images/illustrations/bracelet-tebal-illustration.png`}
+                                alt={`bracelet-diameter`}
+                                width={124}
+                                height={124}
+                                unoptimized
+                            /> */}
+							{/* <BraceletSizeButton
 								type="s"
 								onChange={() => setSize("s")}
 								checked={size === "s"}
-							></BraceletFilterButton>
-							<BraceletFilterButton
+							></BraceletSizeButton>
+							<BraceletSizeButton
 								type="m"
 								onChange={() => setSize("m")}
 								checked={size === "m"}
-							></BraceletFilterButton>
-							<BraceletFilterButton
+							></BraceletSizeButton>
+							<BraceletSizeButton
 								type="l"
 								onChange={() => setSize("l")}
 								checked={size === "l"}
-							></BraceletFilterButton>
+							></BraceletSizeButton> */}
 						</div>
 					</div>
 

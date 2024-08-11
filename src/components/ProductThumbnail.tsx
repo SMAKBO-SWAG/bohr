@@ -28,7 +28,7 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 			onClick={() => handleProductClick()}
 		>
 			<Image
-				src={`/images/${product.name}-thumbnail.png`}
+				src={`/images/thumbnails/${product.name}-thumbnail.png`}
 				className="w-full h-full rounded-3xl absolute"
 				style={{ objectFit: "cover" }}
 				alt={`${product.name}-thumbnail`}
