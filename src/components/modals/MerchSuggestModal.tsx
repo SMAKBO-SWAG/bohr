@@ -39,7 +39,7 @@ export default function MerchSelector() {
 			selectedOptions.push(otherOption);
 		}
 
-		const response = await fetch(API_URL + "suggestions/", {
+		const response = await fetch(API_URL + "/suggestions/", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

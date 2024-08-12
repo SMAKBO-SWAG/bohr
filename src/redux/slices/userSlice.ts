@@ -61,7 +61,11 @@ export const userSlice = createSlice({
 		clearUser: (state) => {
 			state.name = "";
 			state.number = "";
-			state.paymentMethod = "";
+			state.paymentMethod = "cod";
+            state.address = "";
+            state.city = "";
+            state.province = "";
+            state.ongkir = 0;
 			state.totalPrice = 0;
 		},
 	},

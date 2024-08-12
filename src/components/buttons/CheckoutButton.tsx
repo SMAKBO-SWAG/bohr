@@ -17,8 +17,11 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 
 	const [disabled, setDisabled] = useState<boolean>(false);
 
-	const { name, number, province, city, address, paymentMethod, totalPrice } =
+	const { name, number, province, city, address, paymentMethod, ongkir, totalPrice } =
 		useSelector((state: RootState) => state.user);
+
+    const province_name = province?.split("-")[1]
+    const city_name = city?.split("-")[1]
 
 	const handleCheckout = async () => {
 		if (pathname === "/checkout") {
@@ -31,9 +34,9 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 
 			if (paymentMethod === "cod") {
 				dispatch(showModal(<CODConfirmModal />));
-			} else if (paymentMethod === "qris") {
+			} else {
 				try {
-					const response = await fetch(API_URL + "payment/", {
+					const response = await fetch(API_URL + "/payment/", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
@@ -60,7 +63,7 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 
 					(window as any).snap.pay(transaction.token, {
 						onSuccess: async function (result: any) {
-							const response = await fetch(API_URL + "orders/", {
+							const response = await fetch(API_URL + "/orders/", {
 								method: "POST",
 								headers: {
 									"Content-Type": "application/json",
@@ -70,6 +73,7 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 									number,
 									paymentMethod,
 									totalPrice,
+                                    address: (paymentMethod === "ship") ? [address, city_name, province_name].join(", ") : null,
 									orders: cart,
 								}),
 							});
@@ -97,12 +101,12 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 				price += item.price * item.amount!;
 			});
 
-		if (paymentMethod === "ship") {
-			// TODO calculate ongkir
+		if (paymentMethod === "ship" && ongkir) {
+			price += ongkir
 		}
 
 		dispatch(setTotalPrice(price));
-	}, [cart, paymentMethod, province, city]);
+	}, [cart, paymentMethod, ongkir]);
 
 	useEffect(() => {
 		if (pathname === "/checkout") {
@@ -112,7 +116,8 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 						number.trim() === "" ||
 						address?.trim() === "" ||
 						province === "" ||
-						city === ""
+						city === "" ||
+                        !ongkir
 				);
 			} else {
 				setDisabled(name.trim() === "" || number.trim() === "");
@@ -120,7 +125,7 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 		} else {
 			setDisabled(false);
 		}
-	}, [name, number, paymentMethod, province, city, address, pathname]);
+	}, [name, number, paymentMethod, province, city, address, ongkir, pathname]);
 
 	return (
 		<button

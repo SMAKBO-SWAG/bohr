@@ -14,20 +14,43 @@ import {
 import { RootState } from "@/redux/store";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+interface Cities {
+	city_id: string;
+	city_name: string;
+}
+
+interface Provinces {
+	province_id: string;
+	province: string;
+}
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function CheckoutModule() {
 	const dispatch = useDispatch();
 	const router = useRouter();
 
-	const cities = ["Bogor", "Jakarta"];
-	const provinces = ["Jawa Barat", "Palembang"];
+	const [provinces, setProvinces] = useState<Provinces[]>([]);
+	const [cities, setCities] = useState<Cities[]>([]);
+
+	const [isCalculatingOngkir, setIsCalculatingOngkir] =
+		useState<boolean>(false);
 
 	const { cart } = useSelector((state: RootState) => state.cart);
 
-	const { name, number, province, city, address, paymentMethod, valid } =
-		useSelector((state: RootState) => state.user);
+	const {
+		name,
+		number,
+		province,
+		city,
+		address,
+		paymentMethod,
+		ongkir,
+		valid,
+	} = useSelector((state: RootState) => state.user);
 
 	useEffect(() => {
 		if (!cart.length) {
@@ -36,12 +59,57 @@ export default function CheckoutModule() {
 	}, [cart, router]);
 
 	useEffect(() => {
-		if (city) {
-			//TODO fetch ongkir
 
-			dispatch(setOngkir(14000));
+		const fetchProvince = async () => {
+			const response = await fetch(API_URL + "/ongkir/get-province");
+			const data = await response.json();
+			setProvinces(data);
+		};
+
+		const fetchCity = async (province: string) => {
+            const province_id = province.split("-")[0]
+
+			const response = await fetch(
+				API_URL + `/ongkir/get-city/${province_id}`
+			);
+			const data = await response.json();
+			setCities(data);
+		};
+
+		if (!provinces.length) {
+			fetchProvince();
 		}
-	}, [province, city]);
+
+		if (province) {
+			dispatch(setCity(""));
+			dispatch(setOngkir(0));
+
+			fetchCity(province);
+		}
+	}, [province, paymentMethod]);
+
+	useEffect(() => {
+		const fetchOngkir = async (city: string) => {
+
+            const city_id = city.split("-")[0]
+
+			setIsCalculatingOngkir(true);
+
+			const response = await fetch(
+				API_URL + `/ongkir/get-ongkir/${city_id}`
+			);
+			const data = await response.json();
+			const ongkir = data.cost;
+
+			dispatch(setOngkir(ongkir));
+
+			setIsCalculatingOngkir(false);
+		};
+
+		if (city) {
+			fetchOngkir(city);
+		}
+	}, [city]);
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
@@ -137,7 +205,7 @@ export default function CheckoutModule() {
 
 			{paymentMethod === "ship" && (
 				<div className="flex flex-col gap-2 w-full">
-					<p>Complete Address</p>
+					<p>Address</p>
 
 					<div className="flex justify-between w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl">
 						<input
@@ -151,7 +219,7 @@ export default function CheckoutModule() {
 						></input>
 
 						<div className="flex gap-2">
-							<div className="flex flex-col w-full w-[96px] text-sm">
+							<div className="flex flex-col w-[96px] text-sm">
 								<select
 									id="province"
 									className="p-2 border rounded-[20px] shadow-inner-custom h-[40px]"
@@ -163,9 +231,12 @@ export default function CheckoutModule() {
 									<option value="" disabled>
 										Provinsi
 									</option>
-									{provinces.map((province, index) => (
-										<option key={index} value={province}>
-											{province}
+									{provinces?.map((province, index) => (
+										<option
+											key={index}
+											value={`${province.province_id}-${province.province}`}
+										>
+											{province.province}
 										</option>
 									))}
 								</select>
@@ -183,9 +254,12 @@ export default function CheckoutModule() {
 									<option value="" disabled>
 										Kota
 									</option>
-									{cities.map((province, index) => (
-										<option key={index} value={province}>
-											{province}
+									{cities?.map((city, index) => (
+										<option
+											key={index}
+											value={`${city.city_id}-${city.city_name}`}
+										>
+											{city.city_name}
 										</option>
 									))}
 								</select>
@@ -209,6 +283,22 @@ export default function CheckoutModule() {
 					})}
 				</div>
 			</div>
+
+			{paymentMethod === "ship" && (
+				<div className="flex flex-row justify-between gap-2 w-full">
+					<p>Ongkir</p>
+					{isCalculatingOngkir ? (
+						<p>Calculating Ongkir ...</p>
+					) : (
+						<p>
+							Rp
+							{ongkir!
+								.toString()
+								.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+						</p>
+					)}
+				</div>
+			)}
 
 			<div className="h-14" />
 		</div>
