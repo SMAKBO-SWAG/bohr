@@ -172,7 +172,7 @@ export default function CheckoutModule() {
 							dispatch(setPaymentMethod(e.target.value))
 						}
 					></input>
-					<label htmlFor="ship"> QRIS - JNE ( + ongkir)</label>
+					<label htmlFor="ship"> QRIS - JNE ( +ongkir)</label>
 				</div>
 			</div>
 

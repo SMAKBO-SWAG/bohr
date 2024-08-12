@@ -73,6 +73,7 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 									number,
 									paymentMethod,
 									totalPrice,
+                                    ongkir,
                                     address: (paymentMethod === "ship") ? [address, city_name, province_name].join(", ") : null,
 									orders: cart,
 								}),
