@@ -16,6 +16,7 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 	const { cart } = useSelector((state: RootState) => state.cart);
 
 	const [disabled, setDisabled] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState(false)
 
 	const { name, number, province, city, address, paymentMethod, ongkir, totalPrice } =
 		useSelector((state: RootState) => state.user);
@@ -25,6 +26,8 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 
 	const handleCheckout = async () => {
 		if (pathname === "/checkout") {
+            setIsLoading(true)
+            
 			if (!validator.isMobilePhone(number, "id-ID")) {
 				dispatch(valid(false));
 				return;
@@ -89,6 +92,8 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 					console.error("Fetch error:", error);
 				}
 			}
+            setIsLoading(false)
+
 		} else {
 			router.push("/checkout");
 		}
@@ -131,16 +136,16 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 	return (
 		<button
 			className={` ${
-				disabled ? "bg-[#7D7D7D]" : "bg-dark hover:bg-darker"
+				disabled || isLoading ? "bg-[#7D7D7D]" : "bg-dark hover:bg-darker"
 			} rounded-full w-full h-[54px] flex items-center justify-between p-5 text-white transition ease-in-out duration-150 transform active:scale-[0.98]`}
 			onClick={() => handleCheckout()}
-			disabled={disabled}
+			disabled={disabled || isLoading}
 		>
 			<p>
 				Rp{totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
 			</p>
 			<div className="flex gap-2">
-				<p>Checkout</p>
+				<p>{isLoading? "loading..." : "Checkout"}</p>
 				<Image
 					src={`/svg/icons/arrow-icon.svg`}
 					alt={`arrow`}

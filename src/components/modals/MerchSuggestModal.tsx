@@ -20,6 +20,8 @@ export default function MerchSelector() {
 	const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 	const [otherOption, setOtherOption] = useState("");
 
+    const [isLoading, setIsLoading] = useState(false)
+
 	const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		setSelectedOptions((prev: any) =>
@@ -34,6 +36,8 @@ export default function MerchSelector() {
 	};
 
 	const handleSubmit = async () => {
+
+        setIsLoading(true)
 
 		if (otherOption) {
 			selectedOptions.push(otherOption);
@@ -54,6 +58,8 @@ export default function MerchSelector() {
         }
 
 		dispatch(closeModal());
+
+        setIsLoading(false)
 	};
 
 	return (
@@ -87,10 +93,10 @@ export default function MerchSelector() {
 				<PrimaryButton
 					onClick={handleSubmit}
 					disabled={
-						selectedOptions.length === 0 && otherOption === ""
+						(selectedOptions.length === 0 && otherOption === "") || isLoading
 					}
 				>
-					Submit
+					{isLoading? "loading..." : "Submit"}
 				</PrimaryButton>
 			</div>
 		</div>
