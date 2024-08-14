@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
 import { notes } from "@/data/notes";
 import {
+    setIsValid,
 	setAddress,
 	setCity,
 	setName,
@@ -60,6 +61,9 @@ export default function CheckoutModule() {
 
 	useEffect(() => {
 
+        dispatch(setCity(""));
+        dispatch(setOngkir(0));
+
 		const fetchProvince = async () => {
 			const response = await fetch(API_URL + "/ongkir/get-province");
 			const data = await response.json();
@@ -81,14 +85,12 @@ export default function CheckoutModule() {
 		}
 
 		if (province) {
-			dispatch(setCity(""));
-			dispatch(setOngkir(0));
-
 			fetchCity(province);
 		}
 	}, [province, paymentMethod]);
 
 	useEffect(() => {
+
 		const fetchOngkir = async (city: string) => {
 
             const city_id = city.split("-")[0]
@@ -194,7 +196,7 @@ export default function CheckoutModule() {
 					className="flex w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl"
 					placeholder="0812345678"
 					value={number}
-					onChange={(e) => dispatch(setNumber(e.target.value))}
+					onChange={(e) => {dispatch(setNumber(e.target.value)); dispatch(setIsValid(true));}}
 				></input>
 				{!valid && (
 					<span className="text-[#ED4337] text-sm">

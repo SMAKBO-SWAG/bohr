@@ -58,7 +58,7 @@ export const userSlice = createSlice({
 		setTotalPrice: (state, action: PayloadAction<number>) => {
 			state.totalPrice = action.payload;
 		},
-        valid: (state, action: PayloadAction<boolean>) => {
+        setIsValid: (state, action: PayloadAction<boolean>) => {
             state.valid = action.payload
         },
 		clearUser: (state) => {
@@ -74,7 +74,7 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { setName, setNumber, setPaymentMethod, setProvince, setCity, setAddress, setOngkir, setTotalPrice, valid, clearUser } =
+export const { setName, setNumber, setPaymentMethod, setProvince, setCity, setAddress, setOngkir, setTotalPrice, setIsValid, clearUser } =
 	userSlice.actions;
 
 export default userSlice.reducer;
