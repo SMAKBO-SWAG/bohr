@@ -20,9 +20,12 @@ const initialState: userState = {
 	name: "",
 	number: "",
 	paymentMethod: "cod",
+
     province: "",
     city: "",
     address: "",
+
+    ongkir:0,
 	totalPrice: 0,
     valid: true
 };
