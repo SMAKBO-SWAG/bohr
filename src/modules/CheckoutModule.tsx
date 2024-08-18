@@ -1,4 +1,5 @@
 "use client";
+import { CountdownLabel } from "@/components/CountdownLabel";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
 import { notes } from "@/data/notes";
@@ -116,6 +117,7 @@ export default function CheckoutModule() {
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
 			<Header>Checkout</Header>
+            <CountdownLabel/>
 			<div className="flex w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl">
 				<Image
 					src="/svg/icons/info-icon.svg"

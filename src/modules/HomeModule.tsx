@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { showModal } from "@/redux/slices/modalSlice";
 import MerchSuggestModal from "@/components/modals/MerchSuggestModal";
+import { CountdownLabel } from "@/components/CountdownLabel";
 
 export default function HomeModule() {
     const dispatch = useDispatch()
@@ -31,6 +32,8 @@ export default function HomeModule() {
 			/>
 
 			<div className="flex flex-col gap-4 h-full">
+                <CountdownLabel/>
+
 				<div className="flex items-center gap-2 overflow-x-auto py-2 px-5 mx-[-20px] no-scrollbar">
 					<FilterToggle type="All" checked={filter === "All"} />
 					<FilterToggle
