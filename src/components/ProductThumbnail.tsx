@@ -12,6 +12,7 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 	const dispatch = useDispatch();
 
 	const item = {
+		id: product.id,
 		name: product.name,
 		type: product.type,
 		price: product.price,
@@ -19,7 +20,7 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 
 	const thumbnail = product.thumbnail!;
 
-	const handleProductClick = () => [router.push(`/product/${product.name}`)];
+	const handleProductClick = () => [router.push(`/product/${product.id}`)];
 	const handleAddToCartDrawer = () => [dispatch(showDrawer(item))];
 
 	return (
@@ -28,10 +29,10 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 			onClick={() => handleProductClick()}
 		>
 			<Image
-				src={`/images/thumbnails/${product.name}-thumbnail.png`}
+				src={`/images/thumbnails/${product.id}-thumbnail.png`}
 				className="w-full h-full rounded-3xl absolute"
 				style={{ objectFit: "cover" }}
-				alt={`${product.name}-thumbnail`}
+				alt={`${product.id}-thumbnail`}
 				width={0}
 				height={0}
 				unoptimized
@@ -66,9 +67,17 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 							</p>
 							<p className="text-lg">
 								Rp
-								{product.price
-									.toString()
-									.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+								{product.id === "squad" ? (
+									<span>
+										<span className="line-through">
+											25.000{""}
+										</span>
+										{" "}20.000/pcs
+									</span>
+								) : (
+									product.price.toLocaleString("id-ID") +
+									"/pcs"
+								)}
 							</p>
 						</div>
 					</div>

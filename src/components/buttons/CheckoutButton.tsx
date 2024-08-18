@@ -143,7 +143,7 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 			disabled={disabled || isLoading}
 		>
 			<p>
-				Rp{totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+				Rp{totalPrice.toLocaleString('id-ID')}
 			</p>
 			<div className="flex gap-2">
 				<p>{isLoading? "loading..." : "Checkout"}</p>

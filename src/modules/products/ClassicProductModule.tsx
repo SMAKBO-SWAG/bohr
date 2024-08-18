@@ -4,21 +4,12 @@ import { Header } from "@/components/Header";
 import { ProductThumbnail } from "@/components/ProductThumbnail";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
+import { products } from "@/data/products";
 
 export default function CartModule() {
 	const cart = useSelector((state: RootState) => state.cart.cart);
 
-	const product = {
-		name: "classic",
-		type: "Bracelet",
-		price: 25000,
-		thumbnail: {
-			isNew: false,
-			isPreOrder: true,
-			accent: "#132042",
-			accentComplement: "#ffffff",
-		},
-	};
+	const product = products[2]
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">

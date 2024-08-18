@@ -1,6 +1,7 @@
 "use client";
 import { Header } from "@/components/Header";
 import { ProductThumbnail } from "@/components/ProductThumbnail";
+import { products } from "@/data/products";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
 import { useSelector } from "react-redux";
@@ -8,17 +9,7 @@ import { useSelector } from "react-redux";
 export default function FluoreProductModule() {
 	const cart = useSelector((state: RootState) => state.cart.cart);
 
-	const product = {
-		name: "fluore",
-		type: "Bracelet",
-		price: 25000,
-		thumbnail: {
-			isNew: true,
-			isPreOrder: true,
-			accent: "#ffffff",
-			accentComplement: "#132042",
-		},
-	};
+	const product = products[1]
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">

@@ -44,13 +44,13 @@ const ProductCard = ({ product, editable }: ProductCardProps) => {
 	return (
 		<div className="flex flex-row items-center gap-4">
 			<Image
-				src={`/images/thumbnails/${product.name}-thumbnail-s.png`}
-				alt={`${product.name}-thumbnail-s`}
+				src={`/images/thumbnails/${product.id}-thumbnail-s.png`}
+				alt={`${product.id}-thumbnail-s`}
 				width={84}
 				height={84}
 				unoptimized
 				className="cursor-pointer"
-				onClick={() => router.push(`/product/${product.name}`)}
+				onClick={() => router.push(`/product/${product.id}`)}
 			/>
 			<div className="flex w-full h-full justify-between">
 				<div className="flex flex-col gap-2 ">
@@ -63,9 +63,7 @@ const ProductCard = ({ product, editable }: ProductCardProps) => {
 					</p>
 					<p>
 						Rp
-						{product?.price
-							.toString()
-							.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+						{product?.price.toLocaleString('id-ID')}
 					</p>
 				</div>
 				<div

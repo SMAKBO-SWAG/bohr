@@ -73,14 +73,12 @@ export default function Drawer() {
 							unoptimized
 						/>
 						<div className="flex flex-col gap-2 ">
-							<p>{drawerContent?.type}</p>
+							<p>{drawerContent.type}</p>
 							<p className="text-xl font-bold leading-5">
-								{drawerContent?.name.toUpperCase()}
+								{drawerContent.name.toUpperCase()}
 							</p>
 							<p>
-								{drawerContent?.price
-									.toString()
-									.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+								Rp{drawerContent.price.toLocaleString("id-ID")}
 							</p>
 						</div>
 					</div>
