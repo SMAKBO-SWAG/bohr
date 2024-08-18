@@ -2,7 +2,7 @@ import { Product } from "@/types/product";
 
 const now = new Date();
 const jakartaTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }));
-const squadAvailableDate = new Date("2024-08-17T18:00:00+07:00");
+const squadAvailableDate = new Date("2024-08-22T18:00:00+07:00");
 
 const products: Product[] = [
 	{
