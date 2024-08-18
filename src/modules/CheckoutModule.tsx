@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
 import { notes } from "@/data/notes";
 import {
-    setIsValid,
+	setIsValid,
 	setAddress,
 	setCity,
 	setName,
@@ -61,9 +61,8 @@ export default function CheckoutModule() {
 	}, [cart, router]);
 
 	useEffect(() => {
-
-        dispatch(setCity(""));
-        dispatch(setOngkir(0));
+		dispatch(setCity(""));
+		dispatch(setOngkir(0));
 
 		const fetchProvince = async () => {
 			const response = await fetch(API_URL + "/ongkir/get-province");
@@ -72,7 +71,7 @@ export default function CheckoutModule() {
 		};
 
 		const fetchCity = async (province: string) => {
-            const province_id = province.split("-")[0]
+			const province_id = province.split("-")[0];
 
 			const response = await fetch(
 				API_URL + `/ongkir/get-city/${province_id}`
@@ -91,10 +90,8 @@ export default function CheckoutModule() {
 	}, [province, paymentMethod]);
 
 	useEffect(() => {
-
 		const fetchOngkir = async (city: string) => {
-
-            const city_id = city.split("-")[0]
+			const city_id = city.split("-")[0];
 
 			setIsCalculatingOngkir(true);
 
@@ -117,7 +114,7 @@ export default function CheckoutModule() {
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
 			<Header>Checkout</Header>
-            <CountdownLabel/>
+			<CountdownLabel />
 			<div className="flex w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl">
 				<Image
 					src="/svg/icons/info-icon.svg"
@@ -137,21 +134,6 @@ export default function CheckoutModule() {
 
 			<div className="flex flex-col gap-2 w-full">
 				<p>Payment Method</p>
-				<div className="flex gap-2">
-					<input
-						type="radio"
-						value="cod"
-						id="cod"
-						name="paymentMethod"
-						defaultChecked={
-							paymentMethod ? paymentMethod === "cod" : true
-						}
-						onChange={(e) =>
-							dispatch(setPaymentMethod(e.target.value))
-						}
-					></input>
-					<label htmlFor="cod"> COD - pickup at SMAKBO</label>
-				</div>
 				<div className="flex gap-2">
 					<input
 						type="radio"
@@ -178,6 +160,19 @@ export default function CheckoutModule() {
 					></input>
 					<label htmlFor="ship"> QRIS - JNE ( +ongkir)</label>
 				</div>
+				<div className="flex gap-2">
+					<input
+						type="radio"
+						value="cod"
+						id="cod"
+						name="paymentMethod"
+						defaultChecked={paymentMethod === "cod"}
+						onChange={(e) =>
+							dispatch(setPaymentMethod(e.target.value))
+						}
+					></input>
+					<label htmlFor="cod"> COD - pickup at SMAKBO</label>
+				</div>
 			</div>
 
 			<div className="flex flex-col gap-2 w-full">
@@ -198,7 +193,10 @@ export default function CheckoutModule() {
 					className="flex w-full bg-[#F5F6FB] p-4 gap-4 rounded-xl"
 					placeholder="0812345678"
 					value={number}
-					onChange={(e) => {dispatch(setNumber(e.target.value)); dispatch(setIsValid(true));}}
+					onChange={(e) => {
+						dispatch(setNumber(e.target.value));
+						dispatch(setIsValid(true));
+					}}
 				></input>
 				{!valid && (
 					<span className="text-[#ED4337] text-sm">

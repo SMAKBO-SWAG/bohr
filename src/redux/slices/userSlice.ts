@@ -19,7 +19,7 @@ export interface userState {
 const initialState: userState = {
 	name: "",
 	number: "",
-	paymentMethod: "cod",
+	paymentMethod: "qris",
 
     province: "",
     city: "",
