@@ -43,8 +43,6 @@ export default function CheckoutModule() {
 
 	const { cart } = useSelector((state: RootState) => state.cart);
 
-    const includesPackage = cart.filter((item) => item.type === "Package").length != 0
-
 	const {
 		name,
 		number,
@@ -142,7 +140,7 @@ export default function CheckoutModule() {
 						value="qris"
 						id="qris"
 						name="paymentMethod"
-						defaultChecked={includesPackage? true : paymentMethod === "qris"}
+						defaultChecked={paymentMethod === "qris"}
 						onChange={(e) =>
 							dispatch(setPaymentMethod(e.target.value))
 						}
@@ -168,15 +166,13 @@ export default function CheckoutModule() {
 						value="cod"
 						id="cod"
 						name="paymentMethod"
-						defaultChecked={includesPackage? false : paymentMethod === "cod"}
-                        disabled={includesPackage}
+						defaultChecked={paymentMethod === "cod"}
 						onChange={(e) =>
 							dispatch(setPaymentMethod(e.target.value))
 						}
 					></input>
 					<label htmlFor="cod"> COD - pickup at SMAKBO</label>
 				</div>
-                {includesPackage && <span className="text-sm">Package payment only available using QRIS</span>}
 			</div>
 
 			<div className="flex flex-col gap-2 w-full">
