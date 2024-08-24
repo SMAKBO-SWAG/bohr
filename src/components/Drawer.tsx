@@ -50,7 +50,7 @@ export default function Drawer() {
 		dispatch(closeDrawer());
 	};
 
-    const isSquad = drawerContent.name === "Bring Your Squad!"
+    const isSquad = drawerContent?.name === "Bring Your Squad!"
 
 	if (!visible) return null;
 
