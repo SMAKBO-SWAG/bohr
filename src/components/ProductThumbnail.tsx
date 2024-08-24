@@ -23,6 +23,8 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 	const handleProductClick = () => [router.push(`/product/${product.id}`)];
 	const handleAddToCartDrawer = () => [dispatch(showDrawer(item))];
 
+    const isSquad = product.id === "squad"
+
 	return (
 		<div
 			className="relative flex flex-col w-full aspect-[3.5/4] cursor-pointer"
@@ -93,7 +95,7 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 					)}
 				</div>
 				<div className="flex w-full justify-end">
-					<AddToCartButton onClick={() => handleAddToCartDrawer()} />
+					<AddToCartButton child={ isSquad ? "Sold Out" : "Add to Cart"} disabled={isSquad} onClick={() => handleAddToCartDrawer()} />
 				</div>
 			</div>
 		</div>
