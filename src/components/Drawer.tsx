@@ -50,6 +50,8 @@ export default function Drawer() {
 		dispatch(closeDrawer());
 	};
 
+    const isSquad = drawerContent.id === "squad"
+
 	if (!visible) return null;
 
 	return (
@@ -139,7 +141,7 @@ export default function Drawer() {
 						</div>
 					</div>
 
-					<AddToCartButton onClick={() => handleAddToCart()} />
+					<AddToCartButton child={ isSquad ? "Sold Out" : "Add to Cart"} disabled={isSquad} onClick={() => handleAddToCart()} />
 				</div>
 			</div>
 		</>
