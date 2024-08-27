@@ -1,10 +1,30 @@
 import { Product } from "@/types/product";
 
-const now = new Date();
-const jakartaTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }));
-const squadAvailableDate = new Date("2024-08-20T18:00:00+07:00");
-
 const products: Product[] = [
+    {
+		id: "duo",
+		name: "Dynamic Duo!",
+		type: "Package",
+		price: 40000,
+		thumbnail: {
+			isNew: false,
+			isPreOrder: true,
+			accent: "#ffffff",
+			accentComplement: "#011B29",
+		},
+	},
+    {
+		id: "squad",
+		name: "Bring Your Squad!",
+		type: "Package",
+		price: 100000,
+		thumbnail: {
+			isNew: false,
+			isPreOrder: true,
+			accent: "#ffffff",
+			accentComplement: "#011B29",
+		},
+	},
 	{
 		id: "fluore",
 		name: "fluore",
@@ -30,20 +50,5 @@ const products: Product[] = [
 		},
 	},
 ];
-
-if (jakartaTime >= squadAvailableDate) {
-	products.unshift({
-		id: "squad",
-		name: "Bring Your Squad!",
-		type: "Package",
-		price: 100000,
-		thumbnail: {
-			isNew: false,
-			isPreOrder: true,
-			accent: "#ffffff",
-			accentComplement: "#011B29",
-		},
-	});
-}
 
 export { products };

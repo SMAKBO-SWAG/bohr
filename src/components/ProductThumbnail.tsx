@@ -69,7 +69,7 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 							</p>
 							<p className="text-lg">
 								Rp
-								{product.id === "squad" ? (
+								{["squad", "duo"].includes(product.id) ? (
 									<span>
 										<span className="line-through">
 											25.000{""}

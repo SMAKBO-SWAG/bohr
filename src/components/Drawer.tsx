@@ -68,7 +68,7 @@ export default function Drawer() {
 				>
 					<div className="flex flex-row items-center gap-4">
 						<Image
-							src={`/images/thumbnails/fluore-thumbnail-s.png`}
+							src={`/images/thumbnails/${drawerContent.id}-thumbnail-s.png`}
 							alt={`fluore-thumbnail-s`}
 							width={84}
 							height={84}
