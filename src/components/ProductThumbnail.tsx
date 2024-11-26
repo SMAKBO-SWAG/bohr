@@ -14,7 +14,7 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 	const item = {
 		id: product.id,
 		name: product.name,
-		type: product.type,
+		tag: product.tag,
 		price: product.price,
 	};
 
@@ -23,7 +23,7 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 	const handleProductClick = () => [router.push(`/product/${product.id}`)];
 	const handleAddToCartDrawer = () => [dispatch(showDrawer(item))];
 
-    const isSquad = product.id === "squad"
+	const isSquad = product.id === "squad";
 
 	return (
 		<div
@@ -46,22 +46,16 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 						style={{ color: thumbnail.accent }}
 					>
 						<div className="flex flex-row gap-2 items-center">
-							{thumbnail.isPreOrder && (
+							{product.tag.map((tag) => (
 								<Tag
 									accent={thumbnail.accent}
 									accentComplement={
 										thumbnail.accentComplement
 									}
 								>
-									Pre-Order
+									{tag}
 								</Tag>
-							)}
-							<Tag
-								accent={thumbnail.accent}
-								accentComplement={thumbnail.accentComplement}
-							>
-								{product.type}
-							</Tag>
+							))}
 						</div>
 						<div className="flex flex-col gap-2">
 							<p className="text-3xl font-bold leading-6 tracking-wider">
@@ -72,9 +66,9 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 								{["squad", "duo"].includes(product.id) ? (
 									<span>
 										<span className="line-through">
-											25.000{""}
+											25.000
 										</span>
-										{" "}20.000/pcs
+										20.000/pcs
 									</span>
 								) : (
 									product.price.toLocaleString("id-ID") +
@@ -83,19 +77,13 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 							</p>
 						</div>
 					</div>
-					{thumbnail.isNew && (
-						<Image
-							src={`/svg/${product.name}-new-tag.svg`}
-							style={{ objectFit: "cover" }}
-							alt={`/${product.name}-new-tag`}
-							width={105}
-							height={85}
-							unoptimized
-						/>
-					)}
 				</div>
 				<div className="flex w-full justify-end">
-					<AddToCartButton child={ isSquad ? "Sold Out" : "Add to Cart"} disabled={isSquad} onClick={() => handleAddToCartDrawer()} />
+					<AddToCartButton
+						child={isSquad ? "Sold Out" : "Add to Cart"}
+						disabled={isSquad}
+						onClick={() => handleAddToCartDrawer()}
+					/>
 				</div>
 			</div>
 		</div>

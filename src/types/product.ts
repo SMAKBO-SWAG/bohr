@@ -1,6 +1,4 @@
 interface ProductThumbnail {
-	isNew: boolean;
-	isPreOrder: boolean;
 	accent: string;
 	accentComplement: string;
 }
@@ -8,7 +6,7 @@ interface ProductThumbnail {
 export interface Product {
     id: string;
 	name: string;
-	type: string;
+	tag: string[];
 	price: number;
 	size?: string;
 	amount?: number;

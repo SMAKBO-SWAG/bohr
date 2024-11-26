@@ -20,7 +20,7 @@ export default function HomeModule() {
 	const filteredProducts =
 		filter === "All"
 			? products
-			: products.filter((product) => product.type === filter);
+			: products.filter((product) => product.tag.includes(filter));
 
 	return (
 		<div className="relative gap-5 flex flex-col h-full">
@@ -35,15 +35,23 @@ export default function HomeModule() {
                 <CountdownLabel/>
 
 				<div className="flex items-center gap-2 overflow-x-auto py-2 px-5 mx-[-20px] no-scrollbar">
-					<FilterToggle type="All" checked={filter === "All"} />
+					{/* <FilterToggle type="All" checked={filter === "All"} /> */}
+
+                    <FilterToggle
+						type="Package"
+						checked={filter === "Package"}
+					/>
+                    
+                    <FilterToggle
+						type="T-Shirt"
+						checked={filter === "T-Shirt"}
+					/>
+
 					<FilterToggle
 						type="Bracelet"
 						checked={filter === "Bracelet"}
 					/>
-					<FilterToggle
-						type="Sticker"
-						checked={filter === "Sticker"}
-					/>
+					
 					<div onClick={() => dispatch(showModal(<MerchSuggestModal/>))} className="font-medium text-dark transition ease-in-out duration-150 transform active:scale-95 border-dark border-2 px-4 py-0.5 text-nowrap rounded-full cursor-pointer">
 						Choose your next merch!
 					</div>
