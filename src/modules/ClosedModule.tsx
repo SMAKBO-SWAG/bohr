@@ -4,7 +4,7 @@ import MerchSuggestModal from "@/components/modals/MerchSuggestModal";
 import { showModal } from "@/redux/slices/modalSlice";
 import { useDispatch } from "react-redux";
 
-export default function CloseOrderModule() {
+export default function ClosedModule() {
     const dispatch = useDispatch()
     
 	return (
