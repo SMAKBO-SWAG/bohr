@@ -2,18 +2,6 @@ import { Product } from "@/types/product";
 
 const products: Product[] = [
     {
-		id: "duo",
-		name: "Dynamic Duo!",
-		type: "Package",
-		price: 40000,
-		thumbnail: {
-			isNew: false,
-			isPreOrder: true,
-			accent: "#ffffff",
-			accentComplement: "#011B29",
-		},
-	},
-    {
 		id: "squad",
 		name: "Bring Your Squad!",
 		type: "Package",
