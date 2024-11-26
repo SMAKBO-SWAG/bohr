@@ -7,7 +7,7 @@ export interface FilterSlice {
 }
 
 const initialState: FilterSlice = {
-	filter: "All",
+	filter: "Package",
 };
 
 export const filterSlice = createSlice({

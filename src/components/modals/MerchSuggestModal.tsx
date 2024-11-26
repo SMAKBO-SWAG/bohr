@@ -5,7 +5,6 @@ import { closeModal } from "@/redux/slices/modalSlice";
 import { useState } from "react";
 
 const options = [
-	{ value: "tshirt", label: "T-shirt" },
 	{ value: "hoodie", label: "Hoodie" },
 	{ value: "sweater", label: "Sweater" },
 	{ value: "totebag", label: "Totebag" },

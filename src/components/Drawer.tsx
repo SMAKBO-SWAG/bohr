@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { closeDrawer } from "@/redux/slices/drawerSlice";
 import { RootState } from "@/redux/store";
-import { BraceletSizeButton } from "./buttons/BraceletSizeButton";
 import { AmountButton } from "./buttons/AmountButton";
 import { AddToCartButton } from "./buttons/AddToCartButton";
 import { setCart } from "@/redux/slices/cartSlice";
@@ -75,7 +74,7 @@ export default function Drawer() {
 							unoptimized
 						/>
 						<div className="flex flex-col gap-2 ">
-							<p>{drawerContent.type}</p>
+							<p>{drawerContent.tag}</p>
 							<p className="text-xl font-bold leading-5">
 								{drawerContent.name.toUpperCase()}
 							</p>
@@ -97,22 +96,6 @@ export default function Drawer() {
 								className="w-full aspect-[3.5/1]"
 								unoptimized
 							/>
-
-							{/* <BraceletSizeButton
-								type="s"
-								onChange={() => setSize("s")}
-								checked={size === "s"}
-							></BraceletSizeButton>
-							<BraceletSizeButton
-								type="m"
-								onChange={() => setSize("m")}
-								checked={size === "m"}
-							></BraceletSizeButton>
-							<BraceletSizeButton
-								type="l"
-								onChange={() => setSize("l")}
-								checked={size === "l"}
-							></BraceletSizeButton> */}
 						</div>
 					</div>
 
@@ -141,7 +124,7 @@ export default function Drawer() {
 						</div>
 					</div>
 
-					<AddToCartButton child={ isSquad ? "Sold Out" : "Add to Cart"} disabled={isSquad} onClick={() => handleAddToCart()} />
+					<AddToCartButton child={ "Add to Cart" } disabled={false} onClick={() => handleAddToCart()} />
 				</div>
 			</div>
 		</>

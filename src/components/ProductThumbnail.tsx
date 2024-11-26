@@ -23,8 +23,6 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 	const handleProductClick = () => [router.push(`/product/${product.id}`)];
 	const handleAddToCartDrawer = () => [dispatch(showDrawer(item))];
 
-	const isSquad = product.id === "squad";
-
 	return (
 		<div
 			className="relative flex flex-col w-full aspect-[3.5/4] cursor-pointer"
@@ -63,25 +61,15 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 							</p>
 							<p className="text-lg">
 								Rp
-								{["squad", "duo"].includes(product.id) ? (
-									<span>
-										<span className="line-through">
-											25.000
-										</span>
-										20.000/pcs
-									</span>
-								) : (
-									product.price.toLocaleString("id-ID") +
-									"/pcs"
-								)}
+								{product.price.toLocaleString("id-ID")}{product.tag.includes("Package") ? "/pack" : "/pcs"}
 							</p>
 						</div>
 					</div>
 				</div>
 				<div className="flex w-full justify-end">
 					<AddToCartButton
-						child={isSquad ? "Sold Out" : "Add to Cart"}
-						disabled={isSquad}
+						child={"Add to Cart"}
+						disabled={false}
 						onClick={() => handleAddToCartDrawer()}
 					/>
 				</div>
