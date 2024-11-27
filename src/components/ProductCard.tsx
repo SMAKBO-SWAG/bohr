@@ -58,7 +58,7 @@ const ProductCard = ({ product, editable }: ProductCardProps) => {
 						{product?.tag.toString()}
 					</p>
 					<p className="text-xl font-bold leading-5">
-						{product?.name.toUpperCase()} {product?.size && `(${product?.size})`}
+						{product?.name.toUpperCase()} {product?.tag[0] !== 'Bracelet' && `(${product?.size})`}
 					</p>
 					<p>
 						Rp
