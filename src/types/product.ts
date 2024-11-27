@@ -8,7 +8,7 @@ export interface Product {
 	name: string;
 	tag: string[];
 	price: number;
-	size?: string;
-	amount?: number;
+	size: string;
+	amount: number;
 	thumbnail?: ProductThumbnail;
 }

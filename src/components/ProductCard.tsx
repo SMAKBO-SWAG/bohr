@@ -54,11 +54,11 @@ const ProductCard = ({ product, editable }: ProductCardProps) => {
 			/>
 			<div className="flex w-full h-full justify-between">
 				<div className="flex flex-col gap-2 ">
-					<p>
+					<p className="text-sm">
 						{product?.tag.toString()}
 					</p>
 					<p className="text-xl font-bold leading-5">
-						{product?.name.toUpperCase()}
+						{product?.name.toUpperCase()} {product?.size && `(${product?.size})`}
 					</p>
 					<p>
 						Rp

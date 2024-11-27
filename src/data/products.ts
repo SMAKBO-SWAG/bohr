@@ -4,7 +4,7 @@ const products: Product[] = [
     {
 		id: "luminous-legacy",
 		name: "Luminous Legacy",
-		tag: ["Package", "T-Shirt", ],
+		tag: ["Package", "T-Shirt", "Bracelet"],
 		price: 120000,
 		thumbnail: {
 			accent: "#ffffff",
