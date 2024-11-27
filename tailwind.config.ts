@@ -9,6 +9,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
+        animation: {
+            aurora: "aurora 6s ease-in-out infinite",
+        },
+        keyframes: {
+            aurora: {
+                "0%, 100%": { transform: "translateX(0) translateY(-1.5%)" },
+                "25%": { transform: "translateX(1.5%) translateY(0)" },
+                "50%": { transform: "translateX(0) translateY(1.5%)" },
+                "75%": { transform: "translateX(-1.5%) translateY(0)" },
+            },
+        },
         fontFamily: {
             gotham: ['"Gotham Rounded"', 'sans-serif'],
         },

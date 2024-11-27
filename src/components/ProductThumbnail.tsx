@@ -28,6 +28,11 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 			className="relative flex flex-col w-full aspect-[3.5/4] cursor-pointer"
 			onClick={() => handleProductClick()}
 		>
+            {product.id === 'luminous-legacy' && (
+                <div
+                    className="absolute w-full h-full rounded-3xl blur-[5px] animate-aurora bg-gradient-to-r from-[#B1CCFF] to-[#A1BAE8] opacity-90"
+                ></div>
+            )}
 			<Image
 				src={`/images/thumbnails/${product.id}-thumbnail.png`}
 				className="w-full h-full rounded-3xl absolute"
@@ -56,7 +61,7 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 							))}
 						</div>
 						<div className="flex flex-col gap-2">
-							<p className="text-3xl font-bold leading-6 tracking-wider">
+							<p className="text-2xl font-bold leading-6 tracking-wider">
 								{product.name.toUpperCase()}
 							</p>
 							<p className="text-lg">

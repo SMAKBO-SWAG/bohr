@@ -120,11 +120,11 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 			if (paymentMethod === "ship") {
 				setDisabled(
 					name.trim() === "" ||
-						number.trim() === "" ||
-						address?.trim() === "" ||
-						province === "" ||
-						city === "" ||
-                        ongkir === 0
+                    number.trim() === "" ||
+                    address?.trim() === "" ||
+                    province === "" ||
+                    city === "" ||
+                    ongkir === 0
 				);
 			} else {
 				setDisabled(name.trim() === "" || number.trim() === "");
@@ -146,7 +146,7 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 				Rp{totalPrice.toLocaleString('id-ID')}
 			</p>
 			<div className="flex gap-2">
-				<p>{isLoading? "loading..." : "Checkout"}</p>
+				<p>{isLoading? "Loading..." : "Checkout"}</p>
 				<Image
 					src={`/svg/icons/arrow-icon.svg`}
 					alt={`arrow`}

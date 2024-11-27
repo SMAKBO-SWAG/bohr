@@ -147,7 +147,7 @@ export default function CheckoutModule() {
 					></input>
 					<label htmlFor="qris"> QRIS - pickup at SMAKBO</label>
 				</div>
-				<div className="flex gap-2">
+				{/* <div className="flex gap-2">
 					<input
 						type="radio"
 						value="ship"
@@ -159,7 +159,7 @@ export default function CheckoutModule() {
 						}
 					></input>
 					<label htmlFor="ship"> QRIS - JNE ( +ongkir)</label>
-				</div>
+				</div> */}
 				<div className="flex gap-2">
 					<input
 						type="radio"

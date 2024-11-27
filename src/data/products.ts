@@ -2,7 +2,27 @@ import { Product } from "@/types/product";
 
 const products: Product[] = [
     {
-		id: "squad",
+		id: "luminous-legacy",
+		name: "Luminous Legacy",
+		tag: ["Package", "T-Shirt", ],
+		price: 120000,
+		thumbnail: {
+			accent: "#ffffff",
+			accentComplement: "#132042",
+		},
+	},
+    {
+		id: "suit-up-your-squad",
+		name: "Suit Up Your Squad!",
+		tag: ["Package", "T-Shirt"],
+		price: 300000,
+		thumbnail: {
+			accent: "#ffffff",
+			accentComplement: "#011B29",
+		},
+	},
+    {
+		id: "bring-your-squad",
 		name: "Bring Your Squad!",
 		tag: ["Package", "Bracelet"],
 		price: 100000,
@@ -22,7 +42,7 @@ const products: Product[] = [
 		},
 	},
 	{
-		id: "classic",
+		id: "classic-bracelet",
 		name: "classic",
 		tag: ["Bracelet"],
 		price: 25000,
@@ -31,6 +51,26 @@ const products: Product[] = [
 			accentComplement: "#ffffff",
 		},
 	},
+    {
+		id: "legacy",
+		name: "Legacy",
+		tag: ["T-Shirt"],
+		price: 105000,
+		thumbnail: {
+			accent: "#ffffff",
+			accentComplement: "#132042",
+		},
+	},
+    {
+		id: "classic-tshirt",
+		name: "Classic",
+		tag: ["T-Shirt"],
+		price: 90000,
+		thumbnail: {
+			accent: "#132042",
+			accentComplement: "#ffffff",
+		},
+	}
 ];
 
 export { products };

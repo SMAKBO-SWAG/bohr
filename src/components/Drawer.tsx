@@ -74,7 +74,7 @@ export default function Drawer() {
 							unoptimized
 						/>
 						<div className="flex flex-col gap-2 ">
-							<p>{drawerContent.tag}</p>
+							<p>{drawerContent.tag.toString()}</p>
 							<p className="text-xl font-bold leading-5">
 								{drawerContent.name.toUpperCase()}
 							</p>

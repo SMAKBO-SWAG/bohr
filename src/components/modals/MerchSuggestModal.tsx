@@ -95,7 +95,7 @@ export default function MerchSelector() {
 						(selectedOptions.length === 0 && otherOption === "") || isLoading
 					}
 				>
-					{isLoading? "loading..." : "Submit"}
+					{isLoading? "Loading..." : "Submit"}
 				</PrimaryButton>
 			</div>
 		</div>

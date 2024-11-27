@@ -1,5 +1,5 @@
-import FluoreProductModule from "@/modules/products/FluoreProductModule";
+import FluoreModule from "@/modules/products/FluoreModule";
 
 export default function FluoreProduct() {
-	return <FluoreProductModule />;
+	return <FluoreModule />;
 }

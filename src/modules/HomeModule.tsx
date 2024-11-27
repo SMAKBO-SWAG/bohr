@@ -20,7 +20,7 @@ export default function HomeModule() {
 	const filteredProducts =
 		filter === "All"
 			? products
-			: products.filter((product) => product.tag.includes(filter));
+			: products.filter((product) => product.tag[0] === filter);
 
 	return (
 		<div className="relative gap-5 flex flex-col h-full">
