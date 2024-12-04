@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 export default function BringYourSquadModule() {
 	const cart = useSelector((state: RootState) => state.cart.cart);
 
-	const product = products[2]
+	const product = products[1]
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">

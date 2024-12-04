@@ -48,15 +48,12 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
         }        
     },[])
 
-    useEffect(() => {        console.log(`${product.id}  ${available}`)
-},[available])
-
 	return (
 		<div
 			className="relative flex flex-col w-full aspect-[3.5/4] cursor-pointer"
 			onClick={() => handleProductClick()}
 		>
-            {product.id === 'suit-up-your-squad' && (
+            {product.tag.includes('Package') && (
                 <div
                     className="absolute w-full h-full rounded-3xl blur-[5px] animate-aurora bg-gradient-to-r from-[#B1CCFF] to-[#A1BAE8] opacity-90"
                 ></div>

@@ -118,11 +118,11 @@ export default function Drawer() {
 						<p>T-Shirt Size Chart</p>
 						<div className="flex w-full flex-row items-center justify-between gap-8">
 							<Image
-								src={`/images/illustrations/bracelet-size-chart-illustration.png`}
+								src={`/images/illustrations/tshirt-size-chart-illustration.png`}
 								alt={`bracelet-diameter`}
 								width={0}
 								height={0}
-								className="w-full aspect-[3.5/1]"
+								className="w-full"
 								unoptimized
 							/>
 						</div>
@@ -132,30 +132,38 @@ export default function Drawer() {
                             {drawerContent.id === 'suit-up-your-squad' ?
                             <div className="flex gap-2">
                                 <select name="size" id="size" onChange={(e) => handleBulkSize(0, e.target.value)}>
+                                    <option value="XS">XS</option>
                                     <option value="S">S</option>
                                     <option value="M">M</option>
                                     <option value="L">L</option>
                                     <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
                                 </select>
                                 <select name="size" id="size" onChange={(e) => handleBulkSize(1, e.target.value)}>
+                                <option value="XS">XS</option>
                                     <option value="S">S</option>
                                     <option value="M">M</option>
                                     <option value="L">L</option>
                                     <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
                                 </select>
                                 <select name="size" id="size" onChange={(e) => handleBulkSize(2, e.target.value)}>
+                                <option value="XS">XS</option>
                                     <option value="S">S</option>
                                     <option value="M">M</option>
                                     <option value="L">L</option>
                                     <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
                                 </select>
                             </div>
                             :
                             <select name="size" id="size" onChange={(e) => setSize(e.target.value)}>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
+                                <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
                             </select>
                             }
                         </div>

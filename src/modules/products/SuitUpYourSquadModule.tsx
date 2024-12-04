@@ -8,7 +8,7 @@ import { products } from "@/data/products";
 export default function SuitUpYourSquadModule() {
 	const cart = useSelector((state: RootState) => state.cart.cart);
 
-	const product = products[1]
+	const product = products[0]
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
