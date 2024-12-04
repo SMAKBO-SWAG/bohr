@@ -1,11 +1,9 @@
 import Image from "next/image";
 
 const AddToCartButton = ({
-	child,
 	disabled,
 	onClick,
 }: {
-	child: string;
 	disabled: boolean;
 	onClick: () => void;
 }) => {
@@ -35,7 +33,7 @@ const AddToCartButton = ({
 				height={21}
 				unoptimized
 			/>
-			<p>{child}</p>
+			<p>{disabled? "Sold Out!" : "Add to Cart" }</p>
 		</button>
 	);
 };

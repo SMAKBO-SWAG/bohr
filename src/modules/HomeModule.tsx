@@ -41,17 +41,17 @@ export default function HomeModule() {
 						type="Package"
 						checked={filter === "Package"}
 					/>
-                    
+
+                    <FilterToggle
+						type="Bracelet"
+						checked={filter === "Bracelet"}
+					/>
+
                     <FilterToggle
 						type="T-Shirt"
 						checked={filter === "T-Shirt"}
 					/>
 
-					<FilterToggle
-						type="Bracelet"
-						checked={filter === "Bracelet"}
-					/>
-					
 					<div onClick={() => dispatch(showModal(<MerchSuggestModal/>))} className="font-medium text-dark transition ease-in-out duration-150 transform active:scale-95 border-dark border-2 px-4 py-0.5 text-nowrap rounded-full cursor-pointer">
 						Choose your next merch!
 					</div>

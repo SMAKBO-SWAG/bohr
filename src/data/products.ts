@@ -2,16 +2,6 @@ import { Product } from "@/types/product";
 
 const products: Product[] = [
     {
-		id: "luminous-legacy",
-		name: "Luminous Legacy",
-		tag: ["Package", "T-Shirt", "Bracelet"],
-		price: 120000,
-		thumbnail: {
-			accent: "#ffffff",
-			accentComplement: "#132042",
-		},
-	},
-    {
 		id: "suit-up-your-squad",
 		name: "Suit Up Your Squad!",
 		tag: ["Package", "T-Shirt"],
@@ -29,6 +19,16 @@ const products: Product[] = [
 		thumbnail: {
 			accent: "#ffffff",
 			accentComplement: "#011B29",
+		},
+	},
+    {
+		id: "luminous-legacy",
+		name: "Luminous Legacy",
+		tag: ["Package", "T-Shirt", "Bracelet"],
+		price: 120000,
+		thumbnail: {
+			accent: "#ffffff",
+			accentComplement: "#132042",
 		},
 	},
 	{

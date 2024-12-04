@@ -191,7 +191,7 @@ export default function Drawer() {
 						</div>
 					</div>
 
-					<AddToCartButton child={ "Add to Cart" } disabled={false} onClick={() => handleAddToCart()} />
+					<AddToCartButton disabled={false} onClick={() => handleAddToCart()} />
 				</div>
 			</div>
 		</>

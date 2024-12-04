@@ -37,23 +37,26 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
             });
 
             const promo = await response.json()
-            console.log(`${product.id}  ${promo.available}`)
             
             setAvailability(promo.available)
         }
 
         if (product.tag.includes('Package')){
             checkPromo()
-        }
-        
+        } else {
+            setAvailability(true)
+        }        
     },[])
+
+    useEffect(() => {        console.log(`${product.id}  ${available}`)
+},[available])
 
 	return (
 		<div
 			className="relative flex flex-col w-full aspect-[3.5/4] cursor-pointer"
 			onClick={() => handleProductClick()}
 		>
-            {product.id === 'luminous-legacy' && (
+            {product.id === 'suit-up-your-squad' && (
                 <div
                     className="absolute w-full h-full rounded-3xl blur-[5px] animate-aurora bg-gradient-to-r from-[#B1CCFF] to-[#A1BAE8] opacity-90"
                 ></div>
@@ -90,6 +93,9 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 								{product.name.toUpperCase()}
 							</p>
 							<p className="text-lg">
+                                {product.id === 'suit-up-your-squad' && <><span className="line-through">Rp315.000</span> <span> </span></>}
+                                {product.id === 'bring-your-squad' && <><span className="line-through">Rp125.000</span> <span> </span></>}
+                                {product.id === 'luminous-legacy' && <><span className="line-through">Rp130.000</span> <span> </span></>}
 								Rp
 								{product.price.toLocaleString("id-ID")}{product.tag.includes("Package") ? "/pack" : "/pcs"}
 							</p>
@@ -98,7 +104,6 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 				</div>
 				<div className="flex w-full justify-end">
 					<AddToCartButton
-						child={available? "Add to Cart" : "Sold Out!"}
 						disabled={product.tag.includes('Package') ? !available : false}
 						onClick={() => handleAddToCartDrawer()}
 					/>
