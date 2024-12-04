@@ -15,7 +15,7 @@ const products: Product[] = [
 		id: "suit-up-your-squad",
 		name: "Suit Up Your Squad!",
 		tag: ["Package", "T-Shirt"],
-		price: 300000,
+		price: 285000,
 		thumbnail: {
 			accent: "#ffffff",
 			accentComplement: "#011B29",

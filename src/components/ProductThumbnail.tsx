@@ -6,11 +6,14 @@ import { showDrawer } from "@/redux/slices/drawerSlice";
 import { useDispatch } from "react-redux";
 import { Tag } from "./Tag";
 import { Product } from "@/types/product";
+import { useEffect, useState } from "react";
 
 const ProductThumbnail = ({ product }: { product: Product }) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
 
+    const [available, setAvailability] = useState<boolean>(false)
+    
 	const item = {
 		id: product.id,
 		name: product.name,
@@ -22,6 +25,28 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 
 	const handleProductClick = () => [router.push(`/product/${product.id}`)];
 	const handleAddToCartDrawer = () => [dispatch(showDrawer(item))];
+
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+    
+    useEffect(() => {
+
+        const checkPromo = async () => {
+            const response = await fetch(API_URL + `/promo/${product.id}`, {
+                method: "GET",
+            });
+
+            const promo = await response.json()
+            console.log(`${product.id}  ${promo.available}`)
+            
+            setAvailability(promo.available)
+        }
+
+        if (product.tag.includes('Package')){
+            checkPromo()
+        }
+        
+    },[])
 
 	return (
 		<div
@@ -73,8 +98,8 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 				</div>
 				<div className="flex w-full justify-end">
 					<AddToCartButton
-						child={"Add to Cart"}
-						disabled={false}
+						child={available? "Add to Cart" : "Sold Out!"}
+						disabled={product.tag.includes('Package') ? !available : false}
 						onClick={() => handleAddToCartDrawer()}
 					/>
 				</div>
