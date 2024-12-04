@@ -52,6 +52,7 @@ export default function CheckoutModule() {
 		paymentMethod,
 		ongkir,
 		valid,
+        totalPrice
 	} = useSelector((state: RootState) => state.user);
 
 	useEffect(() => {
@@ -60,56 +61,56 @@ export default function CheckoutModule() {
 		}
 	}, [cart, router]);
 
-	useEffect(() => {
-		dispatch(setCity(""));
-		dispatch(setOngkir(0));
+	// useEffect(() => {
+	// 	dispatch(setCity(""));
+	// 	dispatch(setOngkir(0));
 
-		const fetchProvince = async () => {
-			const response = await fetch(API_URL + "/ongkir/get-province");
-			const data = await response.json();
-			setProvinces(data);
-		};
+	// 	const fetchProvince = async () => {
+	// 		const response = await fetch(API_URL + "/ongkir/get-province");
+	// 		const data = await response.json();
+	// 		setProvinces(data);
+	// 	};
 
-		const fetchCity = async (province: string) => {
-			const province_id = province.split("-")[0];
+	// 	const fetchCity = async (province: string) => {
+	// 		const province_id = province.split("-")[0];
 
-			const response = await fetch(
-				API_URL + `/ongkir/get-city/${province_id}`
-			);
-			const data = await response.json();
-			setCities(data);
-		};
+	// 		const response = await fetch(
+	// 			API_URL + `/ongkir/get-city/${province_id}`
+	// 		);
+	// 		const data = await response.json();
+	// 		setCities(data);
+	// 	};
 
-		if (!provinces.length) {
-			fetchProvince();
-		}
+	// 	if (!provinces.length) {
+	// 		fetchProvince();
+	// 	}
 
-		if (province) {
-			fetchCity(province);
-		}
-	}, [province, paymentMethod]);
+	// 	if (province) {
+	// 		fetchCity(province);
+	// 	}
+	// }, [province, paymentMethod]);
 
-	useEffect(() => {
-		const fetchOngkir = async (city: string) => {
-			const city_id = city.split("-")[0];
+	// useEffect(() => {
+	// 	const fetchOngkir = async (city: string) => {
+	// 		const city_id = city.split("-")[0];
 
-			setIsCalculatingOngkir(true);
+	// 		setIsCalculatingOngkir(true);
 
-			const response = await fetch(
-				API_URL + `/ongkir/get-ongkir/${city_id}`
-			);
-			const data = await response.json();
-			const ongkir = data.cost;
+	// 		const response = await fetch(
+	// 			API_URL + `/ongkir/get-ongkir/${city_id}`
+	// 		);
+	// 		const data = await response.json();
+	// 		const ongkir = data.cost;
 
-			dispatch(setOngkir(ongkir));
+	// 		dispatch(setOngkir(ongkir));
 
-			setIsCalculatingOngkir(false);
-		};
+	// 		setIsCalculatingOngkir(false);
+	// 	};
 
-		if (city) {
-			fetchOngkir(city);
-		}
-	}, [city]);
+	// 	if (city) {
+	// 		fetchOngkir(city);
+	// 	}
+	// }, [city]);
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
@@ -137,29 +138,31 @@ export default function CheckoutModule() {
 				<div className="flex gap-2">
 					<input
 						type="radio"
-						value="qris"
-						id="qris"
+						value="qris100"
+						id="qris100"
 						name="paymentMethod"
-						defaultChecked={paymentMethod === "qris"}
+						defaultChecked={paymentMethod === "qris100"}
 						onChange={(e) =>
 							dispatch(setPaymentMethod(e.target.value))
 						}
 					></input>
-					<label htmlFor="qris"> QRIS - pickup at SMAKBO</label>
+					<label htmlFor="qris100"> QRIS (100%) - pickup at SMAKBO</label>
 				</div>
-				{/* <div className="flex gap-2">
+                {totalPrice > 50000 ?
+                <div className="flex gap-2">
 					<input
 						type="radio"
-						value="ship"
-						id="ship"
+						value="qris50"
+						id="qris50"
 						name="paymentMethod"
-						defaultChecked={paymentMethod === "ship"}
+						defaultChecked={paymentMethod === "qris50"}
 						onChange={(e) =>
 							dispatch(setPaymentMethod(e.target.value))
 						}
 					></input>
-					<label htmlFor="ship"> QRIS - JNE ( +ongkir)</label>
-				</div> */}
+					<label htmlFor="qris50"> QRIS (50%) - pickup at SMAKBO</label>
+				</div>
+                :
 				<div className="flex gap-2">
 					<input
 						type="radio"
@@ -173,6 +176,21 @@ export default function CheckoutModule() {
 					></input>
 					<label htmlFor="cod"> COD - pickup at SMAKBO</label>
 				</div>
+                }
+
+                {/* <div className="flex gap-2">
+					<input
+						type="radio"
+						value="ship"
+						id="ship"
+						name="paymentMethod"
+						defaultChecked={paymentMethod === "ship"}
+						onChange={(e) =>
+							dispatch(setPaymentMethod(e.target.value))
+						}
+					></input>
+					<label htmlFor="ship"> QRIS - JNE ( +ongkir)</label>
+				</div> */}
 			</div>
 
 			<div className="flex flex-col gap-2 w-full">

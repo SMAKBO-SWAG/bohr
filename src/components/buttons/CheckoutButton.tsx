@@ -40,6 +40,9 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 				dispatch(showModal(<CODConfirmModal />));
 			} else {
 				try {
+
+                    const finalPrice = paymentMethod === "qris100" ? totalPrice : 0.5 * totalPrice
+
 					const response = await fetch(API_URL + "/payment/", {
 						method: "POST",
 						headers: {
@@ -49,7 +52,7 @@ const CheckoutButton = ({ pathname }: { pathname: string }) => {
 							name,
 							number,
 							paymentMethod,
-							totalPrice,
+							totalPrice: finalPrice,
 							orders: cart,
 						}),
 					});
