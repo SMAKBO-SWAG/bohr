@@ -146,9 +146,9 @@ export default function CheckoutModule() {
 							dispatch(setPaymentMethod(e.target.value))
 						}
 					></input>
-					<label htmlFor="qris100"> QRIS (100%) - pickup at SMAKBO</label>
+					<label htmlFor="qris100"> QRIS - pickup at SMAKBO</label>
 				</div>
-                {totalPrice > 50000 ?
+                {totalPrice > 50000 &&
                 <div className="flex gap-2">
 					<input
 						type="radio"
@@ -160,23 +160,25 @@ export default function CheckoutModule() {
 							dispatch(setPaymentMethod(e.target.value))
 						}
 					></input>
-					<label htmlFor="qris50"> QRIS (50%) - pickup at SMAKBO</label>
+					<label htmlFor="qris50"> QRIS (DP 50%) - pickup at SMAKBO</label>
 				</div>
-                :
-				<div className="flex gap-2">
+                }
+                <div className="flex gap-2">
 					<input
 						type="radio"
 						value="cod"
 						id="cod"
 						name="paymentMethod"
+                        disabled={totalPrice > 50000}
 						defaultChecked={paymentMethod === "cod"}
 						onChange={(e) =>
 							dispatch(setPaymentMethod(e.target.value))
 						}
 					></input>
-					<label htmlFor="cod"> COD - pickup at SMAKBO</label>
+					<label htmlFor="cod" className={totalPrice > 50000 ? `text-gray-400` : ''} > COD - pickup at SMAKBO</label>
 				</div>
-                }
+                {totalPrice > 50000 &&<span className="text-sm text-red-700">COD only available for under 50K transaction</span>}
+
 
                 {/* <div className="flex gap-2">
 					<input
