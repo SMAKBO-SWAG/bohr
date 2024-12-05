@@ -39,6 +39,7 @@ export default function CODConfirmModal() {
 				paymentMethod,
 				totalPrice,
 				orders: cart,
+                preOrder: 2
 			}),
 		});
 
