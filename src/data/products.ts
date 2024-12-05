@@ -33,7 +33,7 @@ const products: Product[] = [
 	},
 	{
 		id: "fluore",
-		name: "fluore",
+		name: "Fluore",
 		tag: ["Bracelet"],
 		price: 25000,
 		thumbnail: {
@@ -43,7 +43,7 @@ const products: Product[] = [
 	},
 	{
 		id: "classic-bracelet",
-		name: "classic",
+		name: "Classic",
 		tag: ["Bracelet"],
 		price: 25000,
 		thumbnail: {
