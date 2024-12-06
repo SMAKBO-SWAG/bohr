@@ -53,7 +53,7 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 			className="relative flex flex-col w-full aspect-[3.5/4] cursor-pointer"
 			onClick={() => handleProductClick()}
 		>
-            {['bring-your-squad'].includes(product.id) && <img src={`/images/thumbnails/${product.id}-discount.png`} className="absolute z-10 w-[30%] right-5 top-28 animate-subtle-bounce"></img>}
+            <div className="absolute inset-0 h-1/2 rounded-tl-3xl rounded-tr-3xl z-10 bg-gradient-to-b from-[color:var(--accent-complement)] to-transparent" style={{ '--accent-complement': `${thumbnail.accentComplement}` } as React.CSSProperties}/>            {['bring-your-squad'].includes(product.id) && <img src={`/images/thumbnails/${product.id}-discount.png`} className="absolute z-10 w-[30%] right-5 top-28 animate-subtle-bounce"></img>}
             {['suit-up-your-squad', 'luminous-legacy'].includes(product.id) && <img src={`/images/thumbnails/${product.id}-discount.png`} className="absolute z-10 w-[30%] right-5 bottom-20 animate-subtle-bounce"></img>}
 
             {product.tag.includes('Package') && (

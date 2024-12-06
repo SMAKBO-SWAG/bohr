@@ -48,7 +48,7 @@ const products: Product[] = [
 		price: 90000,
 		thumbnail: {
 			accent: "#132042",
-			accentComplement: "#ffffff",
+			accentComplement: "#B1CCFF",
 		},
 	},
     {
@@ -68,7 +68,7 @@ const products: Product[] = [
 		price: 25000,
 		thumbnail: {
 			accent: "#132042",
-			accentComplement: "#ffffff",
+			accentComplement: "#B1CCFF",
 		},
 	},
 ];
