@@ -77,7 +77,7 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 						style={{ color: thumbnail.accent }}
 					>
 						<div className="flex flex-row gap-2 items-center">
-							{product.tag.map((i, tag) => (
+							{product.tag.map((tag, i) => (
 								<Tag
                                     key={i}
 									accent={thumbnail.accent}
