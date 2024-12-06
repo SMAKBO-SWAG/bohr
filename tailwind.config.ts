@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
         animation: {
             aurora: "aurora 6s ease-in-out infinite",
+            'subtle-bounce': 'subtle-bounce 2s infinite',
         },
         keyframes: {
             aurora: {
@@ -18,6 +19,10 @@ const config: Config = {
                 "25%": { transform: "translateX(1.5%) translateY(0)" },
                 "50%": { transform: "translateX(0) translateY(1.5%)" },
                 "75%": { transform: "translateX(-1.5%) translateY(0)" },
+            },
+            'subtle-bounce': {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
             },
         },
         fontFamily: {
