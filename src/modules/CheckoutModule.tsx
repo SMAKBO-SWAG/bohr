@@ -61,6 +61,13 @@ export default function CheckoutModule() {
 		}
 	}, [cart, router]);
 
+    useEffect(()=> {
+        console.log('asdsa')
+        if (totalPrice > 50000) {
+            dispatch(setPaymentMethod('qris100'))
+        }
+    },[totalPrice])
+
 	// useEffect(() => {
 	// 	dispatch(setCity(""));
 	// 	dispatch(setOngkir(0));
@@ -141,7 +148,7 @@ export default function CheckoutModule() {
 						value="qris100"
 						id="qris100"
 						name="paymentMethod"
-						defaultChecked={paymentMethod === "qris100"}
+						checked={paymentMethod === "qris100"}
 						onChange={(e) =>
 							dispatch(setPaymentMethod(e.target.value))
 						}
@@ -155,7 +162,7 @@ export default function CheckoutModule() {
 						value="qris50"
 						id="qris50"
 						name="paymentMethod"
-						defaultChecked={paymentMethod === "qris50"}
+						checked={paymentMethod === "qris50"}
 						onChange={(e) =>
 							dispatch(setPaymentMethod(e.target.value))
 						}
@@ -170,7 +177,7 @@ export default function CheckoutModule() {
 						id="cod"
 						name="paymentMethod"
                         disabled={totalPrice > 50000}
-						defaultChecked={paymentMethod === "cod"}
+						checked={paymentMethod === "cod"}
 						onChange={(e) =>
 							dispatch(setPaymentMethod(e.target.value))
 						}
