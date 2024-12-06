@@ -44,7 +44,7 @@ export default function HomeModule() {
 			<div className="flex flex-col gap-4 h-full">
                 <CountdownLabel/>
 
-				<div className="flex justify-between items-center gap-2 overflow-x-scroll py-2 px-5 mx-[-20px] no-scrollbar">
+				<div className="flex items-center justify-between gap-2 overflow-x-scroll py-2 px-5 mx-[-20px] no-scrollbar">
 					<FilterToggle type="All" checked={filter === "All"} />
 
                     <FilterToggle

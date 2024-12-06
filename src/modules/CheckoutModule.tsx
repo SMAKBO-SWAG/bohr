@@ -299,7 +299,7 @@ export default function CheckoutModule() {
 							<ProductCard
 								product={product}
 								key={index}
-								editable={false}
+								editable={true}
 							></ProductCard>
 						);
 					})}

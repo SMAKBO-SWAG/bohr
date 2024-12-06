@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+        boxShadow: {
+            'text': '1px 1px 2px rgba(0, 0, 0, 0.5)',
+        },
         animation: {
             aurora: "aurora 6s ease-in-out infinite",
             'subtle-bounce': 'subtle-bounce 2s infinite',
