@@ -53,8 +53,8 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 			className="relative flex flex-col w-full aspect-[3.5/4] cursor-pointer"
 			onClick={() => handleProductClick()}
 		>
-            {['bring-your-squad'].includes(product.id) && <img src={`/images/thumbnails/${product.id}-discount.png`} className="absolute z-10 w-[150px] right-5 top-28 animate-subtle-bounce"></img>}
-            {['suit-up-your-squad', 'luminous-legacy'].includes(product.id) && <img src={`/images/thumbnails/${product.id}-discount.png`} className="absolute z-10 w-[150px] right-5 bottom-20 animate-subtle-bounce"></img>}
+            {['bring-your-squad'].includes(product.id) && <img src={`/images/thumbnails/${product.id}-discount.png`} className="absolute z-10 w-[30%] right-5 top-28 animate-subtle-bounce"></img>}
+            {['suit-up-your-squad', 'luminous-legacy'].includes(product.id) && <img src={`/images/thumbnails/${product.id}-discount.png`} className="absolute z-10 w-[30%] right-5 bottom-20 animate-subtle-bounce"></img>}
 
             {product.tag.includes('Package') && (
                 <div

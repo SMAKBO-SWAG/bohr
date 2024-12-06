@@ -12,7 +12,7 @@ const FilterToggle = ({ type, checked }: FilterToggleProps) => {
 	const defaultInputClass = `hidden peer`;
 	const defaultLabelClass = `
         font-medium
-        bg-light px-4 py-2 text-nowrap rounded-full cursor-pointer 
+        bg-light px-5 py-2 text-nowrap rounded-full cursor-pointer 
         transition ease-in-out duration-150 
         peer-checked:bg-dark peer-checked:text-white
         hover:bg-[#C3EAFF] 

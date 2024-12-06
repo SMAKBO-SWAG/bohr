@@ -24,17 +24,27 @@ export default function HomeModule() {
 
 	return (
 		<div className="relative gap-5 flex flex-col h-full">
+            <div className="flex justify-between items-center">
 			<Image
 				src="/svg/logo.svg"
 				width={225}
 				height={45}
 				alt="SMAKBO SWAG Logo"
 			/>
+            <Image
+				src="/svg/icons/suggestion-icon.svg"
+				width={48}
+				height={48}
+				alt="Suggestion Icon"
+                className="transition ease-in-out duration-150 transform active:scale-95 hover:opacity-90 cursor-pointer"
+                onClick={() => dispatch(showModal(<MerchSuggestModal/>))}
+			/>
+            </div>
 
 			<div className="flex flex-col gap-4 h-full">
                 <CountdownLabel/>
 
-				<div className="flex items-center gap-2 overflow-x-scroll py-2 px-5 mx-[-20px]">
+				<div className="flex justify-between items-center gap-2 overflow-x-scroll py-2 px-5 mx-[-20px] no-scrollbar">
 					<FilterToggle type="All" checked={filter === "All"} />
 
                     <FilterToggle
@@ -51,10 +61,6 @@ export default function HomeModule() {
 						type="T-Shirt"
 						checked={filter === "T-Shirt"}
 					/>
-
-					<div onClick={() => dispatch(showModal(<MerchSuggestModal/>))} className="font-medium text-dark transition ease-in-out duration-150 transform active:scale-95 border-dark border-2 px-4 py-0.5 text-nowrap rounded-full cursor-pointer">
-						Choose your next merch!
-					</div>
 				</div>
 
 				{filteredProducts.length ? (
