@@ -19,7 +19,7 @@ export interface userState {
 const initialState: userState = {
 	name: "",
 	number: "",
-	paymentMethod: "qris",
+	paymentMethod: "qris100",
 
     province: "",
     city: "",
@@ -64,7 +64,7 @@ export const userSlice = createSlice({
 		clearUser: (state) => {
 			state.name = "";
 			state.number = "";
-			state.paymentMethod = "cod";
+			state.paymentMethod = "qris100";
             state.address = "";
             state.city = "";
             state.province = "";

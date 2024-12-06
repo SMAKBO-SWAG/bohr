@@ -23,11 +23,19 @@ export default function Drawer() {
 	const [fadeClass, setFadeClass] = useState("");
 
 	// Attribute states
-	const [size, setSize] = useState<string>("S");
-    const [packageSizes, setPackageSizes] = useState(["S", "S", "S"]);
+	const [size, setSize] = useState<string>();
+	const [packageSizes, setPackageSizes] = useState(["XS", "XS", "XS"]);
 	const [amount, setAmount] = useState<number>(1);
 
 	useEffect(() => {
+        
+		if (drawerContent) {
+			if (drawerContent.id === "suit-up-your-squad") {
+				setSize("XS,XS,XS");
+			} else {
+				setSize("XS");
+			}
+		}
 
 		if (showDrawer) {
 			setVisible(true);
@@ -39,8 +47,8 @@ export default function Drawer() {
 
 			const clearState = setTimeout(() => {
 				setVisible(false);
-				setSize("S");
-                setPackageSizes(["S", "S", "S"])
+				setSize("XS");
+				setPackageSizes(["XS", "XS", "XS"]);
 				setAmount(1);
 			}, 280);
 
@@ -53,13 +61,15 @@ export default function Drawer() {
 		dispatch(closeDrawer());
 	};
 
-    const handleBulkSize = (index: number, value: string) => {
-        packageSizes.splice(index, 1, value)
-        setPackageSizes(packageSizes)
-        setSize(packageSizes.toString())
-    }
+	const handleBulkSize = (index: number, value: string) => {
+		packageSizes.splice(index, 1, value);
+		setPackageSizes(packageSizes);
+		setSize(packageSizes.toString());
+	};
 
-    useEffect( () => {console.log(size)},[size])
+	useEffect(() => {
+		console.log(size);
+	}, [size]);
 
 	if (!visible) return null;
 
@@ -94,85 +104,113 @@ export default function Drawer() {
 						</div>
 					</div>
 
-                    {drawerContent.tag.includes("Bracelet") &&
-                        <div className="flex flex-col gap-4">
-                            <hr className="border-t border-[#E4F6FF] border-1" />
-                            <p>Bracelet Size</p>
-                            <div className="flex w-full flex-row items-center justify-between gap-8">
-                                <Image
-                                    src={`/images/illustrations/bracelet-size-chart-illustration.png`}
-                                    alt={`bracelet-diameter`}
-                                    width={0}
-                                    height={0}
-                                    className="w-full aspect-[3.5/1]"
-                                    unoptimized
-                                />
-                            </div>
-                        </div>
-                    }
-
-                    {drawerContent.tag.includes("T-Shirt") &&
-                    
-                    <div className="flex flex-col gap-4">
-						<hr className="border-t border-[#E4F6FF] border-1" />
-						<p>T-Shirt Size Chart</p>
-						<div className="flex w-full flex-row items-center justify-between gap-8">
-							<Image
-								src={`/images/illustrations/tshirt-size-chart-illustration.png`}
-								alt={`bracelet-diameter`}
-								width={0}
-								height={0}
-								className="w-full"
-								unoptimized
-							/>
+					{drawerContent.tag.includes("Bracelet") && (
+						<div className="flex flex-col gap-4">
+							<hr className="border-t border-[#E4F6FF] border-1" />
+							<p>Bracelet Size</p>
+							<div className="flex w-full flex-row items-center justify-between gap-8">
+								<Image
+									src={`/images/illustrations/bracelet-size-chart-illustration.png`}
+									alt={`bracelet-diameter`}
+									width={0}
+									height={0}
+									className="w-full aspect-[3.5/1]"
+									unoptimized
+								/>
+							</div>
 						</div>
-                        
-                        <div className="flex justify-between">
-                            <p>Choose Size</p>
-                            {drawerContent.id === 'suit-up-your-squad' ?
-                            <div className="flex gap-2">
-                                <select name="size" id="size" onChange={(e) => handleBulkSize(0, e.target.value)}>
-                                    <option value="XS">XS</option>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-                                <select name="size" id="size" onChange={(e) => handleBulkSize(1, e.target.value)}>
-                                <option value="XS">XS</option>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-                                <select name="size" id="size" onChange={(e) => handleBulkSize(2, e.target.value)}>
-                                <option value="XS">XS</option>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-                            </div>
-                            :
-                            <select name="size" id="size" onChange={(e) => setSize(e.target.value)}>
-                                <option value="XS">XS</option>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                            </select>
-                            }
-                        </div>
+					)}
 
-					</div>}
+					{drawerContent.tag.includes("T-Shirt") && (
+						<div className="flex flex-col gap-4">
+							<hr className="border-t border-[#E4F6FF] border-1" />
+							<p>T-Shirt Size Chart</p>
+							<div className="flex w-full flex-row items-center justify-between gap-8">
+								<Image
+									src={`/images/illustrations/tshirt-size-chart-illustration.png`}
+									alt={`bracelet-diameter`}
+									width={0}
+									height={0}
+									className="w-full"
+									unoptimized
+								/>
+							</div>
 
-                    
-
-                   
+							<div className="flex justify-between">
+								<p>Choose Size</p>
+								{drawerContent.id === "suit-up-your-squad" ? (
+									<div className="flex gap-2">
+										<select
+											name="size"
+											id="size"
+											onChange={(e) =>
+												handleBulkSize(
+													0,
+													e.target.value
+												)
+											}
+										>
+											<option value="XS">XS</option>
+											<option value="S">S</option>
+											<option value="M">M</option>
+											<option value="L">L</option>
+											<option value="XL">XL</option>
+											<option value="XXL">XXL</option>
+										</select>
+										<select
+											name="size"
+											id="size"
+											onChange={(e) =>
+												handleBulkSize(
+													1,
+													e.target.value
+												)
+											}
+										>
+											<option value="XS">XS</option>
+											<option value="S">S</option>
+											<option value="M">M</option>
+											<option value="L">L</option>
+											<option value="XL">XL</option>
+											<option value="XXL">XXL</option>
+										</select>
+										<select
+											name="size"
+											id="size"
+											onChange={(e) =>
+												handleBulkSize(
+													2,
+													e.target.value
+												)
+											}
+										>
+											<option value="XS">XS</option>
+											<option value="S">S</option>
+											<option value="M">M</option>
+											<option value="L">L</option>
+											<option value="XL">XL</option>
+											<option value="XXL">XXL</option>
+										</select>
+									</div>
+								) : (
+									<select
+										name="size"
+										id="size"
+										onChange={(e) =>
+											setSize(e.target.value)
+										}
+									>
+										<option value="XS">XS</option>
+										<option value="S">S</option>
+										<option value="M">M</option>
+										<option value="L">L</option>
+										<option value="XL">XL</option>
+										<option value="XXL">XXL</option>
+									</select>
+								)}
+							</div>
+						</div>
+					)}
 
 					<div className="flex flex-col gap-4">
 						<hr className="border-t border-[#E4F6FF] border-1" />
@@ -199,7 +237,10 @@ export default function Drawer() {
 						</div>
 					</div>
 
-					<AddToCartButton disabled={false} onClick={() => handleAddToCart()} />
+					<AddToCartButton
+						disabled={false}
+						onClick={() => handleAddToCart()}
+					/>
 				</div>
 			</div>
 		</>
