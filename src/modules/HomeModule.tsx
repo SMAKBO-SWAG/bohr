@@ -31,14 +31,15 @@ export default function HomeModule() {
 				height={45}
 				alt="SMAKBO SWAG Logo"
 			/>
-            <Image
-				src="/svg/icons/suggestion-icon.svg"
-				width={48}
-				height={48}
-				alt="Suggestion Icon"
-                className="transition ease-in-out duration-150 transform active:scale-95 hover:opacity-90 cursor-pointer"
-                onClick={() => dispatch(showModal(<MerchSuggestModal/>))}
-			/>
+            <div className="flex items-center bg-dark rounded-full pr-4 transition ease-in-out duration-150 transform active:scale-95 cursor-pointer" onClick={() => dispatch(showModal(<MerchSuggestModal/>))}            >
+                <Image
+                    src="/svg/icons/suggestion-icon.svg"
+                    width={44}
+                    height={44}
+                    alt="Suggestion Icon"
+                />
+                <p className="text-white text-sm">Request</p>
+            </div>
             </div>
 
 			<div className="flex flex-col gap-4 h-full">
