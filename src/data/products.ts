@@ -31,26 +31,6 @@ const products: Product[] = [
 			accentComplement: "#132042",
 		},
 	},
-	{
-		id: "fluore",
-		name: "Fluore",
-		tag: ["Bracelet"],
-		price: 25000,
-		thumbnail: {
-			accent: "#ffffff",
-			accentComplement: "#132042",
-		},
-	},
-	{
-		id: "classic-bracelet",
-		name: "Classic",
-		tag: ["Bracelet"],
-		price: 25000,
-		thumbnail: {
-			accent: "#132042",
-			accentComplement: "#ffffff",
-		},
-	},
     {
 		id: "legacy",
 		name: "Legacy",
@@ -70,7 +50,27 @@ const products: Product[] = [
 			accent: "#132042",
 			accentComplement: "#ffffff",
 		},
-	}
+	},
+    {
+		id: "fluore",
+		name: "Fluore",
+		tag: ["Bracelet"],
+		price: 25000,
+		thumbnail: {
+			accent: "#ffffff",
+			accentComplement: "#132042",
+		},
+	},
+	{
+		id: "classic-bracelet",
+		name: "Classic",
+		tag: ["Bracelet"],
+		price: 25000,
+		thumbnail: {
+			accent: "#132042",
+			accentComplement: "#ffffff",
+		},
+	},
 ];
 
 export { products };
