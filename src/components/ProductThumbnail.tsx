@@ -94,9 +94,12 @@ const ProductThumbnail = ({ product }: { product: Product }) => {
 								{product.name.toUpperCase()}
 							</p>
 							<p className="text-lg">
-                                {product.id === 'suit-up-your-squad' && <><span className="line-through">Rp315.000</span> <span> </span></>}
+                                {product.id === 'suit-up-your-squad' && <><span className="line-through">Rp255.000</span> <span> </span></>}
                                 {product.id === 'bring-your-squad' && <><span className="line-through">Rp125.000</span> <span> </span></>}
-                                {product.id === 'luminous-legacy' && <><span className="line-through">Rp130.000</span> <span> </span></>}
+                                {product.id === 'luminous-legacy' && <><span className="line-through">Rp110.000</span> <span> </span></>}
+                                {product.id === 'legacy' && <><span className="line-through">Rp105.000</span> <span> </span></>}
+                                {product.id === 'classic-tshirt' && <><span className="line-through">Rp90.000</span> <span> </span></>}
+
 								Rp
 								{product.price.toLocaleString("id-ID")}{product.tag.includes("Package") ? "/pack" : "/pcs"}
 							</p>

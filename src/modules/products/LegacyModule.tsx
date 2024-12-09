@@ -8,7 +8,7 @@ import { products } from "@/data/products";
 export default function LegacyModule() {
 	const cart = useSelector((state: RootState) => state.cart.cart);
 
-	const product = products[5]
+	const product = products[3]
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">

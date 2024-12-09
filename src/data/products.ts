@@ -5,7 +5,7 @@ const products: Product[] = [
 		id: "suit-up-your-squad",
 		name: "Suit Up Your Squad!",
 		tag: ["Package", "T-Shirt"],
-		price: 285000,
+		price: 225000,
 		thumbnail: {
 			accent: "#ffffff",
 			accentComplement: "#011B29",
@@ -25,7 +25,7 @@ const products: Product[] = [
 		id: "luminous-legacy",
 		name: "Luminous Legacy",
 		tag: ["Package", "T-Shirt", "Bracelet"],
-		price: 120000,
+		price: 100000,
 		thumbnail: {
 			accent: "#ffffff",
 			accentComplement: "#132042",
@@ -35,7 +35,7 @@ const products: Product[] = [
 		id: "legacy",
 		name: "Legacy",
 		tag: ["T-Shirt"],
-		price: 105000,
+		price: 85000,
 		thumbnail: {
 			accent: "#ffffff",
 			accentComplement: "#132042",
@@ -45,7 +45,7 @@ const products: Product[] = [
 		id: "classic-tshirt",
 		name: "Classic",
 		tag: ["T-Shirt"],
-		price: 90000,
+		price: 75000,
 		thumbnail: {
 			accent: "#132042",
 			accentComplement: "#B1CCFF",
