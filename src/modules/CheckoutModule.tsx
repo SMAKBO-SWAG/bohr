@@ -63,7 +63,7 @@ export default function CheckoutModule() {
 
     useEffect(()=> {
         console.log('asdsa')
-        if (totalPrice > 50000) {
+        if (totalPrice > 100000) {
             dispatch(setPaymentMethod('qris100'))
         }
     },[totalPrice])
@@ -155,7 +155,7 @@ export default function CheckoutModule() {
 					></input>
 					<label htmlFor="qris100"> QRIS - pickup at SMAKBO</label>
 				</div>
-                {totalPrice > 50000 &&
+                {totalPrice > 100000 &&
                 <div className="flex gap-2">
 					<input
 						type="radio"
@@ -176,15 +176,15 @@ export default function CheckoutModule() {
 						value="cod"
 						id="cod"
 						name="paymentMethod"
-                        disabled={totalPrice > 50000}
+                        disabled={totalPrice > 100000}
 						checked={paymentMethod === "cod"}
 						onChange={(e) =>
 							dispatch(setPaymentMethod(e.target.value))
 						}
 					></input>
-					<label htmlFor="cod" className={totalPrice > 50000 ? `text-gray-400` : ''} > COD - pickup at SMAKBO</label>
+					<label htmlFor="cod" className={totalPrice > 100000 ? `text-gray-400` : ''} > COD - pickup at SMAKBO</label>
 				</div>
-                {totalPrice > 50000 &&<span className="text-sm text-red-700">COD only available for under 50K transaction</span>}
+                {totalPrice > 100000 &&<span className="text-sm text-red-700">COD only available for under 100K transaction</span>}
 
 
                 {/* <div className="flex gap-2">
