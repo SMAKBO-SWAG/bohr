@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 export default function FluoreModule() {
 	const cart = useSelector((state: RootState) => state.cart.cart);
 
-	const product = products[5]
+	const product = products[0]
 
 	return (
 		<div className="relative flex flex-col items-center gap-6 text-black">
